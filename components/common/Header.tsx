@@ -89,19 +89,21 @@ export default function Header({ variant = 'light' }: HeaderProps) {
           >
             Business Banking
           </Link>
-          <Link
-            href="/remittance"
-            onClick={closeAllDropdowns}
-            className={`${linkHover} ${isActive('/remittance') ? 'text-[#E8192C]' : textColor}`}
-          >
-            Remittance
-          </Link>
+        
           <Link
             href="/api-banking"
             onClick={closeAllDropdowns}
             className={`${linkHover} ${isActive('/api-banking') ? 'text-[#E8192C]' : textColor}`}
           >
             API Banking
+          </Link>
+
+          <Link
+            href="/remittance"
+            onClick={closeAllDropdowns}
+            className={`${linkHover} ${isActive('/remittance') ? 'text-[#E8192C]' : textColor}`}
+          >
+            Remittance
           </Link>
 
           {/** Loans Dropdown */}
@@ -117,13 +119,13 @@ export default function Header({ variant = 'light' }: HeaderProps) {
               Loans <KeyboardArrowDown className='inline-block ml-1' />
             </button>
             {loanLinkOpen && (
-              <div className='absolute top-full mt-2 bg-white text-black rounded-md shadow-md w-40 py-2'>
+              <div className='absolute top-full mt-2 bg-white text-black rounded-md shadow-md w-48 py-2'>
                 <Link
-                  href="/asset-finance-loans"
-                  className='block px-4 py-2 hover:bg-gray-100 transition-colors'
+                  href="/loans"
+                  className='block px-4 py-2 hover:bg-gray-100 transition-colors font-semibold'
                   onClick={() => setLoanLinkOpen(false)}
                 >
-                  Asset Finance Loans
+                  All Loans
                 </Link>
                 <Link
                   href="/logbook-loans"
@@ -131,6 +133,13 @@ export default function Header({ variant = 'light' }: HeaderProps) {
                   onClick={() => setLoanLinkOpen(false)}
                 >
                   Logbook Loans
+                </Link>
+                <Link
+                  href="/asset-finance-loans"
+                  className='block px-4 py-2 hover:bg-gray-100 transition-colors'
+                  onClick={() => setLoanLinkOpen(false)}
+                >
+                  Asset Finance Loans
                 </Link>
               </div>
             )}
@@ -240,19 +249,20 @@ export default function Header({ variant = 'light' }: HeaderProps) {
             >
               Business
             </Link>
-            <Link
-              href="/remittance"
-              onClick={() => setMobileOpen(false)}
-              className="block py-2 border-b border-white/10"
-            >
-              Remittance
-            </Link>
+          
             <Link
               href="/api-banking"
               onClick={() => setMobileOpen(false)}
               className="block py-2 border-b border-white/10"
             >
               API Banking
+            </Link>
+            <Link
+              href="/remittance"
+              onClick={() => setMobileOpen(false)}
+              className="block py-2 border-b border-white/10"
+            >
+              Remittance
             </Link>
 
             <button
