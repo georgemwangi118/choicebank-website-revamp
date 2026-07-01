@@ -27,12 +27,12 @@ export default function Footer() {
     <footer className="font-gilroy bg-[#08003C] text-white px-6 md:px-20 pt-24 pb-10 relative">
       {/* Call to Action */}
       <div className="text-center mb-16">
-        <p className="text-sm text-red-300 uppercase tracking-wide">
+        <p className="text-sm text-[#E8192C] uppercase tracking-wide">
           Unlock the Future of Payments:
         </p>
         <h2 className="text-3xl md:text-5xl font-bold mt-2 leading-tight">
           Start Sending Money, Saving Smart, and <br />
-          <span className="text-red-400">
+          <span className="text-[#E8192C]">
             Taking Control of Your Finances!
           </span>
         </h2>
