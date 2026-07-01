@@ -1,46 +1,46 @@
 import { Metadata } from 'next';
 import Link from 'next/link';
-import { ArrowForward, CheckCircleOutlined, DirectionsCar, Build, Agriculture, Devices } from '@mui/icons-material';
+import { ArrowForward, CheckCircleOutlined, DirectionsCar, Build, WbSunny, Gavel } from '@mui/icons-material';
 
 export const metadata: Metadata = {
-  title: 'Asset Finance Loans | ChoiceBank',
-  description: 'Finance vehicles, machinery, and equipment for your business with ChoiceBank asset finance loans. Competitive rates, fast decisions.',
+  title: 'Asset Finance Loans | Choice Microfinance Bank',
+  description: 'Finance vehicles and income-generating assets for your business. Competitive rates, fast decisions, and flexible repayment up to 24 months.',
 };
 
 const assetTypes = [
   {
     icon: DirectionsCar,
-    title: 'Motor Vehicles',
-    description: 'Finance new or used commercial vehicles, passenger cars, minibuses, and trucks for personal or business use.',
-    examples: ['Saloon & SUVs', 'Pickup trucks', 'Minibuses & matatus', 'Heavy commercial trucks'],
+    title: 'Asset Finance Loan',
+    description: 'Financing for customers purchasing a vehicle or asset from a yard, individual seller or company. Supports both fresh financing and hire purchase arrangements.',
+    examples: ['Vehicles from YOM 2009+', 'Interest: 2.5% p.m.', 'Up to Ksh 5M gross', 'Up to 24 months'],
   },
   {
-    icon: Build,
-    title: 'Machinery & Equipment',
-    description: 'Fund the equipment that drives your business — from construction machinery to manufacturing plant.',
-    examples: ['Construction equipment', 'Industrial machinery', 'Medical equipment', 'Printing & packaging'],
+    icon: DirectionsCar,
+    title: 'MOTI 80% Asset Finance',
+    description: 'A higher-limit asset finance option for qualifying customers and newer vehicles. Designed for stronger financial profiles that meet the stated eligibility criteria.',
+    examples: ['Up to 80% of forced value', 'Interest: 2.5% p.m.', 'YOM 2018 and above', '12 to 36 months'],
   },
   {
-    icon: Agriculture,
-    title: 'Agricultural Equipment',
-    description: 'Finance tractors, harvesters, irrigation systems, and other farm equipment to scale your agricultural operations.',
-    examples: ['Tractors & tillers', 'Irrigation systems', 'Harvesters', 'Cold storage equipment'],
+    icon: Gavel,
+    title: 'Auction Refinancing',
+    description: 'Finance for customers acquiring repossessed vehicles through organizational auctions. Helps qualifying buyers meet the purchase balance after paying the required deposit.',
+    examples: ['50% deposit required', 'Loan: 50% of selling price', 'Up to 18 months', 'Interest: 2.5% p.m.'],
   },
   {
-    icon: Devices,
-    title: 'IT & Office Equipment',
-    description: 'Upgrade your technology and office infrastructure without tying up working capital.',
-    examples: ['Computers & servers', 'CCTV & security systems', 'Office furniture', 'Solar & energy systems'],
+    icon: WbSunny,
+    title: 'Solari Loan',
+    description: 'A green energy loan for complete solar solutions for homes, schools, churches, hotels, restaurants and SMEs seeking reliable solar packages.',
+    examples: ['Packages: Ksh 150K – Ksh 10M', 'Financing capped at Ksh 5M', '40% minimum deposit', 'Up to 36 months'],
   },
 ];
 
 const features = [
-  { label: 'Loan amount', value: 'KES 100,000 – KES 50,000,000' },
-  { label: 'Repayment period', value: 'Up to 60 months' },
-  { label: 'Financing coverage', value: 'Up to 80% of asset value' },
-  { label: 'Decision turnaround', value: 'Within 48 hours' },
-  { label: 'Insurance', value: 'Arranged through our partners' },
-  { label: 'Early repayment', value: 'Allowed with no penalty' },
+  { label: 'Loan amount', value: 'Up to Ksh 5M' },
+  { label: 'Interest rate', value: '2.5% p.m.' },
+  { label: 'Loan period', value: 'Up to 24 months' },
+  { label: 'Vehicle YOM', value: '2009 and above' },
+  { label: 'MOTI financing', value: 'Up to 80%' },
+  { label: 'Decision', value: 'Within 48 hours' },
 ];
 
 const requirements = [
@@ -68,17 +68,17 @@ export default function AssetFinancePage() {
         <div className="max-w-7xl mx-auto">
           <p className="text-sm font-semibold text-[#E8192C] uppercase tracking-widest mb-4">Asset Finance Loans</p>
           <h1 className="text-5xl md:text-6xl font-bold text-white leading-tight max-w-3xl mb-6">
-            Get the assets you need. Pay as you earn.
+            Acquire the assets that move your business.
           </h1>
           <p className="text-gray-400 text-xl max-w-xl leading-relaxed mb-10">
-            Finance vehicles, machinery, equipment, and technology for your business or personal use — with competitive rates, fast decisions, and flexible repayment terms up to 60 months.
+            Finance vehicles and income-generating assets needed for business mobility, logistics and growth. The facility is structured around the asset value, customer financials and repayment capacity.
           </p>
           <div className="flex flex-wrap gap-4">
             <Link
               href="/contact"
               className="inline-flex items-center gap-2 bg-[#E8192C] text-white px-8 py-4 rounded-full font-semibold hover:bg-[#c4121e] transition-all group"
             >
-              Apply Now
+              Explore Asset Financing
               <ArrowForward className="group-hover:translate-x-1 transition-transform" />
             </Link>
             <Link
@@ -108,7 +108,7 @@ export default function AssetFinancePage() {
         <div className="max-w-7xl mx-auto">
           <div className="max-w-xl mb-14">
             <p className="text-sm font-semibold text-[#E8192C] uppercase tracking-widest mb-3">What we finance</p>
-            <h2 className="text-4xl font-bold text-[#0A0534]">From vehicles to heavy machinery.</h2>
+            <h2 className="text-4xl font-bold text-[#0A0534]">Choose the financing option that supports your next move.</h2>
           </div>
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {assetTypes.map(({ icon: Icon, title, description, examples }) => (
@@ -169,12 +169,12 @@ export default function AssetFinancePage() {
               href="/contact"
               className="inline-flex items-center gap-2 bg-[#0A0534] text-white px-6 py-3 rounded-full font-semibold hover:bg-[#E8192C] transition-colors group"
             >
-              Start your application
+              Finance Your Asset
               <ArrowForward className="group-hover:translate-x-1 transition-transform" fontSize="small" />
             </Link>
           </div>
           <div className="space-y-3">
-            {requirements.map((req, i) => (
+            {requirements.map((req) => (
               <div key={req} className="flex items-start gap-4 bg-white p-4 rounded-xl border border-gray-100">
                 <CheckCircleOutlined className="text-[#E8192C] shrink-0 mt-0.5" fontSize="small" />
                 <p className="text-sm text-gray-600 leading-relaxed">{req}</p>
@@ -192,7 +192,7 @@ export default function AssetFinancePage() {
           href="/contact"
           className="inline-flex items-center gap-2 bg-[#E8192C] text-white px-8 py-4 rounded-full font-semibold hover:bg-[#c4121e] transition-colors group"
         >
-          Apply for asset finance
+          Apply for Asset Finance
           <ArrowForward className="group-hover:translate-x-1 transition-transform" />
         </Link>
       </div>

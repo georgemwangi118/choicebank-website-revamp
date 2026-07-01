@@ -1,69 +1,78 @@
 import { Metadata } from 'next';
 import Link from 'next/link';
-import { ArrowForward, CheckCircleOutlined, Savings, AccountBalanceWallet, SwapHoriz, Public } from '@mui/icons-material';
+import { ArrowForward, CheckCircleOutlined, Savings, AccountBalanceWallet, Lock, SwapHoriz, CurrencyExchange, PhoneAndroid } from '@mui/icons-material';
 
 export const metadata: Metadata = {
-  title: 'Personal Banking | ChoiceBank',
-  description: 'Open a personal account with ChoiceBank. Savings, current accounts, instant transfers, and zero monthly fees.',
+  title: 'Personal Banking | Choice Microfinance Bank',
+  description: 'Secure, accessible and flexible banking solutions designed to help you save, transact and plan with confidence.',
 };
 
 const accounts = [
   {
-    icon: Savings,
-    name: 'Savings Account',
-    tagline: 'Save with purpose.',
-    description: 'A high-yield savings account that rewards consistency. Watch your money grow with competitive rates and full liquidity.',
+    icon: AccountBalanceWallet,
+    name: 'Personal Account',
+    tagline: 'Everyday banking, made simple.',
+    description: 'A secure account for deposits, withdrawals, payments, savings and access to Choice Bank services. A reliable foundation for managing day-to-day money with confidence.',
     features: [
-      'Competitive interest rates, calculated daily',
-      '24/7 access — withdraw anytime with no penalties',
-      'Set savings goals and track your progress in-app',
-      'Automated round-up savings on every transaction',
-      'Instant notifications on deposits and interest credits',
+      'Manage everyday transactions securely',
+      'Suitable for salary, savings and personal payments',
+      'Supports access to mobile and internet banking',
+      'Helps build a banking relationship for future financial needs',
     ],
-    cta: 'Open Savings Account',
+    cta: 'Open a Personal Account',
     accent: 'border-[#E8192C]',
     badgeBg: 'bg-[#E8192C]/10',
     badgeText: 'text-[#E8192C]',
   },
   {
-    icon: AccountBalanceWallet,
-    name: 'Current Account',
-    tagline: 'Spend without friction.',
-    description: 'A full-featured current account for your daily financial life — zero maintenance fees, free debit card, and seamless payments.',
+    icon: Savings,
+    name: 'Savings Account',
+    tagline: 'Save with purpose.',
+    description: 'Build consistency in your money habits with a simple account that helps you set funds aside while keeping your money accessible. Ideal for personal goals, emergencies and future plans.',
     features: [
-      'Zero monthly maintenance fees — ever',
-      'Free debit card with international acceptance',
-      'Real-time transfers to any bank or mobile wallet',
-      'International transfers at competitive FX rates',
-      'Up to 3 sub-accounts for budgeting',
+      'Separate savings from everyday spending',
+      'Suitable for short-term and long-term goals',
+      'Easy deposits and account access',
+      'Supports disciplined personal financial planning',
     ],
-    cta: 'Open Current Account',
+    cta: 'Start Saving Today',
     accent: 'border-[#0A0534]',
     badgeBg: 'bg-[#0A0534]/10',
     badgeText: 'text-[#0A0534]',
   },
+  {
+    icon: Lock,
+    name: 'Fixed Deposit',
+    tagline: 'Let your money work for you.',
+    description: 'Place funds for an agreed period and earn predictable returns at fixed rates. A strong option for customers seeking secure growth, capital preservation and financial flexibility.',
+    features: [
+      'Minimum placement from Ksh 100,000 or USD 1,000',
+      'Flexible tenures: 3, 6 or 12 months',
+      'Fixed rates agreed at placement',
+      'Can be used as collateral for loans and overdrafts',
+    ],
+    cta: 'Open a Fixed Deposit',
+    accent: 'border-[#E8192C]',
+    badgeBg: 'bg-[#E8192C]/10',
+    badgeText: 'text-[#E8192C]',
+  },
 ];
 
-const perks = [
+const services = [
   {
     icon: SwapHoriz,
-    title: 'Instant transfers',
-    description: 'Send money to any bank, M-Pesa, or Airtel Money in seconds — 24/7, including weekends and public holidays.',
+    title: 'Money Transfers',
+    description: 'Send and receive funds through reliable banking channels designed for convenience and ease. Built for everyday payments, family support and personal transactions.',
   },
   {
-    icon: Public,
-    title: 'Send abroad',
-    description: 'Receive diaspora remittances or send money internationally at real exchange rates with transparent fees.',
+    icon: CurrencyExchange,
+    title: 'Foreign Exchange',
+    description: 'Access foreign exchange support for travel, international payments and cross-border financial needs. Professional FX assistance with transparent, guided transactions.',
   },
   {
-    icon: Savings,
-    title: 'No hidden charges',
-    description: 'We publish every fee in plain language. If you can\'t find a fee before you transact, we don\'t charge it.',
-  },
-  {
-    icon: AccountBalanceWallet,
-    title: 'Loans available',
-    description: 'Asset finance and logbook loans available for account holders. Quick decisions, fair rates.',
+    icon: PhoneAndroid,
+    title: 'Mobile & Internet Banking',
+    description: 'Access key banking services through digital channels designed for convenience, security and easier money management. Built for customers who prefer digital-first banking.',
   },
 ];
 
@@ -75,16 +84,16 @@ export default function PersonalBankingPage() {
         <div className="max-w-7xl mx-auto">
           <p className="text-sm font-semibold text-[#E8192C] uppercase tracking-widest mb-4">Personal Banking</p>
           <h1 className="text-5xl md:text-6xl font-bold text-white leading-tight max-w-3xl mb-6">
-            Banking that grows with you.
+            Banking that fits your everyday life.
           </h1>
           <p className="text-gray-400 text-xl max-w-xl leading-relaxed mb-10">
-            From your first savings goal to running your finances across multiple accounts — ChoiceBank gives you the tools, not the headaches.
+            Secure, accessible and flexible banking solutions designed to help you save, transact and plan with confidence. From daily money movement to fixed deposits and digital access, Choice Microfinance Bank gives you tools to manage your financial life with clarity.
           </p>
           <Link
             href="/contact"
             className="inline-flex items-center gap-2 bg-[#E8192C] text-white px-8 py-4 rounded-full font-semibold hover:bg-[#c4121e] transition-all group"
           >
-            Open an Account
+            Open a Personal Account
             <ArrowForward className="group-hover:translate-x-1 transition-transform" />
           </Link>
         </div>
@@ -94,20 +103,19 @@ export default function PersonalBankingPage() {
       <div className="py-24 px-6 md:px-16 bg-[#F7F8F8]">
         <div className="max-w-7xl mx-auto">
           <div className="max-w-xl mb-14">
-            <p className="text-sm font-semibold text-[#E8192C] uppercase tracking-widest mb-3">Account types</p>
-            <h2 className="text-4xl font-bold text-[#0A0534]">Pick the account that fits.</h2>
+            <p className="text-sm font-semibold text-[#E8192C] uppercase tracking-widest mb-3">Account types & services</p>
+            <h2 className="text-4xl font-bold text-[#0A0534]">Pick the service that fits.</h2>
           </div>
-
-          <div className="grid md:grid-cols-2 gap-8">
+          <div className="grid md:grid-cols-3 gap-8">
             {accounts.map(({ icon: Icon, name, tagline, description, features, cta, accent, badgeBg, badgeText }) => (
-              <div key={name} className={`bg-white rounded-3xl p-10 border-t-4 ${accent} shadow-sm`}>
+              <div key={name} className={`bg-white rounded-3xl p-10 border-t-4 ${accent} shadow-sm flex flex-col`}>
                 <div className={`w-12 h-12 rounded-xl ${badgeBg} flex items-center justify-center mb-6`}>
                   <Icon className={badgeText} />
                 </div>
-                <h2 className="text-2xl font-bold text-[#0A0534] mb-1">{name}</h2>
+                <h2 className="text-xl font-bold text-[#0A0534] mb-1">{name}</h2>
                 <p className={`text-sm font-semibold ${badgeText} mb-4`}>{tagline}</p>
-                <p className="text-gray-500 mb-6 leading-relaxed">{description}</p>
-                <ul className="space-y-3 mb-8">
+                <p className="text-gray-500 mb-6 leading-relaxed text-sm">{description}</p>
+                <ul className="space-y-3 mb-8 flex-1">
                   {features.map((f) => (
                     <li key={f} className="flex items-start gap-3 text-sm text-gray-600">
                       <CheckCircleOutlined className="text-[#E8192C] shrink-0 mt-0.5" fontSize="small" />
@@ -117,7 +125,7 @@ export default function PersonalBankingPage() {
                 </ul>
                 <Link
                   href="/contact"
-                  className="inline-flex items-center gap-2 bg-[#0A0534] text-white px-6 py-3 rounded-full font-semibold hover:bg-[#1a0f4e] transition-colors group text-sm"
+                  className="inline-flex items-center gap-2 bg-[#0A0534] text-white px-6 py-3 rounded-full font-semibold hover:bg-[#E8192C] transition-colors group text-sm"
                 >
                   {cta}
                   <ArrowForward className="group-hover:translate-x-1 transition-transform" fontSize="small" />
@@ -128,16 +136,16 @@ export default function PersonalBankingPage() {
         </div>
       </div>
 
-      {/* Perks */}
+      {/* Additional Services */}
       <div className="py-24 px-6 md:px-16 bg-white">
         <div className="max-w-7xl mx-auto">
           <div className="max-w-xl mb-14">
-            <p className="text-sm font-semibold text-[#E8192C] uppercase tracking-widest mb-3">Why ChoiceBank</p>
+            <p className="text-sm font-semibold text-[#E8192C] uppercase tracking-widest mb-3">More services</p>
             <h2 className="text-4xl font-bold text-[#0A0534]">Everything your bank should be.</h2>
           </div>
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {perks.map(({ icon: Icon, title, description }) => (
-              <div key={title} className="p-6 rounded-2xl bg-[#F7F8F8]">
+          <div className="grid sm:grid-cols-3 gap-6">
+            {services.map(({ icon: Icon, title, description }) => (
+              <div key={title} className="p-8 rounded-2xl bg-[#F7F8F8]">
                 <div className="w-10 h-10 rounded-lg bg-[#E8192C]/10 flex items-center justify-center mb-4">
                   <Icon className="text-[#E8192C]" fontSize="small" />
                 </div>
@@ -152,12 +160,12 @@ export default function PersonalBankingPage() {
       {/* CTA strip */}
       <div className="py-16 px-6 md:px-16 bg-[#0A0534] text-center">
         <h2 className="text-3xl font-bold text-white mb-4">Ready to open your account?</h2>
-        <p className="text-gray-400 mb-8 max-w-md mx-auto">Takes less than 5 minutes. No branch visit required.</p>
+        <p className="text-gray-400 mb-8 max-w-md mx-auto">Speak to a Choice Bank officer and get started today.</p>
         <Link
           href="/contact"
           className="inline-flex items-center gap-2 bg-[#E8192C] text-white px-8 py-4 rounded-full font-semibold hover:bg-[#c4121e] transition-colors group"
         >
-          Get started — It&apos;s free
+          Speak to a Choice Bank Officer
           <ArrowForward className="group-hover:translate-x-1 transition-transform" />
         </Link>
       </div>

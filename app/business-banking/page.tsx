@@ -1,41 +1,41 @@
 import { Metadata } from 'next';
 import Link from 'next/link';
-import { ArrowForward, CheckCircleOutlined, Business, AccountBalance, SwapHoriz, Public, Hub, BarChart } from '@mui/icons-material';
+import { ArrowForward, CheckCircleOutlined, Business, AccountBalance, SwapHoriz, Public, WbSunny, PhoneAndroid } from '@mui/icons-material';
 
 export const metadata: Metadata = {
-  title: 'Business Banking | ChoiceBank',
-  description: 'Banking built for Kenyan businesses. Business accounts, bulk payments, foreign exchange, collections, and API access — all in one place.',
+  title: 'Business Banking | Choice Microfinance Bank',
+  description: 'Practical financial solutions for SMEs, startups and growing enterprises across Kenya.',
 };
 
 const accounts = [
   {
-    name: 'Business Current Account',
-    tagline: 'Your business\'s everyday account.',
-    description: 'A fully-featured current account for day-to-day business operations. Make payments, receive funds, and manage cash flow — all in one place.',
+    icon: Business,
+    name: 'Business Account',
+    tagline: 'Run your business with better control.',
+    description: 'A reliable account for SMEs, startups and growing enterprises that need a secure place to manage collections, payments and daily operations. Keeps business finances separate from personal funds.',
     features: [
-      'Zero monthly maintenance fees',
-      'Unlimited transactions with transparent per-transaction fees',
-      'Dedicated relationship manager for accounts above KES 1M',
-      'Multi-signatory approval workflows',
-      'Debit card for directors and authorised signatories',
-      'Real-time SMS and email transaction alerts',
+      'Manage collections, supplier payments and cash flow',
+      'Keep business finances separate and organized',
+      'Build transaction history for future credit assessment',
+      'Access support through Choice Bank branches and digital channels',
     ],
+    cta: 'Open a Business Account',
     accent: 'border-[#E8192C]',
     badgeBg: 'bg-[#E8192C]/10',
     badgeText: 'text-[#E8192C]',
   },
   {
-    name: 'Business Savings Account',
-    tagline: 'Put idle cash to work.',
-    description: 'Earn competitive interest on business reserves. Keep liquidity available while growing your balance between payroll and supplier cycles.',
+    icon: AccountBalance,
+    name: 'Business Fixed Deposits',
+    tagline: 'Put idle business funds to work.',
+    description: 'A secure way for businesses to earn predictable returns on funds not immediately required for operations. Suitable for SMEs and corporate clients focused on capital preservation.',
     features: [
-      'Competitive tiered interest rates',
-      'Instant access — no lock-in periods',
-      'Earn interest calculated on daily closing balance',
-      'Sweep from current account automatically',
-      'Separate reporting for audit and compliance',
-      'Eligible as collateral for business loans',
+      'Tenures available for 3, 6 or 12 months',
+      'Competitive fixed returns agreed at placement',
+      'Supports better treasury planning for businesses',
+      'Can be used as collateral for credit facilities',
     ],
+    cta: 'Place a Fixed Deposit',
     accent: 'border-[#0A0534]',
     badgeBg: 'bg-[#0A0534]/10',
     badgeText: 'text-[#0A0534]',
@@ -44,34 +44,34 @@ const accounts = [
 
 const solutions = [
   {
-    icon: SwapHoriz,
-    title: 'Bulk Payments',
-    description: 'Pay salaries, suppliers, and agents across banks, M-Pesa, and Airtel Money in a single upload. Full reconciliation report included.',
+    icon: AccountBalance,
+    title: 'SME Financing',
+    description: 'Choice Business Loan up to Ksh 1M net. Tenure of up to 12 months. Assessment based on account transactions and customer profile.',
   },
   {
     icon: Public,
-    title: 'Foreign Exchange',
-    description: 'Buy and sell USD, GBP, EUR, and other major currencies at competitive rates. Same-day settlement for most currency pairs.',
+    title: 'Asset Financing',
+    description: 'Finance vehicles and income-generating assets up to Ksh 5M gross. Interest from 2.5% p.m. Loan period up to 24 months.',
   },
   {
-    icon: Hub,
-    title: 'Collections',
-    description: 'Collect from customers via Paybill, Pesalink, or bank transfer. Every payment auto-reconciled against your virtual wallet.',
+    icon: SwapHoriz,
+    title: 'Business Money Transfers',
+    description: 'Move funds for suppliers, operations and business commitments through reliable banking channels. Designed for smoother daily transactions.',
   },
   {
-    icon: BarChart,
-    title: 'Cash Flow Reporting',
-    description: 'Monthly and on-demand statements, with export to Excel and PDF. Full audit trail for every transaction.',
+    icon: Public,
+    title: 'Foreign Exchange & Supplier Payments',
+    description: 'Guided currency solutions for supplier payments, imports and cross-border transactions. Built for importers and businesses trading internationally.',
   },
   {
-    icon: AccountBalance,
-    title: 'Business Loans',
-    description: 'Asset finance and logbook loans for business assets. Quick decisions and competitive rates for existing account holders.',
+    icon: WbSunny,
+    title: 'Solari Loan',
+    description: 'Green energy financing for solar installations. Packages from Ksh 150K to Ksh 10M, capped at Ksh 5M. Loan period up to 36 months.',
   },
   {
-    icon: Business,
-    title: 'API Banking',
-    description: 'Embed our banking infrastructure directly into your product. Full API access for disbursements, accounts, and collections.',
+    icon: PhoneAndroid,
+    title: 'Business Digital Banking',
+    description: 'Remote access to banking services through mobile and internet banking. Ideal for busy entrepreneurs and teams that need flexible account access.',
   },
 ];
 
@@ -82,6 +82,7 @@ const requirements = [
   'Board resolution authorising account opening',
   'ID and KRA PIN for all directors/signatories',
   'Proof of business address (utility bill or lease agreement)',
+  'Latest 6 months bank statements',
 ];
 
 export default function BusinessBankingPage() {
@@ -92,10 +93,10 @@ export default function BusinessBankingPage() {
         <div className="max-w-7xl mx-auto">
           <p className="text-sm font-semibold text-[#E8192C] uppercase tracking-widest mb-4">Business Banking</p>
           <h1 className="text-5xl md:text-6xl font-bold text-white leading-tight max-w-3xl mb-6">
-            A bank that moves as fast as your business.
+            Banking built around your business goals.
           </h1>
           <p className="text-gray-400 text-xl max-w-xl leading-relaxed mb-10">
-            From SMEs to growing enterprises — business accounts, bulk payments, FX, collections, and API access all under one roof. No switching between providers.
+            Practical financial solutions for SMEs, startups and growing enterprises across Kenya. Manage cash flow, transact with confidence, grow deposits and access financing designed around real business needs.
           </p>
           <div className="flex flex-wrap gap-4">
             <Link
@@ -123,10 +124,10 @@ export default function BusinessBankingPage() {
             <h2 className="text-4xl font-bold text-[#0A0534]">Built for how businesses actually operate.</h2>
           </div>
           <div className="grid md:grid-cols-2 gap-8">
-            {accounts.map(({ name, tagline, description, features, accent, badgeBg, badgeText }) => (
+            {accounts.map(({ icon: Icon, name, tagline, description, features, cta, accent, badgeBg, badgeText }) => (
               <div key={name} className={`bg-white rounded-3xl p-10 border-t-4 ${accent} shadow-sm`}>
                 <div className={`w-12 h-12 rounded-xl ${badgeBg} flex items-center justify-center mb-6`}>
-                  <Business className={badgeText} />
+                  <Icon className={badgeText} />
                 </div>
                 <h2 className="text-2xl font-bold text-[#0A0534] mb-1">{name}</h2>
                 <p className={`text-sm font-semibold ${badgeText} mb-4`}>{tagline}</p>
@@ -141,9 +142,9 @@ export default function BusinessBankingPage() {
                 </ul>
                 <Link
                   href="/contact"
-                  className="inline-flex items-center gap-2 bg-[#0A0534] text-white px-6 py-3 rounded-full font-semibold hover:bg-[#1a0f4e] transition-colors group text-sm"
+                  className="inline-flex items-center gap-2 bg-[#0A0534] text-white px-6 py-3 rounded-full font-semibold hover:bg-[#E8192C] transition-colors group text-sm"
                 >
-                  Get started
+                  {cta}
                   <ArrowForward className="group-hover:translate-x-1 transition-transform" fontSize="small" />
                 </Link>
               </div>
@@ -157,7 +158,7 @@ export default function BusinessBankingPage() {
         <div className="max-w-7xl mx-auto">
           <div className="max-w-xl mb-14">
             <p className="text-sm font-semibold text-[#E8192C] uppercase tracking-widest mb-3">Business solutions</p>
-            <h2 className="text-4xl font-bold text-[#0A0534]">Everything your business needs to move money.</h2>
+            <h2 className="text-4xl font-bold text-[#0A0534]">Solutions for every stage of business growth.</h2>
           </div>
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {solutions.map(({ icon: Icon, title, description }) => (
@@ -180,7 +181,7 @@ export default function BusinessBankingPage() {
             <p className="text-sm font-semibold text-[#E8192C] uppercase tracking-widest mb-3">Account opening</p>
             <h2 className="text-4xl font-bold text-[#0A0534] mb-4">What you need to get started.</h2>
             <p className="text-gray-500 leading-relaxed mb-8">
-              Opening a ChoiceBank business account is straightforward. Submit your documents, and our team will have your account ready within 2 business days.
+              Opening a Choice Bank business account is straightforward. Submit your documents and our team will guide you through the process.
             </p>
             <Link
               href="/contact"
@@ -209,7 +210,7 @@ export default function BusinessBankingPage() {
           href="/contact"
           className="inline-flex items-center gap-2 bg-[#E8192C] text-white px-8 py-4 rounded-full font-semibold hover:bg-[#c4121e] transition-colors group"
         >
-          Talk to us today
+          Speak to a Choice Bank Officer
           <ArrowForward className="group-hover:translate-x-1 transition-transform" />
         </Link>
       </div>
