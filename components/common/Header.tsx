@@ -106,6 +106,14 @@ export default function Header({ variant = 'light' }: HeaderProps) {
             Remittance
           </Link>
 
+          <Link
+            href="/blog"
+            onClick={closeAllDropdowns}
+            className={`${linkHover} ${isActive('/blog') ? 'text-[#E8192C]' : textColor}`}
+          >
+            Blog
+          </Link>
+
           {/** Loans Dropdown */}
           <div className='relative'>
             <button
@@ -263,6 +271,13 @@ export default function Header({ variant = 'light' }: HeaderProps) {
               className="block py-2 border-b border-white/10"
             >
               Remittance
+            </Link>
+            <Link
+              href="/blog"
+              onClick={() => setMobileOpen(false)}
+              className="block py-2 border-b border-white/10"
+            >
+              Blog
             </Link>
 
             <button

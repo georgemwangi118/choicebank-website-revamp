@@ -1,5 +1,6 @@
 import { Metadata } from 'next';
 import Link from 'next/link';
+import Image from 'next/image';
 import {
   ArrowForward,
   CheckCircleOutlined,
@@ -21,6 +22,7 @@ export const metadata: Metadata = {
 const loanProducts = [
   {
     icon: BusinessCenter,
+    image: 'https://images.unsplash.com/photo-1664575602554-2087b04935a5?w=600&q=80&fit=crop',
     title: 'Choice Business Loan',
     tagline: 'Business support without asset security.',
     description: 'A retail financing solution for Choice Bank account holders who need funds for business expansion, education, emergencies, vehicle purchases or other financial goals.',
@@ -37,6 +39,7 @@ const loanProducts = [
   },
   {
     icon: DirectionsCar,
+    image: 'https://images.unsplash.com/photo-1494976388531-d1058494cdd8?w=600&q=80&fit=crop',
     title: 'Logbook Loan',
     tagline: 'Unlock cash from your vehicle.',
     description: 'A motor vehicle-secured loan supported by a valid logbook registered in the borrower\'s name. Use the funds for personal, business or development needs while leveraging vehicle ownership.',
@@ -53,6 +56,7 @@ const loanProducts = [
   },
   {
     icon: DirectionsCar,
+    image: 'https://images.unsplash.com/photo-1601584115197-04ecc0da31d7?w=600&q=80&fit=crop',
     title: 'Asset Finance Loan',
     tagline: 'Own the vehicle or asset your business needs.',
     description: 'Financing for customers purchasing an asset from a yard, individual seller or company. Supports both fresh financing and hire purchase arrangements from yards.',
@@ -69,6 +73,7 @@ const loanProducts = [
   },
   {
     icon: DirectionsCar,
+    image: 'https://images.unsplash.com/photo-1555215695-3004980ad54e?w=600&q=80&fit=crop',
     title: 'MOTI 80% Asset Finance',
     tagline: 'Higher financing for qualifying vehicles.',
     description: 'A higher-limit asset finance option for qualifying customers and vehicles. Designed for stronger financial profiles and newer assets that meet the stated eligibility criteria.',
@@ -85,6 +90,7 @@ const loanProducts = [
   },
   {
     icon: WbSunny,
+    image: 'https://images.unsplash.com/photo-1509391366360-2e959784a276?w=600&q=80&fit=crop',
     title: 'Solari Loan',
     tagline: 'Power your home or business sustainably.',
     description: 'A green energy loan for complete solar solutions for homes, schools, churches, hotels, restaurants and SMEs. Supports customers who want a reliable solar package.',
@@ -101,6 +107,7 @@ const loanProducts = [
   },
   {
     icon: Lock,
+    image: 'https://images.unsplash.com/photo-1579621970563-ebec7560ff3e?w=600&q=80&fit=crop',
     title: 'Fixed Deposit Loan',
     tagline: 'Borrow against your savings.',
     description: 'A secured loan that allows customers to access financing using an active Choice Bank fixed deposit as collateral, while keeping the savings structure in place.',
@@ -117,6 +124,7 @@ const loanProducts = [
   },
   {
     icon: Gavel,
+    image: 'https://images.unsplash.com/photo-1568605117036-5fe5e7bab0b7?w=600&q=80&fit=crop',
     title: 'Auction Refinancing',
     tagline: 'Finance auction vehicle purchases.',
     description: 'A product for customers acquiring repossessed vehicles through organizational auctions. Helps qualifying buyers meet the purchase balance after paying the required deposit.',
@@ -133,6 +141,7 @@ const loanProducts = [
   },
   {
     icon: Shield,
+    image: 'https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=600&q=80&fit=crop',
     title: 'Insurance Premium Financing',
     tagline: 'Spread your insurance premium.',
     description: 'A motor insurance premium financing solution that helps customers access full insurance cover while paying the premium in installments.',
@@ -149,6 +158,7 @@ const loanProducts = [
   },
   {
     icon: Bolt,
+    image: 'https://images.unsplash.com/photo-1553729459-efe14ef6055d?w=600&q=80&fit=crop',
     title: 'Emergency Loan',
     tagline: 'Extra support for existing clients.',
     description: 'A top-up product for well-paying existing clients who need urgent cash support. Runs separately from the main loan — the client carries two concurrent installments.',
@@ -165,6 +175,7 @@ const loanProducts = [
   },
   {
     icon: TrendingUp,
+    image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=600&q=80&fit=crop',
     title: 'Top-Up Through Liquidation',
     tagline: 'More room from your existing loan.',
     description: 'A top-up option for existing clients who need additional financing on their current facility. The existing balance is liquidated as part of the new disbursement process.',
@@ -194,8 +205,16 @@ export default function LoansPage() {
   return (
     <div className="min-h-screen bg-white">
       {/* Hero */}
-      <div className="bg-[#0A0534] pt-40 pb-24 px-6 md:px-16">
-        <div className="max-w-7xl mx-auto">
+      <div className="relative bg-[#0A0534] pt-40 pb-24 px-6 md:px-16 overflow-hidden">
+        <Image
+          src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=1600&q=80&fit=crop"
+          alt="Loans hero background"
+          fill
+          sizes="100vw"
+          className="object-cover object-center opacity-30"
+          priority
+        />
+        <div className="relative z-10 max-w-7xl mx-auto">
           <p className="text-sm font-semibold text-[#E8192C] uppercase tracking-widest mb-4">Loans & Financing</p>
           <h1 className="text-5xl md:text-6xl font-bold text-white leading-tight max-w-3xl mb-6">
             Flexible financing for the goals ahead.
@@ -242,33 +261,46 @@ export default function LoansPage() {
           </div>
 
           <div className="grid md:grid-cols-2 gap-6">
-            {loanProducts.map(({ icon: Icon, title, tagline, description, highlights, cta, href, accent }) => (
-              <div key={title} className={`bg-white rounded-2xl p-8 border-l-4 ${accent} border border-gray-100 flex flex-col`}>
-                <div className="flex items-start gap-4 mb-4">
-                  <div className="w-10 h-10 rounded-xl bg-[#E8192C]/10 flex items-center justify-center shrink-0">
-                    <Icon className="text-[#E8192C]" fontSize="small" />
-                  </div>
-                  <div>
-                    <h3 className="font-bold text-[#0A0534] text-lg leading-tight">{title}</h3>
-                    <p className="text-sm font-semibold text-[#E8192C]">{tagline}</p>
+            {loanProducts.map(({ icon: Icon, image, title, tagline, description, highlights, cta, href, accent }) => (
+              <div key={title} className={`bg-white rounded-2xl overflow-hidden border border-gray-100 shadow-sm flex flex-col`}>
+                {/* Image */}
+                <div className="relative h-48 w-full">
+                  <Image
+                    src={image}
+                    alt={title}
+                    fill
+                    sizes="(max-width: 768px) 100vw, 50vw"
+                    className="object-cover"
+                  />
+                  <div className="absolute inset-0 bg-[#0A0534]/40" />
+                  <div className="absolute bottom-4 left-4 flex items-center gap-2">
+                    <div className="w-8 h-8 rounded-lg bg-white/20 backdrop-blur-sm flex items-center justify-center">
+                      <Icon className="text-white" sx={{ fontSize: 16 }} />
+                    </div>
+                    <span className="text-xs font-semibold text-[#E8192C] uppercase tracking-widest bg-white/10 backdrop-blur-sm px-2 py-1 rounded-full">{tagline}</span>
                   </div>
                 </div>
-                <p className="text-sm text-gray-500 leading-relaxed mb-5">{description}</p>
-                <ul className="space-y-2 mb-6 flex-1">
-                  {highlights.map((h) => (
-                    <li key={h} className="flex items-start gap-2 text-sm text-gray-600">
-                      <CheckCircleOutlined className="text-[#E8192C] shrink-0 mt-0.5" fontSize="small" />
-                      {h}
-                    </li>
-                  ))}
-                </ul>
-                <Link
-                  href={href}
-                  className="inline-flex items-center gap-2 text-sm font-semibold text-[#0A0534] hover:text-[#E8192C] transition-colors group"
-                >
-                  {cta}
-                  <ArrowForward className="group-hover:translate-x-1 transition-transform" fontSize="small" />
-                </Link>
+
+                {/* Content */}
+                <div className={`p-7 border-t-4 ${accent} flex flex-col flex-1`}>
+                  <h3 className="font-bold text-[#0A0534] text-lg mb-2">{title}</h3>
+                  <p className="text-sm text-gray-500 leading-relaxed mb-5">{description}</p>
+                  <ul className="space-y-2 mb-6 flex-1">
+                    {highlights.map((h) => (
+                      <li key={h} className="flex items-start gap-2 text-sm text-gray-600">
+                        <CheckCircleOutlined className="text-[#E8192C] shrink-0 mt-0.5" fontSize="small" />
+                        {h}
+                      </li>
+                    ))}
+                  </ul>
+                  <Link
+                    href={href}
+                    className="inline-flex items-center gap-2 text-sm font-semibold text-[#0A0534] hover:text-[#E8192C] transition-colors group"
+                  >
+                    {cta}
+                    <ArrowForward className="group-hover:translate-x-1 transition-transform" fontSize="small" />
+                  </Link>
+                </div>
               </div>
             ))}
           </div>

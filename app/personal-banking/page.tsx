@@ -1,5 +1,6 @@
 import { Metadata } from 'next';
 import Link from 'next/link';
+import Image from 'next/image';
 import { ArrowForward, CheckCircleOutlined, Savings, AccountBalanceWallet, Lock, SwapHoriz, CurrencyExchange, PhoneAndroid } from '@mui/icons-material';
 
 export const metadata: Metadata = {
@@ -80,8 +81,16 @@ export default function PersonalBankingPage() {
   return (
     <div className="min-h-screen bg-white">
       {/* Hero */}
-      <div className="bg-[#0A0534] pt-40 pb-24 px-6 md:px-16">
-        <div className="max-w-7xl mx-auto">
+      <div className="relative bg-[#0A0534] pt-40 pb-24 px-6 md:px-16 overflow-hidden">
+        <Image
+          src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=1600&q=80&fit=crop"
+          alt="Hero background"
+          fill
+          sizes="100vw"
+          className="object-cover object-center opacity-30"
+          priority
+        />
+        <div className="relative z-10 max-w-7xl mx-auto">
           <p className="text-sm font-semibold text-[#E8192C] uppercase tracking-widest mb-4">Personal Banking</p>
           <h1 className="text-5xl md:text-6xl font-bold text-white leading-tight max-w-3xl mb-6">
             Banking that fits your everyday life.
