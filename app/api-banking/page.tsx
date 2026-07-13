@@ -1,56 +1,78 @@
 import { Metadata } from 'next';
 import Link from 'next/link';
 import Image from 'next/image';
-import { ArrowForward, CheckCircleOutlined, Code, AccountBalance, Send, Savings, Hub } from '@mui/icons-material';
+import {
+  ArrowForward,
+  CheckCircleOutlined,
+  AccountBalance,
+  Send,
+  Savings,
+  Hub,
+  Shield,
+  Speed,
+  SupportAgent,
+  AccountTree,
+} from '@mui/icons-material';
+import bg from '@/public/assets/home/api.png'
 
 export const metadata: Metadata = {
-  title: 'API Banking | ChoiceBank',
-  description: 'Integrate ChoiceBank\'s API into your product. Bank accounts, disbursements, collections, and virtual wallets — all via a clean REST API.',
+  title: 'Banking as a Service | Choice Microfinance Bank',
+  description: 'Choice Bank offers BaaS infrastructure to fintechs and digital businesses — embed accounts, payments, collections and cross-border rails into your product via API.',
 };
 
-const endpoints = [
+const capabilities = [
   {
     icon: AccountBalance,
-    title: 'Bank Accounts',
-    description: 'Programmatically open partner accounts, business accounts, personal accounts, or wallet accounts. Full KYC flow built in.',
-    methods: ['POST /accounts', 'GET /accounts/:id', 'GET /accounts/:id/balance'],
+    title: 'Embedded Bank Accounts',
+    description: 'Open real, CBK-regulated bank accounts for your customers programmatically. Each account is a fully functional bank account — not a wallet abstraction.',
+    details: ['Personal & business account creation', 'Full KYC flow via API', 'Real-time balance & statement access', 'Account numbers on Kenya\'s banking rails'],
   },
   {
     icon: Send,
-    title: 'Disbursements',
-    description: 'Send money to M-Pesa, Airtel Money, Paybill, Till numbers, Pesalink, and any Kenyan bank account via a single endpoint.',
-    methods: ['POST /disbursements', 'GET /disbursements/:id', 'POST /disbursements/bulk'],
+    title: 'Payments & Disbursements',
+    description: 'Send money to M-Pesa, Airtel Money, Paybill, Till numbers, Pesalink, and any Kenyan bank — all from a single disbursement endpoint.',
+    details: ['Mobile money (M-Pesa, Airtel)', 'Bank-to-bank transfers via Pesalink', 'Bulk disbursements for payroll or agents', 'Real-time status callbacks via webhooks'],
+  },
+  {
+    icon: Savings,
+    title: 'Collections & Inflows',
+    description: 'Accept payments from your users through dedicated virtual accounts, Paybill shortcodes, and Pesalink — with instant transaction notifications.',
+    details: ['Virtual account collections', 'Paybill & Pesalink inflows', 'Webhook events on every receipt', 'Automatic reconciliation support'],
   },
   {
     icon: Hub,
     title: 'Virtual Wallets',
-    description: 'Create virtual wallets to isolate funds by customer, project, or campaign. Real-time balance updates and transaction history.',
-    methods: ['POST /wallets', 'GET /wallets/:id', 'POST /wallets/:id/transfer'],
+    description: 'Create isolated virtual wallets per user, merchant, or project. Move funds between wallets in real time without touching the banking rails.',
+    details: ['Multi-wallet architecture', 'Instant internal transfers', 'Per-wallet transaction history', 'Flexible balance controls'],
   },
   {
-    icon: Savings,
-    title: 'Collections',
-    description: 'Receive payments via Paybill, Pesalink, and bank transfers. Webhook notifications fire on every incoming transaction.',
-    methods: ['POST /collections/paybill', 'GET /collections', 'POST /webhooks'],
+    icon: AccountTree,
+    title: 'Cross-Border & FX',
+    description: 'Settle China supplier payments in CNY/RMB and support diaspora remittance flows — all through the same BaaS integration.',
+    details: ['CNY/RMB payments to China', 'Kenya–China corridor (CNY Express)', 'FX rate guidance and conversion', 'Traceable international transactions'],
+  },
+  {
+    icon: Shield,
+    title: 'Regulatory Coverage',
+    description: 'Build under Choice Bank\'s CBK licence. Your product is backed by a regulated institution — removing the licensing burden from your roadmap.',
+    details: ['CBK-licensed banking partner', 'AML/KYC compliance built in', 'Transaction reporting handled', 'Audit trail on all operations'],
   },
 ];
 
-const sdks = [
-  { lang: 'Node.js', install: 'npm install @choicebank/sdk' },
-  { lang: 'Python', install: 'pip install choicebank' },
-  { lang: 'Java', install: 'implementation \'com.choicebank:sdk:1.0.0\'' },
-  { lang: 'PHP', install: 'composer require choicebank/sdk' },
+const useCases = [
+  { title: 'Lending Platforms', description: 'Disburse loans directly to borrower accounts or mobile money. Collect repayments via dedicated virtual accounts.' },
+  { title: 'Savings & Wallets', description: 'Offer your users real bank accounts with interest-bearing balances, backed by a CBK-regulated institution.' },
+  { title: 'Payroll & Agent Networks', description: 'Pay employees, agents, or merchants across mobile money and bank channels in bulk via a single API call.' },
+  { title: 'E-commerce & Marketplaces', description: 'Collect from buyers and settle to sellers — with escrow-style wallet controls and automated reconciliation.' },
+  { title: 'China Import Payments', description: 'Enable your users to pay Chinese suppliers in CNY directly from Kenya through the CNY Express corridor.' },
+  { title: 'Microfinance & SACCOs', description: 'Digitise your lending and savings operations on top of a regulated banking layer without building core banking from scratch.' },
 ];
 
-const features = [
-  'Sandbox environment with test credentials — no real money at risk',
-  'Comprehensive API documentation with copy-paste examples',
-  'Webhook support for real-time transaction events',
-  'OAuth 2.0 authentication with API key fallback',
-  'Rate limits designed for production workloads',
-  'Dedicated integration support from our engineering team',
-  '99.9% uptime SLA with status page monitoring',
-  'Idempotency keys to prevent duplicate transactions',
+const reasons = [
+  { icon: Shield, label: 'CBK Licensed', description: 'Operate under a real banking licence — no regulatory grey areas.' },
+  { icon: Speed, label: 'Fast Integration', description: 'Sandbox access within 48 hours. Go live in weeks, not months.' },
+  { icon: SupportAgent, label: 'Dedicated Support', description: 'A technical partnership team with you from integration to production.' },
+  { icon: AccountBalance, label: 'Real Banking Rails', description: 'Pesalink, M-Pesa, Airtel, SWIFT. The actual infrastructure.' },
 ];
 
 export default function APIBankingPage() {
@@ -59,107 +81,136 @@ export default function APIBankingPage() {
       {/* Hero */}
       <div className="relative bg-[#0A0534] pt-40 pb-24 px-6 md:px-16 overflow-hidden">
         <Image
-          src="https://images.unsplash.com/photo-1518770660439-4636190af475?w=1600&q=80&fit=crop"
-          alt="Hero background"
+          src={bg}
+          alt="BaaS background"
           fill
           sizes="100vw"
           className="object-cover object-center opacity-30"
           priority
         />
+
         <div className="relative z-10 max-w-7xl mx-auto">
-          <p className="text-sm font-semibold text-[#E8192C] uppercase tracking-widest mb-4">API Banking</p>
+          <p className="text-sm font-semibold text-[#E8192C] uppercase tracking-widest mb-4">Banking as a Service</p>
           <h1 className="text-5xl md:text-6xl font-bold text-white leading-tight max-w-3xl mb-6">
-            Build on top of a real bank.
+            The bank behind<br />your fintech.
           </h1>
-          <p className="text-gray-400 text-xl max-w-xl leading-relaxed mb-10">
-            Embed bank accounts, payments, and collections into your product via a clean, well-documented REST API. Regulated infrastructure, developer-grade experience.
+          <p className="text-white text-sm max-w-xl leading-relaxed mb-10">
+            Choice Microfinance Bank provides regulated banking infrastructure to fintechs, digital lenders, and platforms across the World. Embed real accounts, payments, and collections into your product without building a bank.
           </p>
           <div className="flex flex-wrap gap-4">
-            <Link
-              href="/contact"
+            <a
+              href="https://choice-bank.gitbook.io/choice-bank"
+              target="_blank"
+              rel="noopener noreferrer"
               className="inline-flex items-center gap-2 bg-[#E8192C] text-white px-8 py-4 rounded-full font-semibold hover:bg-[#c4121e] transition-all group"
             >
-              Get API Access
+              Read the Docs
               <ArrowForward className="group-hover:translate-x-1 transition-transform" />
-            </Link>
-            <Link
-              href="/contact"
-              className="inline-flex items-center gap-2 border border-white/20 text-white px-8 py-4 rounded-full font-semibold hover:bg-white/10 transition-all"
-            >
-              Talk to our team
-            </Link>
+            </a>
+          
           </div>
         </div>
       </div>
 
-      {/* Endpoints */}
+      {/* Why Choice BaaS */}
+      <div className="py-16 px-6 md:px-16 bg-[#E8192C]/10">
+        <div className="max-w-7xl mx-auto grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
+          {reasons.map(({ icon: Icon, label, description }) => (
+            <div key={label} className="flex items-start gap-4">
+              <div className="w-10 h-10 rounded-xl bg-[#E8192C]/20 flex items-center justify-center shrink-0">
+                <Icon className="text-[#E8192C]" fontSize="small" />
+              </div>
+              <div>
+                <p className="font-bold text-[#0A0534] text-sm mb-1">{label}</p>
+                <p className="text-xs text-gray-500 leading-relaxed">{description}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* BaaS Capabilities */}
       <div className="py-24 px-6 md:px-16 bg-[#F7F8F8]">
         <div className="max-w-7xl mx-auto">
           <div className="max-w-xl mb-14">
-            <p className="text-sm font-semibold text-[#E8192C] uppercase tracking-widest mb-3">API Endpoints</p>
-            <h2 className="text-4xl font-bold text-[#0A0534]">Everything you need to build.</h2>
+            <p className="text-sm font-semibold text-[#E8192C] uppercase tracking-widest mb-3">Platform Capabilities</p>
+            <h2 className="text-4xl font-bold text-[#0A0534]">Everything your product needs.</h2>
+            <p className="text-gray-500 mt-4 leading-relaxed">Access the full stack of banking services through a single, well-documented API partnership.</p>
           </div>
-
-          <div className="grid md:grid-cols-2 gap-6">
-            {endpoints.map(({ icon: Icon, title, description, methods }) => (
-              <div key={title} className="bg-white rounded-2xl p-8 border border-gray-100">
-                <div className="flex items-center gap-3 mb-4">
-                  <div className="w-10 h-10 rounded-lg bg-[#E8192C]/10 flex items-center justify-center">
-                    <Icon className="text-[#E8192C]" fontSize="small" />
-                  </div>
-                  <h3 className="text-xl font-bold text-[#0A0534]">{title}</h3>
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {capabilities.map(({ icon: Icon, title, description, details }) => (
+              <div key={title} className="bg-white rounded-2xl p-8 border border-gray-100 flex flex-col">
+                <div className="w-12 h-12 rounded-xl bg-[#E8192C]/10 flex items-center justify-center mb-5">
+                  <Icon className="text-[#E8192C]" />
                 </div>
-                <p className="text-gray-500 text-sm mb-5 leading-relaxed">{description}</p>
-                <div className="space-y-1">
-                  {methods.map((m) => (
-                    <code key={m} className="block text-xs font-mono text-[#E8192C] bg-[#F7F4FF] px-3 py-1.5 rounded-lg">
-                      {m}
-                    </code>
+                <h3 className="font-bold text-[#0A0534] text-lg mb-2">{title}</h3>
+                <p className="text-sm text-gray-500 leading-relaxed mb-5 flex-1">{description}</p>
+                <ul className="space-y-2">
+                  {details.map((d) => (
+                    <li key={d} className="flex items-start gap-2 text-xs text-gray-500">
+                      <CheckCircleOutlined className="text-[#E8192C] shrink-0 mt-0.5" sx={{ fontSize: 14 }} />
+                      {d}
+                    </li>
                   ))}
-                </div>
+                </ul>
               </div>
             ))}
           </div>
         </div>
       </div>
 
-      {/* SDKs */}
+      {/* Use cases */}
       <div className="py-24 px-6 md:px-16 bg-white">
+        <div className="max-w-7xl mx-auto">
+          <div className="max-w-xl mb-14">
+            <p className="text-sm font-semibold text-[#E8192C] uppercase tracking-widest mb-3">Who It&apos;s For</p>
+            <h2 className="text-4xl font-bold text-[#0A0534]">Built for builders.</h2>
+            <p className="text-gray-500 mt-4 leading-relaxed">Whether you&apos;re a fintech, SACCO, marketplace, or enterprise — if you need banking infrastructure, this is the conversation to start.</p>
+          </div>
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+            {useCases.map(({ title, description }) => (
+              <div key={title} className="border border-gray-100 rounded-2xl p-7 hover:border-[#E8192C]/30 hover:shadow-sm transition-all">
+                <h3 className="font-bold text-[#0A0534] mb-2">{title}</h3>
+                <p className="text-sm text-gray-500 leading-relaxed">{description}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      {/* How it works */}
+      <div className="py-24 px-6 md:px-16 bg-[#0A0534]">
         <div className="max-w-7xl mx-auto grid md:grid-cols-2 gap-16 items-center">
           <div>
-            <p className="text-sm font-semibold text-[#E8192C] uppercase tracking-widest mb-3">SDK Libraries</p>
-            <h2 className="text-4xl font-bold text-[#0A0534] mb-4">Your language, our API.</h2>
-            <p className="text-gray-500 leading-relaxed mb-8">
-              Don&apos;t write boilerplate. Our official SDK libraries handle authentication, retries, and serialization so you can focus on your product logic.
+            <p className="text-sm font-semibold text-[#E8192C] uppercase tracking-widest mb-4">How Partnership Works</p>
+            <h2 className="text-4xl font-bold text-white mb-6">From conversation to production.</h2>
+            <p className="text-gray-400 leading-relaxed mb-8">
+              We don&apos;t run a self-serve sign-up flow — BaaS partnerships are scoped properly from the start. Here&apos;s how we work together.
             </p>
-            <div className="flex items-center gap-2">
-              <Code className="text-[#E8192C]" />
-              <span className="text-sm text-gray-500">Available for Node.js, Python, Java, and PHP</span>
-            </div>
+            <a
+              href="https://choice-bank.gitbook.io/choice-bank"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 border border-white/20 text-white px-6 py-3 rounded-full font-semibold hover:bg-white/10 transition-all group text-sm"
+            >
+              Our API Docs
+              <ArrowForward className="group-hover:translate-x-1 transition-transform" fontSize="small" />
+            </a>
           </div>
-          <div className="space-y-3">
-            {sdks.map(({ lang, install }) => (
-              <div key={lang} className="bg-[#0A0534] rounded-2xl px-6 py-4 flex items-center justify-between">
-                <span className="text-white font-semibold text-sm">{lang}</span>
-                <code className="text-[#E8192C] text-xs font-mono">{install}</code>
-              </div>
-            ))}
-          </div>
-        </div>
-      </div>
-
-      {/* Features list */}
-      <div className="py-24 px-6 md:px-16 bg-[#F7F8F8]">
-        <div className="max-w-7xl mx-auto">
-          <div className="max-w-xl mb-14">
-            <p className="text-sm font-semibold text-[#E8192C] uppercase tracking-widest mb-3">Platform features</p>
-            <h2 className="text-4xl font-bold text-[#0A0534]">Built for production.</h2>
-          </div>
-          <div className="grid sm:grid-cols-2 gap-4">
-            {features.map((f) => (
-              <div key={f} className="flex items-start gap-3 p-4 bg-white rounded-xl border border-gray-100">
-                <CheckCircleOutlined className="text-[#E8192C] shrink-0 mt-0.5" fontSize="small" />
-                <p className="text-sm text-gray-600 leading-relaxed">{f}</p>
+          <div className="space-y-0 divide-y divide-white/10">
+            {[
+              { step: '01', title: 'Initial conversation', detail: 'Tell us about your product, your users, and what banking capabilities you need. No commitment required.' },
+              { step: '02', title: 'Scope & agreement', detail: 'We define the integration scope, data flows, compliance requirements, and go-live timeline together.' },
+              { step: '03', title: 'Sandbox access', detail: 'You get sandbox credentials and API documentation to begin building and testing within 48 hours of agreement.' },
+              { step: '04', title: 'Integration & review', detail: 'Our technical team reviews your integration, supports testing, and signs off before production launch.' },
+              { step: '05', title: 'Go live', detail: 'Flip to production. Your users can now open accounts, send payments, and collect funds through a CBK-licensed bank.' },
+            ].map(({ step, title, detail }) => (
+              <div key={step} className="flex gap-6 py-6">
+                <span className="text-2xl font-bold text-white/20 w-10 shrink-0">{step}</span>
+                <div>
+                  <h4 className="font-semibold text-white mb-1">{title}</h4>
+                  <p className="text-sm text-gray-400 leading-relaxed">{detail}</p>
+                </div>
               </div>
             ))}
           </div>
@@ -167,16 +218,31 @@ export default function APIBankingPage() {
       </div>
 
       {/* CTA */}
-      <div className="py-16 px-6 md:px-16 bg-[#0A0534] text-center">
-        <h2 className="text-3xl font-bold text-white mb-4">Start building today.</h2>
-        <p className="text-gray-400 mb-8 max-w-md mx-auto">Get sandbox access and start integrating in minutes. Our team is available to support your integration.</p>
-        <Link
-          href="/contact"
-          className="inline-flex items-center gap-2 bg-[#E8192C] text-white px-8 py-4 rounded-full font-semibold hover:bg-[#c4121e] transition-colors group"
-        >
-          Request API Access
-          <ArrowForward className="group-hover:translate-x-1 transition-transform" />
-        </Link>
+      <div className="py-16 px-6 md:px-16 bg-[#F7F8F8]">
+        <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-8 bg-white rounded-3xl p-10 border border-gray-100">
+          <div>
+            <h2 className="text-3xl font-bold text-[#0A0534] mb-3">Ready to embed banking into your product?</h2>
+            <p className="text-gray-500 max-w-lg leading-relaxed">Start with a conversation. Our partnership team will help you figure out the right integration for your use case.</p>
+          </div>
+          <div className="flex flex-col sm:flex-row gap-3 shrink-0">
+            <Link
+              href="/contact"
+              className="inline-flex items-center gap-2 bg-[#E8192C] text-white px-8 py-4 rounded-full font-semibold hover:bg-[#c4121e] transition-colors group whitespace-nowrap"
+            >
+              Start a Partnership
+              <ArrowForward className="group-hover:translate-x-1 transition-transform" fontSize="small" />
+            </Link>
+            <a
+              href="https://choice-bank.gitbook.io/choice-bank"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 border border-[#0A0534] text-[#0A0534] px-8 py-4 rounded-full font-semibold hover:bg-[#0A0534] hover:text-white transition-colors group whitespace-nowrap"
+            >
+              Read the Docs
+              <ArrowForward className="group-hover:translate-x-1 transition-transform" fontSize="small" />
+            </a>
+          </div>
+        </div>
       </div>
     </div>
   );

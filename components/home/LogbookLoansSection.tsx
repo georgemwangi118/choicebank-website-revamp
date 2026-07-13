@@ -36,7 +36,7 @@ export default function LogbookLoansSection() {
             </p>
 
             <Link
-              href="/logbook-loans"
+              href="/logbook-loans/#apply-form"
               className="group inline-flex items-center gap-2 bg-[#0A0534] text-white px-8 py-4 rounded-full font-semibold hover:bg-[#E8192C] transition-all duration-300"
             >
               Apply now

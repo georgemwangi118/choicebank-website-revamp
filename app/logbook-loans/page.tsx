@@ -1,12 +1,11 @@
-import { Metadata } from 'next';
+'use client';
+
 import Link from 'next/link';
 import Image from 'next/image';
+import { useState } from 'react';
+import { sendEmail } from '@/lib/sendEmail';
 import { ArrowForward, CheckCircleOutlined, DirectionsCar, Bolt, Shield, MonetizationOn } from '@mui/icons-material';
-
-export const metadata: Metadata = {
-  title: 'Logbook Loans | Choice Microfinance Bank',
-  description: 'Unlock cash from your vehicle with a Choice Bank logbook loan. Keep driving your car while accessing up to 60% of its value.',
-};
+import bg from '@/public/assets/loans/bg1.png';
 
 const highlights = [
   { icon: MonetizationOn, title: 'Up to Ksh 5 Million', description: 'Borrow up to 60% of your vehicle\'s value depending on year of manufacture, make and condition.' },
@@ -16,54 +15,100 @@ const highlights = [
 ];
 
 const loanTerms = [
-  { label: 'Loan amount', value: 'Up to Ksh 5M' },
-  { label: 'Loan period', value: 'Up to 18 months' },
-  { label: 'Financing coverage', value: 'Up to 60%' },
+  { label: 'Loan amount', value: 'Up to Ksh 6M' },
+  { label: 'Loan period', value: 'Up to 48 months' },
+  { label: 'Financing coverage', value: 'Up to 80%' },
   { label: 'Turnaround time', value: '6 – 12 hours' },
-  { label: 'Vehicle YOM', value: '2009 and above' },
-  { label: 'Loan Buyoff', value: 'Available' },
+  { label: 'Vehicle YOM', value: '2004 and above' },
+  { label: 'Affordable', value: 'Available' },
 ];
 
 const eligibility = [
-  'Kenyan citizen or resident with a valid National ID',
-  'Vehicle registered in your name with logbook available',
-  'Vehicle from year of manufacture 2009 and above',
-  'Comprehensive motor insurance cover in place',
-  'No adverse credit history',
-  'Proof of income or regular cash flow',
+  'Valid National ID',
+  'Vehicle registered with logbook available',
+  'Vehicle from year of manufacture 2004 and above',
+  'Motor insurance cover in place',
+  'Proof of income',
 ];
 
 const documents = [
   'Original logbook (vehicle registration certificate)',
   'National ID or Passport',
   'KRA PIN Certificate',
-  'Comprehensive motor insurance certificate',
-  'Latest 3 months bank statements',
-  'Proof of residence (utility bill or lease)',
+  'Motor insurance certificate',
+  'Latest 6 months Bank/M-Pesa statements',
 ];
 
 const steps = [
   { number: '01', title: 'Apply online or at a branch', description: 'Submit your details and upload your documents digitally, or visit any Choice Bank branch to get started.' },
-  { number: '02', title: 'Vehicle & document checks', description: 'Our team conducts external checks and document verification. The process is designed to move quickly.' },
-  { number: '03', title: 'Loan offer issued', description: 'Receive a formal offer within hours. Review the amount, rate, and repayment schedule at no obligation.' },
-  { number: '04', title: 'Sign & receive funds', description: 'Accept the offer, hand over the logbook, and funds are disbursed directly to your account.' },
+  { number: '02', title: 'Loan offer issued', description: 'Receive a formal offer within hours. Review the amount, rate, and repayment schedule at no obligation.' },
+  { number: '03', title: 'Receive funds', description: 'Accept the offer, hand over the logbook, and funds are disbursed directly to your account.' },
 ];
 
 const buyoffTerms = [
-  'Loan amount of up to Ksh 5M gross',
-  'Loan period of up to 18 months',
-  'Vehicle YOM: 2014 and above',
+  'Loan amount of up to Ksh 6M gross',
+  'Loan period of up to 48 months',
+  'Vehicle YOM: 2004 and above',
   'Client must have paid at least 50% of principal without default',
   'Up to 50% financing depending on YOM, make and condition',
 ];
 
+function scrollToForm() {
+  document.getElementById('apply-form')?.scrollIntoView({ behavior: 'smooth' });
+}
+
 export default function LogbookLoansPage() {
+  const [submitted, setSubmitted] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState('');
+  const [form, setForm] = useState({
+    name: '',
+    phone: '',
+    email: '',
+    vehicleMake: '',
+    vehicleYear: '',
+    amount: '',
+    message: '',
+  });
+
+  function handleChange(e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) {
+    setForm({ ...form, [e.target.name]: e.target.value });
+  }
+
+  async function handleSubmit(e: React.FormEvent) {
+    e.preventDefault();
+    setSubmitting(true);
+    setSubmitError('');
+    try {
+      await sendEmail({
+        to: 'sales@choice-bank.com',
+        subject: `Logbook Loan Application — ${form.name}`,
+        formTitle: 'Logbook Loan Application',
+        replyTo: form.email || undefined,
+        fields: [
+          { label: 'Full Name', value: form.name },
+          { label: 'Phone Number', value: form.phone },
+          { label: 'Email Address', value: form.email },
+          { label: 'Vehicle Make & Model', value: form.vehicleMake },
+          { label: 'Year of Manufacture', value: form.vehicleYear },
+          { label: 'Loan Amount Needed', value: form.amount },
+          { label: 'Additional Information', value: form.message },
+        ],
+      });
+      setSubmitted(true);
+    } catch {
+      setSubmitError('Something went wrong. Please call us directly or try again.');
+    } finally {
+      setSubmitting(false);
+    }
+  }
+
   return (
     <div className="min-h-screen bg-white">
       {/* Hero */}
       <div className="relative bg-[#0A0534] pt-40 pb-24 px-6 md:px-16 overflow-hidden">
         <Image
-          src="https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?w=1600&q=80&fit=crop"
+          src={bg}
           alt="Hero background"
           fill
           sizes="100vw"
@@ -79,15 +124,15 @@ export default function LogbookLoansPage() {
             A motor vehicle-secured loan supported by a valid logbook registered in your name. Use the funds for personal, business or development needs — while you keep driving.
           </p>
           <div className="flex flex-wrap gap-4">
-            <Link
-              href="/contact"
+            <button
+              onClick={scrollToForm}
               className="inline-flex items-center gap-2 bg-[#E8192C] text-white px-8 py-4 rounded-full font-semibold hover:bg-[#c4121e] transition-all group"
             >
               Apply for a Logbook Loan
               <ArrowForward className="group-hover:translate-x-1 transition-transform" />
-            </Link>
+            </button>
             <Link
-              href="/contact"
+              href="/sales"
               className="inline-flex items-center gap-2 border border-white/20 text-white px-8 py-4 rounded-full font-semibold hover:bg-white/10 transition-all"
             >
               Speak to an advisor
@@ -168,13 +213,13 @@ export default function LogbookLoansPage() {
             <p className="text-gray-500 leading-relaxed mb-8">
               A logbook loan product designed to buy off an existing facility from another MFI or bank. It helps qualifying customers transfer their loan after demonstrating a strong repayment history.
             </p>
-            <Link
-              href="/contact"
+            <button
+              onClick={scrollToForm}
               className="inline-flex items-center gap-2 bg-[#0A0534] text-white px-6 py-3 rounded-full font-semibold hover:bg-[#E8192C] transition-colors group"
             >
               Request Loan Buyoff
               <ArrowForward className="group-hover:translate-x-1 transition-transform" fontSize="small" />
-            </Link>
+            </button>
           </div>
           <div className="space-y-3">
             {buyoffTerms.map((term) => (
@@ -211,17 +256,138 @@ export default function LogbookLoansPage() {
         </div>
       </div>
 
-      {/* CTA */}
-      <div className="py-16 px-6 md:px-16 bg-[#0A0534] text-center">
-        <h2 className="text-3xl font-bold text-white mb-4">Ready to unlock your vehicle&apos;s value?</h2>
-        <p className="text-gray-400 mb-8 max-w-md mx-auto">Apply today. Our team responds within hours.</p>
-        <Link
-          href="/contact"
-          className="inline-flex items-center gap-2 bg-[#E8192C] text-white px-8 py-4 rounded-full font-semibold hover:bg-[#c4121e] transition-colors group"
-        >
-          Apply for a Logbook Loan
-          <ArrowForward className="group-hover:translate-x-1 transition-transform" />
-        </Link>
+      {/* Application Form */}
+      <div id="apply-form" className="py-24 px-6 md:px-16 bg-[#0A0534]">
+        <div className="max-w-3xl mx-auto">
+          <p className="text-sm font-semibold text-[#E8192C] uppercase tracking-widest mb-4">Apply Now</p>
+          <h2 className="text-4xl font-bold text-white mb-3">Start your application.</h2>
+          <p className="text-gray-400 mb-10">Fill in your details below and a Choice Bank loan officer will contact you within hours.</p>
+
+          {submitted ? (
+            <div className="bg-white/10 border border-white/20 rounded-3xl p-12 text-center">
+              <CheckCircleOutlined className="text-[#E8192C] mb-4" sx={{ fontSize: 48 }} />
+              <h3 className="text-2xl font-bold text-white mb-3">Application received.</h3>
+              <p className="text-gray-400">Thank you, {form.name}. Our team will reach out to you on {form.phone} within 6–12 hours.</p>
+            </div>
+          ) : (
+            <form onSubmit={handleSubmit} className="space-y-5">
+              <div className="grid md:grid-cols-2 gap-5">
+                <div>
+                  <label className="block text-sm text-gray-300 mb-2">Full Name *</label>
+                  <input
+                    type="text"
+                    name="name"
+                    required
+                    value={form.name}
+                    onChange={handleChange}
+                    placeholder="John Kamau"
+                    className="w-full bg-white/10 border border-white/20 rounded-xl px-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:border-[#E8192C] transition-colors"
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm text-gray-300 mb-2">Phone Number *</label>
+                  <input
+                    type="tel"
+                    name="phone"
+                    required
+                    value={form.phone}
+                    onChange={handleChange}
+                    placeholder="07XX XXX XXX"
+                    className="w-full bg-white/10 border border-white/20 rounded-xl px-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:border-[#E8192C] transition-colors"
+                  />
+                </div>
+              </div>
+
+              <div>
+                <label className="block text-sm text-gray-300 mb-2">Email Address</label>
+                <input
+                  type="email"
+                  name="email"
+                  value={form.email}
+                  onChange={handleChange}
+                  placeholder="john@email.com"
+                  className="w-full bg-white/10 border border-white/20 rounded-xl px-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:border-[#E8192C] transition-colors"
+                />
+              </div>
+
+              <div className="grid md:grid-cols-2 gap-5">
+                <div>
+                  <label className="block text-sm text-gray-300 mb-2">Vehicle Make & Model *</label>
+                  <input
+                    type="text"
+                    name="vehicleMake"
+                    required
+                    value={form.vehicleMake}
+                    onChange={handleChange}
+                    placeholder="e.g. Toyota Fielder"
+                    className="w-full bg-white/10 border border-white/20 rounded-xl px-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:border-[#E8192C] transition-colors"
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm text-gray-300 mb-2">Year of Manufacture *</label>
+                  <input
+                    type="number"
+                    name="vehicleYear"
+                    required
+                    value={form.vehicleYear}
+                    onChange={handleChange}
+                    placeholder="e.g. 2015"
+                    min="2004"
+                    max="2025"
+                    className="w-full bg-white/10 border border-white/20 rounded-xl px-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:border-[#E8192C] transition-colors"
+                  />
+                </div>
+              </div>
+
+              <div>
+                <label className="block text-sm text-gray-300 mb-2">Loan Amount Needed (Ksh) *</label>
+                <select
+                  name="amount"
+                  required
+                  value={form.amount}
+                  onChange={handleChange}
+                  className="w-full bg-white/10 border border-white/20 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-[#E8192C] transition-colors appearance-none"
+                >
+                  <option value="" className="bg-[#0A0534]">Select a range</option>
+                  <option value="Under 500K" className="bg-[#0A0534]">Under Ksh 500,000</option>
+                  <option value="500K - 1M" className="bg-[#0A0534]">Ksh 500,000 – 1,000,000</option>
+                  <option value="1M - 2M" className="bg-[#0A0534]">Ksh 1,000,000 – 2,000,000</option>
+                  <option value="2M - 4M" className="bg-[#0A0534]">Ksh 2,000,000 – 4,000,000</option>
+                  <option value="Above 4M" className="bg-[#0A0534]">Above Ksh 4,000,000</option>
+                </select>
+              </div>
+
+              <div>
+                <label className="block text-sm text-gray-300 mb-2">Additional Information</label>
+                <textarea
+                  name="message"
+                  value={form.message}
+                  onChange={handleChange}
+                  rows={4}
+                  placeholder="Any other details about your vehicle or loan purpose..."
+                  className="w-full bg-white/10 border border-white/20 rounded-xl px-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:border-[#E8192C] transition-colors resize-none"
+                />
+              </div>
+
+              <button
+                type="submit"
+                disabled={submitting}
+                className="w-full bg-[#E8192C] text-white py-4 rounded-full font-semibold hover:bg-[#c4121e] transition-colors flex items-center justify-center gap-2 group disabled:opacity-60 disabled:cursor-not-allowed"
+              >
+                {submitting ? 'Submitting…' : 'Submit Application'}
+                {!submitting && <ArrowForward className="group-hover:translate-x-1 transition-transform" />}
+              </button>
+
+              {submitError && (
+                <p className="text-sm text-red-400 text-center">{submitError}</p>
+              )}
+
+              <p className="text-xs text-gray-500 text-center">
+                By submitting, you agree that a Choice Bank representative may contact you regarding your application. Your data is handled in accordance with CBK regulations.
+              </p>
+            </form>
+          )}
+        </div>
       </div>
     </div>
   );

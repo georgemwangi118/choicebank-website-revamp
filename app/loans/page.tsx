@@ -1,6 +1,9 @@
-import { Metadata } from 'next';
+'use client';
+
 import Link from 'next/link';
 import Image from 'next/image';
+import { useState } from 'react';
+import { sendEmail } from '@/lib/sendEmail';
 import {
   ArrowForward,
   CheckCircleOutlined,
@@ -12,12 +15,8 @@ import {
   Gavel,
   Shield,
   TrendingUp,
+  Close,
 } from '@mui/icons-material';
-
-export const metadata: Metadata = {
-  title: 'Loans & Financing | Choice Microfinance Bank',
-  description: 'Access practical financing solutions designed around your goals, assets, cash flow and repayment ability. Logbook loans, asset finance, solar, fixed deposit loans and more.',
-};
 
 const loanProducts = [
   {
@@ -34,7 +33,6 @@ const loanProducts = [
       'Business documents, 6-month statements and business visit apply',
     ],
     cta: 'Apply for a Business Loan',
-    href: '/contact',
     accent: 'border-[#E8192C]',
   },
   {
@@ -51,7 +49,6 @@ const loanProducts = [
       'TAT ranges from 6 to 12 hours',
     ],
     cta: 'Apply for a Logbook Loan',
-    href: '/logbook-loans',
     accent: 'border-[#0A0534]',
   },
   {
@@ -68,7 +65,6 @@ const loanProducts = [
       'Financing depends on vehicle value, condition and client financials',
     ],
     cta: 'Finance Your Asset',
-    href: '/asset-finance-loans',
     accent: 'border-[#E8192C]',
   },
   {
@@ -85,7 +81,6 @@ const loanProducts = [
       'Maximum loan amount of up to Ksh 5M gross',
     ],
     cta: 'Check Eligibility',
-    href: '/contact',
     accent: 'border-[#0A0534]',
   },
   {
@@ -102,7 +97,6 @@ const loanProducts = [
       'Loan term of up to 36 months',
     ],
     cta: 'Explore Solar Financing',
-    href: '/contact',
     accent: 'border-[#E8192C]',
   },
   {
@@ -119,7 +113,6 @@ const loanProducts = [
       'Loan tenure must not exceed FD maturity',
     ],
     cta: 'Use Your FD as Security',
-    href: '/contact',
     accent: 'border-[#0A0534]',
   },
   {
@@ -136,7 +129,6 @@ const loanProducts = [
       'Auction documents required',
     ],
     cta: 'Finance an Auction Purchase',
-    href: '/contact',
     accent: 'border-[#E8192C]',
   },
   {
@@ -153,7 +145,6 @@ const loanProducts = [
       'IPF BIMA loan up to Ksh 1M with 1-hour TAT',
     ],
     cta: 'Finance Your Cover',
-    href: '/contact',
     accent: 'border-[#0A0534]',
   },
   {
@@ -170,7 +161,6 @@ const loanProducts = [
       'Loan period of up to 3 months',
     ],
     cta: 'Request Emergency Support',
-    href: '/contact',
     accent: 'border-[#E8192C]',
   },
   {
@@ -187,7 +177,6 @@ const loanProducts = [
       'Loan period of up to 18 months',
     ],
     cta: 'Request a Top-Up',
-    href: '/contact',
     accent: 'border-[#0A0534]',
   },
 ];
@@ -201,9 +190,204 @@ const quickStats = [
   { label: 'Regulation', value: 'CBK Licensed' },
 ];
 
+interface ModalState {
+  open: boolean;
+  loanType: string;
+}
+
+interface FormState {
+  name: string;
+  phone: string;
+  email: string;
+  amount: string;
+  message: string;
+}
+
+function LoanModal({ loanType, onClose }: { loanType: string; onClose: () => void }) {
+  const [submitted, setSubmitted] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState('');
+  const [form, setForm] = useState<FormState>({ name: '', phone: '', email: '', amount: '', message: '' });
+
+  function handleChange(e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) {
+    setForm({ ...form, [e.target.name]: e.target.value });
+  }
+
+  async function handleSubmit(e: React.FormEvent) {
+    e.preventDefault();
+    setSubmitting(true);
+    setSubmitError('');
+    try {
+      await sendEmail({
+        to: 'sales@choice-bank.com',
+        subject: `Loan Application — ${loanType} — ${form.name}`,
+        formTitle: `${loanType} Application`,
+        replyTo: form.email || undefined,
+        fields: [
+          { label: 'Full Name', value: form.name },
+          { label: 'Phone Number', value: form.phone },
+          { label: 'Email Address', value: form.email },
+          { label: 'Loan Amount Needed', value: form.amount },
+          { label: 'Additional Details', value: form.message },
+        ],
+      });
+      setSubmitted(true);
+    } catch {
+      setSubmitError('Something went wrong. Please call us directly or try again.');
+    } finally {
+      setSubmitting(false);
+    }
+  }
+
+  return (
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4" onClick={onClose}>
+      <div className="absolute inset-0 bg-black/60 backdrop-blur-sm" />
+      <div
+        className="relative bg-white rounded-3xl w-full max-w-lg max-h-[90vh] overflow-y-auto shadow-2xl"
+        onClick={(e) => e.stopPropagation()}
+      >
+        {/* Modal header */}
+        <div className="bg-[#0A0534] rounded-t-3xl px-8 py-6 flex items-start justify-between">
+          <div>
+            <p className="text-xs font-semibold text-[#E8192C] uppercase tracking-widest mb-1">Loan Application</p>
+            <h3 className="text-xl font-bold text-white leading-snug">{loanType}</h3>
+          </div>
+          <button
+            onClick={onClose}
+            className="text-white/60 hover:text-white transition-colors mt-0.5 shrink-0"
+          >
+            <Close />
+          </button>
+        </div>
+
+        <div className="px-8 py-6">
+          {submitted ? (
+            <div className="text-center py-8">
+              <CheckCircleOutlined className="text-[#E8192C] mb-4" sx={{ fontSize: 48 }} />
+              <h4 className="text-xl font-bold text-[#0A0534] mb-2">Application received.</h4>
+              <p className="text-gray-500 text-sm">Thank you, {form.name}. A Choice Bank loan officer will contact you on {form.phone} within 6–12 hours.</p>
+              <button
+                onClick={onClose}
+                className="mt-6 inline-flex items-center gap-2 bg-[#0A0534] text-white px-6 py-3 rounded-full font-semibold hover:bg-[#E8192C] transition-colors text-sm"
+              >
+                Close
+              </button>
+            </div>
+          ) : (
+            <form onSubmit={handleSubmit} className="space-y-4">
+              <div className="grid grid-cols-2 gap-4">
+                <div className="col-span-2 sm:col-span-1">
+                  <label className="block text-xs font-semibold text-gray-500 uppercase tracking-widest mb-1.5">Full Name *</label>
+                  <input
+                    type="text"
+                    name="name"
+                    required
+                    value={form.name}
+                    onChange={handleChange}
+                    placeholder="John Kamau"
+                    className="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm text-[#0A0534] placeholder-gray-300 focus:outline-none focus:border-[#E8192C] transition-colors"
+                  />
+                </div>
+                <div className="col-span-2 sm:col-span-1">
+                  <label className="block text-xs font-semibold text-gray-500 uppercase tracking-widest mb-1.5">Phone Number *</label>
+                  <input
+                    type="tel"
+                    name="phone"
+                    required
+                    value={form.phone}
+                    onChange={handleChange}
+                    placeholder="07XX XXX XXX"
+                    className="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm text-[#0A0534] placeholder-gray-300 focus:outline-none focus:border-[#E8192C] transition-colors"
+                  />
+                </div>
+              </div>
+
+              <div>
+                <label className="block text-xs font-semibold text-gray-500 uppercase tracking-widest mb-1.5">Email Address</label>
+                <input
+                  type="email"
+                  name="email"
+                  value={form.email}
+                  onChange={handleChange}
+                  placeholder="john@email.com"
+                  className="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm text-[#0A0534] placeholder-gray-300 focus:outline-none focus:border-[#E8192C] transition-colors"
+                />
+              </div>
+
+              <div>
+                <label className="block text-xs font-semibold text-gray-500 uppercase tracking-widest mb-1.5">Loan Amount Needed (Ksh) *</label>
+                <select
+                  name="amount"
+                  required
+                  value={form.amount}
+                  onChange={handleChange}
+                  className="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm text-[#0A0534] focus:outline-none focus:border-[#E8192C] transition-colors appearance-none bg-white"
+                >
+                  <option value="">Select a range</option>
+                  <option value="Under 500K">Under Ksh 500,000</option>
+                  <option value="500K - 1M">Ksh 500,000 – 1,000,000</option>
+                  <option value="1M - 2M">Ksh 1,000,000 – 2,000,000</option>
+                  <option value="2M - 4M">Ksh 2,000,000 – 4,000,000</option>
+                  <option value="Above 4M">Above Ksh 4,000,000</option>
+                </select>
+              </div>
+
+              <div>
+                <label className="block text-xs font-semibold text-gray-500 uppercase tracking-widest mb-1.5">Additional Details</label>
+                <textarea
+                  name="message"
+                  value={form.message}
+                  onChange={handleChange}
+                  rows={3}
+                  placeholder="Any other relevant information..."
+                  className="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm text-[#0A0534] placeholder-gray-300 focus:outline-none focus:border-[#E8192C] transition-colors resize-none"
+                />
+              </div>
+
+              <button
+                type="submit"
+                disabled={submitting}
+                className="w-full bg-[#E8192C] text-white py-3.5 rounded-full font-semibold hover:bg-[#c4121e] transition-colors flex items-center justify-center gap-2 group disabled:opacity-60 disabled:cursor-not-allowed"
+              >
+                {submitting ? 'Submitting…' : 'Submit Application'}
+                {!submitting && <ArrowForward className="group-hover:translate-x-1 transition-transform" fontSize="small" />}
+              </button>
+
+              {submitError && (
+                <p className="text-sm text-red-500 text-center">{submitError}</p>
+              )}
+
+              <p className="text-xs text-gray-400 text-center">
+                A Choice Bank loan officer will contact you within 6–12 hours. Your data is handled in accordance with CBK regulations.
+              </p>
+            </form>
+          )}
+        </div>
+      </div>
+    </div>
+  );
+}
+
 export default function LoansPage() {
+  const [modal, setModal] = useState<ModalState>({ open: false, loanType: '' });
+
+  function openModal(loanType: string) {
+    setModal({ open: true, loanType });
+  }
+
+  function closeModal() {
+    setModal({ open: false, loanType: '' });
+  }
+
+  function scrollToProducts() {
+    document.getElementById('loan-products')?.scrollIntoView({ behavior: 'smooth' });
+  }
+
   return (
     <div className="min-h-screen bg-white">
+      {/* Modal */}
+      {modal.open && <LoanModal loanType={modal.loanType} onClose={closeModal} />}
+
       {/* Hero */}
       <div className="relative bg-[#0A0534] pt-40 pb-24 px-6 md:px-16 overflow-hidden">
         <Image
@@ -223,15 +407,15 @@ export default function LoansPage() {
             Access practical financing solutions designed around your goals, assets, cash flow and repayment ability. Whether the need is working capital, asset purchase, solar installation, insurance premium support or a top-up facility — Choice Microfinance Bank has a structured credit solution for you.
           </p>
           <div className="flex flex-wrap gap-4">
-            <Link
-              href="/contact"
+            <button
+              onClick={scrollToProducts}
               className="inline-flex items-center gap-2 bg-[#E8192C] text-white px-8 py-4 rounded-full font-semibold hover:bg-[#c4121e] transition-all group"
             >
               Apply for a Loan
               <ArrowForward className="group-hover:translate-x-1 transition-transform" />
-            </Link>
+            </button>
             <Link
-              href="/contact"
+              href="/sales"
               className="inline-flex items-center gap-2 border border-white/20 text-white px-8 py-4 rounded-full font-semibold hover:bg-white/10 transition-all"
             >
               Speak to a loan officer
@@ -253,7 +437,7 @@ export default function LoansPage() {
       </div>
 
       {/* Loan products */}
-      <div className="py-24 px-6 md:px-16 bg-[#F7F8F8]">
+      <div id="loan-products" className="py-24 px-6 md:px-16 bg-[#F7F8F8]">
         <div className="max-w-7xl mx-auto">
           <div className="max-w-xl mb-14">
             <p className="text-sm font-semibold text-[#E8192C] uppercase tracking-widest mb-3">Loan products</p>
@@ -261,8 +445,8 @@ export default function LoansPage() {
           </div>
 
           <div className="grid md:grid-cols-2 gap-6">
-            {loanProducts.map(({ icon: Icon, image, title, tagline, description, highlights, cta, href, accent }) => (
-              <div key={title} className={`bg-white rounded-2xl overflow-hidden border border-gray-100 shadow-sm flex flex-col`}>
+            {loanProducts.map(({ icon: Icon, image, title, tagline, description, highlights, cta, accent }) => (
+              <div key={title} className="bg-white rounded-2xl overflow-hidden border border-gray-100 shadow-sm flex flex-col">
                 {/* Image */}
                 <div className="relative h-48 w-full">
                   <Image
@@ -293,13 +477,13 @@ export default function LoansPage() {
                       </li>
                     ))}
                   </ul>
-                  <Link
-                    href={href}
+                  <button
+                    onClick={() => openModal(title)}
                     className="inline-flex items-center gap-2 text-sm font-semibold text-[#0A0534] hover:text-[#E8192C] transition-colors group"
                   >
                     {cta}
                     <ArrowForward className="group-hover:translate-x-1 transition-transform" fontSize="small" />
-                  </Link>
+                  </button>
                 </div>
               </div>
             ))}
@@ -331,13 +515,13 @@ export default function LoansPage() {
               </div>
             ))}
             <div className="pt-4">
-              <Link
-                href="/contact"
+              <button
+                onClick={() => openModal('Loan Buyoff')}
                 className="inline-flex items-center gap-2 bg-[#E8192C] text-white px-6 py-3 rounded-full font-semibold hover:bg-[#c4121e] transition-colors group text-sm"
               >
                 Request Loan Buyoff
                 <ArrowForward className="group-hover:translate-x-1 transition-transform" fontSize="small" />
-              </Link>
+              </button>
             </div>
           </div>
         </div>
@@ -349,7 +533,7 @@ export default function LoansPage() {
         <h2 className="text-3xl font-bold text-[#0A0534] mb-4">Not sure which loan is right for you?</h2>
         <p className="text-gray-500 mb-8 max-w-md mx-auto">Speak to a Choice Bank loan officer. We&apos;ll match you to the right product for your situation.</p>
         <Link
-          href="/contact"
+          href="/sales"
           className="inline-flex items-center gap-2 bg-[#0A0534] text-white px-8 py-4 rounded-full font-semibold hover:bg-[#E8192C] transition-colors group"
         >
           Speak to a Choice Bank Officer

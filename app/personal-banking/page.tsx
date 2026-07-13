@@ -1,7 +1,6 @@
 import { Metadata } from 'next';
-import Link from 'next/link';
 import Image from 'next/image';
-import { ArrowForward, CheckCircleOutlined, Savings, AccountBalanceWallet, Lock, SwapHoriz, CurrencyExchange, PhoneAndroid } from '@mui/icons-material';
+import { CheckCircleOutlined, Savings, AccountBalanceWallet, Lock, SwapHoriz, CurrencyExchange, PhoneAndroid } from '@mui/icons-material';
 
 export const metadata: Metadata = {
   title: 'Personal Banking | Choice Microfinance Bank',
@@ -95,16 +94,10 @@ export default function PersonalBankingPage() {
           <h1 className="text-5xl md:text-6xl font-bold text-white leading-tight max-w-3xl mb-6">
             Banking that fits your everyday life.
           </h1>
-          <p className="text-gray-400 text-xl max-w-xl leading-relaxed mb-10">
+          <p className="text-white text-sm max-w-xl leading-relaxed mb-10">
             Secure, accessible and flexible banking solutions designed to help you save, transact and plan with confidence. From daily money movement to fixed deposits and digital access, Choice Microfinance Bank gives you tools to manage your financial life with clarity.
           </p>
-          <Link
-            href="/contact"
-            className="inline-flex items-center gap-2 bg-[#E8192C] text-white px-8 py-4 rounded-full font-semibold hover:bg-[#c4121e] transition-all group"
-          >
-            Open a Personal Account
-            <ArrowForward className="group-hover:translate-x-1 transition-transform" />
-          </Link>
+        
         </div>
       </div>
 
@@ -116,7 +109,7 @@ export default function PersonalBankingPage() {
             <h2 className="text-4xl font-bold text-[#0A0534]">Pick the service that fits.</h2>
           </div>
           <div className="grid md:grid-cols-3 gap-8">
-            {accounts.map(({ icon: Icon, name, tagline, description, features, cta, accent, badgeBg, badgeText }) => (
+            {accounts.map(({ icon: Icon, name, tagline, description, features, accent, badgeBg, badgeText }) => (
               <div key={name} className={`bg-white rounded-3xl p-10 border-t-4 ${accent} shadow-sm flex flex-col`}>
                 <div className={`w-12 h-12 rounded-xl ${badgeBg} flex items-center justify-center mb-6`}>
                   <Icon className={badgeText} />
@@ -132,13 +125,6 @@ export default function PersonalBankingPage() {
                     </li>
                   ))}
                 </ul>
-                <Link
-                  href="/contact"
-                  className="inline-flex items-center gap-2 bg-[#0A0534] text-white px-6 py-3 rounded-full font-semibold hover:bg-[#E8192C] transition-colors group text-sm"
-                >
-                  {cta}
-                  <ArrowForward className="group-hover:translate-x-1 transition-transform" fontSize="small" />
-                </Link>
               </div>
             ))}
           </div>
@@ -164,19 +150,6 @@ export default function PersonalBankingPage() {
             ))}
           </div>
         </div>
-      </div>
-
-      {/* CTA strip */}
-      <div className="py-16 px-6 md:px-16 bg-[#0A0534] text-center">
-        <h2 className="text-3xl font-bold text-white mb-4">Ready to open your account?</h2>
-        <p className="text-gray-400 mb-8 max-w-md mx-auto">Speak to a Choice Bank officer and get started today.</p>
-        <Link
-          href="/contact"
-          className="inline-flex items-center gap-2 bg-[#E8192C] text-white px-8 py-4 rounded-full font-semibold hover:bg-[#c4121e] transition-colors group"
-        >
-          Speak to a Choice Bank Officer
-          <ArrowForward className="group-hover:translate-x-1 transition-transform" />
-        </Link>
       </div>
     </div>
   );
