@@ -6,37 +6,26 @@ import Image from 'next/image';
 import { Menu, Close, KeyboardArrowDown } from '@mui/icons-material';
 import { usePathname } from 'next/navigation';
 
-interface HeaderProps {
-  variant?: 'light' | 'dark' | 'default';
-}
-
-export default function Header({ variant = 'light' }: HeaderProps) {
+export default function Header() {
   const pathname = usePathname();
 
   const [loginLinkOpen, setLoginLinkOpen] = useState(false);
   const [getStartedOpen, setGetStartedOpen] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [loanLinkOpen, setLoanLinkOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
   const navRef = useRef<HTMLElement>(null);
 
-  // Logo based on variant
-  const logoSrc = variant === 'light' ? '/logo2.png' : variant === 'dark' ? '/logo2.png' : '/logo.png';
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 80);
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
 
-  // Text color based on variant
-  const textColor = variant === 'light'
-    ? 'text-white'
-    : variant === 'dark'
-      ? 'text-white'
-      : 'text-[#0A0534]'
-
+  const logoSrc = '/logo2.png';
+  const textColor = 'text-white';
   const linkHover = 'hover:text-[#E8192C] transition-colors';
-
-  // Button styles based on variant
-  const buttonBg = variant === 'light'
-    ? 'bg-white text-[#0A0534] hover:bg-gray-100'
-    : variant === 'dark'
-      ? 'bg-[#E8192C] text-white hover:bg-[#c4121e]'
-      : 'bg-[#E8192C] text-white hover:bg-[#c4121e]';
+  const buttonBg = 'bg-[#E8192C] text-white hover:bg-[#c4121e]';
 
   const closeAllDropdowns = () => {
     setLoanLinkOpen(false);
@@ -57,7 +46,7 @@ export default function Header({ variant = 'light' }: HeaderProps) {
   const isActive = (path: string) => pathname === path;
 
   return (
-    <nav ref={navRef} className={`font-gilroy absolute top-0 left-0 w-full z-50 ${textColor}`}>
+    <nav ref={navRef} className={`font-gilroy fixed top-0 left-0 w-full z-50 transition-all duration-300 ${scrolled ? 'bg-[#0A0534] shadow-md' : 'bg-transparent'} ${textColor}`}>
       <div className="max-w-7xl mx-auto px-4 md:px-6 lg:px-8 flex items-center justify-between h-20">
         {/** Left: Logo */}
         <div className="flex items-center space-x-6">

@@ -1,13 +1,12 @@
 'use client';
 
-import Link from 'next/link';
-import { ArrowForward, SwapHoriz, CreditCard, AccountBalance, Public } from '@mui/icons-material';
+import { SwapHoriz, CreditCard, AccountBalance, Public } from '@mui/icons-material';
 
 const offerings = [
   {
     icon: SwapHoriz,
     title: 'Bulk Payments',
-    description: 'Send money to hundreds of recipients simultaneously — across banks, M-Pesa, Airtel Money, and international corridors.',
+    description: 'Send money to hundreds of recipients simultaneously across banks, M-Pesa, Airtel Money, and international corridors.',
   },
   {
     icon: Public,
@@ -22,7 +21,7 @@ const offerings = [
   {
     icon: CreditCard,
     title: 'Remittance',
-    description: 'Receive money from anywhere in the world directly into your ChoiceBank account — fast, safe, and fee-transparent.',
+    description: 'Receive money from anywhere in the world directly into your ChoiceBank account fast, safe, and transparent.',
   },
 ];
 
@@ -58,14 +57,6 @@ export default function WhatWeOffer() {
             </div>
           ))}
         </div>
-
-        <Link
-          href="/personal-banking"
-          className="inline-flex items-center gap-2 text-[#0A0534] font-semibold hover:text-[#E8192C] transition-colors group"
-        >
-          Explore all products
-          <ArrowForward className="text-lg group-hover:translate-x-1 transition-transform" />
-        </Link>
       </div>
     </section>
   );

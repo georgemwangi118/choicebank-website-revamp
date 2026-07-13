@@ -22,7 +22,7 @@ const stats = [
   { label: 'Kenya–China corridor', value: 'CNY Express' },
   { label: 'Transaction handling', value: 'Secure & traceable' },
   { label: 'Regulation', value: 'CBK Licensed' },
-  { label: 'FX support', value: 'CNY / RMB & more' },
+  { label: 'FX support', value: 'CNY / KES & more' },
   { label: 'Service type', value: 'Personal & Business' },
 ];
 
@@ -31,9 +31,9 @@ const services = [
     icon: FlightTakeoff,
     title: 'CNY Express',
     tagline: 'Fast, secure CNY transfers from Kenya to China.',
-    description: 'A focused remittance solution for customers and importers who need to pay suppliers in China directly in CNY/RMB. Supports faster China-bound payments with professional banking guidance.',
+    description: 'A focused remittance solution for customers and importers who need to pay suppliers in China directly in CNY/KES. Supports faster China-bound payments with professional banking guidance.',
     highlights: [
-      'Pay suppliers in CNY/RMB directly from Kenya',
+      'Pay suppliers in CNY/KES directly from Kenya',
       'Designed for importers, traders and China-linked businesses',
       'Supports safer, traceable and compliant transaction handling',
       'Built around speed, convenience and clear payment support',
@@ -60,7 +60,7 @@ const services = [
     description: 'Combine remittance support with professional foreign exchange guidance, helping customers understand conversion, transaction requirements and the value of every payment.',
     highlights: [
       'Guided FX support for cross-border payments',
-      'Useful for CNY/RMB and other currency needs',
+      'Useful for CNY/KES and other currency needs',
       'Helps customers transact with better clarity',
       'Designed for transparent payment conversations',
     ],
@@ -125,24 +125,9 @@ export default function RemittancePage() {
           <h1 className="text-5xl md:text-6xl font-bold text-white leading-tight max-w-3xl mb-6">
             Cross-border payments built for modern trade.
           </h1>
-          <p className="text-gray-400 text-xl max-w-2xl leading-relaxed mb-10">
+          <p className="text-white text-sm max-w-2xl leading-relaxed mb-10">
             Send money beyond borders with secure, guided and business-ready remittance solutions. From CNY Express payments between Kenya and China to supplier settlements and diaspora-linked transactions, Choice Microfinance Bank helps customers move funds with clarity and confidence.
           </p>
-          <div className="flex flex-wrap gap-4">
-            <Link
-              href="/contact"
-              className="inline-flex items-center gap-2 bg-[#E8192C] text-white px-8 py-4 rounded-full font-semibold hover:bg-[#c4121e] transition-all group"
-            >
-              Start a Remittance
-              <ArrowForward className="group-hover:translate-x-1 transition-transform" />
-            </Link>
-            <Link
-              href="/contact"
-              className="inline-flex items-center gap-2 border border-white/20 text-white px-8 py-4 rounded-full font-semibold hover:bg-white/10 transition-all"
-            >
-              Speak to a Remittance Officer
-            </Link>
-          </div>
         </div>
       </div>
 
@@ -169,12 +154,12 @@ export default function RemittancePage() {
               Kenya to China,<br />
               <span className="text-[#E8192C]">direct in CNY.</span>
             </h2>
-            <p className="text-gray-400 text-lg leading-relaxed mb-8">
-              CNY Express is our dedicated China payment corridor — built for importers, traders and businesses that need to pay suppliers in CNY/RMB directly from Kenya. Fast, traceable, and professionally handled.
+            <p className="text-white text-lg leading-relaxed mb-8">
+              CNY Express is our dedicated China payment corridor — built for importers, traders and businesses that need to pay suppliers in CNY/KES directly from Kenya. Fast, traceable, and professionally handled.
             </p>
             <ul className="space-y-3 mb-10">
               {[
-                'Pay suppliers in CNY/RMB directly from Kenya',
+                'Pay suppliers in CNY/KES directly from Kenya',
                 'Traceable and compliant transaction handling',
                 'Designed for importers and China-linked businesses',
                 'Supported by professional FX guidance',
@@ -185,18 +170,12 @@ export default function RemittancePage() {
                 </li>
               ))}
             </ul>
-            <Link
-              href="/contact"
-              className="group inline-flex items-center gap-2 bg-[#E8192C] text-white px-8 py-4 rounded-full font-semibold hover:bg-[#c4121e] transition-all"
-            >
-              Start a CNY Transfer
-              <ArrowForward className="group-hover:translate-x-1 transition-transform" fontSize="small" />
-            </Link>
+           
           </div>
           <div className="grid grid-cols-2 gap-4">
             {[
               { label: 'Corridor', value: 'Kenya → China' },
-              { label: 'Currency', value: 'CNY / RMB' },
+              { label: 'Currency', value: 'CNY / KES' },
               { label: 'Purpose', value: 'Supplier Payments' },
               { label: 'Handling', value: 'Secure & Traceable' },
             ].map(({ label, value }) => (
@@ -217,7 +196,7 @@ export default function RemittancePage() {
             <h2 className="text-4xl font-bold text-[#0A0534]">Move money where business takes you.</h2>
           </div>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {services.map(({ icon: Icon, title, tagline, description, highlights, cta }) => (
+            {services.map(({ icon: Icon, title, tagline, description, highlights }) => (
               <div key={title} className="bg-white rounded-2xl p-8 border border-gray-100 flex flex-col">
                 <div className="w-12 h-12 rounded-xl bg-[#E8192C]/10 flex items-center justify-center mb-5">
                   <Icon className="text-[#E8192C]" />
@@ -233,13 +212,7 @@ export default function RemittancePage() {
                     </li>
                   ))}
                 </ul>
-                <Link
-                  href="/contact"
-                  className="inline-flex items-center gap-2 text-sm font-semibold text-[#0A0534] hover:text-[#E8192C] transition-colors group"
-                >
-                  {cta}
-                  <ArrowForward className="group-hover:translate-x-1 transition-transform" fontSize="small" />
-                </Link>
+              
               </div>
             ))}
           </div>

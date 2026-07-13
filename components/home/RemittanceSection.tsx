@@ -24,12 +24,12 @@ export default function RemittanceSection() {
             Remittance
           </span>
           <h2 className="text-4xl md:text-5xl font-bold text-white leading-tight mb-6">
-            Send money home,
+            Make Global Payments,
             <br />
             <span className="text-[#E8192C]">instantly.</span>
           </h2>
           <p className="text-white text-lg leading-relaxed mb-8 max-w-lg">
-            Whether you&apos;re supporting family abroad or paying international suppliers, our remittance service makes cross-border transfers fast, affordable, and stress-free — every single time.
+            Whether you&apos;re paying international suppliers, our remittance service makes cross-border transfers fast, affordable, and stress-free every single time.
           </p>
 
 
@@ -39,14 +39,14 @@ export default function RemittanceSection() {
               target="_blank"
               rel="noopener noreferrer"
             >
-              <Image src={appstore} alt="Download on the App Store" height={48} className="h-12 w-auto" />
+              <Image src={appstore} alt="Download on the App Store" className="h-15 w-auto" />
             </a>
             <a
               href="https://play.google.com/store/apps/details?id=micro.finance.bank.choice.kenya&hl=en"
               target="_blank"
               rel="noopener noreferrer"
             >
-              <Image src={playstore} alt="Get it on Google Play" height={48} className="h-12 w-auto" />
+              <Image src={playstore} alt="Get it on Google Play" className="h-15 w-auto" />
             </a>
           </div>
         </div>

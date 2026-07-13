@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import Image from 'next/image';
 import { Phone, Email, LocationOn, ArrowForward } from '@mui/icons-material';
+import { sendEmail } from '@/lib/sendEmail';
 
 const contactDetails = [
   { icon: Phone, label: 'Phone', value: '+254 729 114 444' },
@@ -22,15 +23,38 @@ const inquiryTypes = [
 
 export default function ContactPage() {
   const [submitted, setSubmitted] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState('');
   const [form, setForm] = useState({ name: '', email: '', phone: '', inquiry: '', message: '' });
 
   function handleChange(e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) {
     setForm({ ...form, [e.target.name]: e.target.value });
   }
 
-  function handleSubmit(e: React.FormEvent) {
+  async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
-    setSubmitted(true);
+    setSubmitting(true);
+    setSubmitError('');
+    try {
+      await sendEmail({
+        to: 'contactcentre@choice-bank.com',
+        subject: `Contact Us — ${form.inquiry} — ${form.name}`,
+        formTitle: 'Contact Us',
+        replyTo: form.email,
+        fields: [
+          { label: 'Full Name', value: form.name },
+          { label: 'Email Address', value: form.email },
+          { label: 'Phone Number', value: form.phone },
+          { label: 'Inquiry Type', value: form.inquiry },
+          { label: 'Message', value: form.message },
+        ],
+      });
+      setSubmitted(true);
+    } catch {
+      setSubmitError('Something went wrong. Please email us directly at contactcenter@choice-bank.com.');
+    } finally {
+      setSubmitting(false);
+    }
   }
 
   return (
@@ -170,11 +194,16 @@ export default function ContactPage() {
 
                 <button
                   type="submit"
-                  className="w-full bg-[#0A0534] text-white py-4 rounded-full font-semibold hover:bg-[#E8192C] transition-colors duration-300 flex items-center justify-center gap-2 group"
+                  disabled={submitting}
+                  className="w-full bg-[#0A0534] text-white py-4 rounded-full font-semibold hover:bg-[#E8192C] transition-colors duration-300 flex items-center justify-center gap-2 group disabled:opacity-60 disabled:cursor-not-allowed"
                 >
-                  Send message
-                  <ArrowForward className="group-hover:translate-x-1 transition-transform" fontSize="small" />
+                  {submitting ? 'Sending…' : 'Send message'}
+                  {!submitting && <ArrowForward className="group-hover:translate-x-1 transition-transform" fontSize="small" />}
                 </button>
+
+                {submitError && (
+                  <p className="text-sm text-red-500 text-center">{submitError}</p>
+                )}
               </form>
             )}
           </div>

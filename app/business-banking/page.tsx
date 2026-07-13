@@ -1,7 +1,7 @@
 import { Metadata } from 'next';
 import Link from 'next/link';
 import Image from 'next/image';
-import { ArrowForward, CheckCircleOutlined, Business, AccountBalance, SwapHoriz, Public, WbSunny, PhoneAndroid } from '@mui/icons-material';
+import { CheckCircleOutlined, Business, AccountBalance, SwapHoriz, Public, WbSunny, PhoneAndroid } from '@mui/icons-material';
 
 export const metadata: Metadata = {
   title: 'Business Banking | Choice Microfinance Bank',
@@ -20,7 +20,6 @@ const accounts = [
       'Build transaction history for future credit assessment',
       'Access support through Choice Bank branches and digital channels',
     ],
-    cta: 'Open a Business Account',
     accent: 'border-[#E8192C]',
     badgeBg: 'bg-[#E8192C]/10',
     badgeText: 'text-[#E8192C]',
@@ -36,7 +35,7 @@ const accounts = [
       'Supports better treasury planning for businesses',
       'Can be used as collateral for credit facilities',
     ],
-    cta: 'Place a Fixed Deposit',
+
     accent: 'border-[#0A0534]',
     badgeBg: 'bg-[#0A0534]/10',
     badgeText: 'text-[#0A0534]',
@@ -104,20 +103,13 @@ export default function BusinessBankingPage() {
           <h1 className="text-5xl md:text-6xl font-bold text-white leading-tight max-w-3xl mb-6">
             Banking built around your business goals.
           </h1>
-          <p className="text-gray-400 text-xl max-w-xl leading-relaxed mb-10">
-            Practical financial solutions for SMEs, startups and growing enterprises across Kenya. Manage cash flow, transact with confidence, grow deposits and access financing designed around real business needs.
+          <p className="text-white text-sm max-w-xl leading-relaxed mb-10">
+            Practical financial solutions for SMEs, startups and growing enterprises across the world. Manage cash flow, transact with confidence, grow deposits and access financing designed around real business needs.
           </p>
           <div className="flex flex-wrap gap-4">
             <Link
-              href="/contact"
-              className="inline-flex items-center gap-2 bg-[#E8192C] text-white px-8 py-4 rounded-full font-semibold hover:bg-[#c4121e] transition-all group"
-            >
-              Open a Business Account
-              <ArrowForward className="group-hover:translate-x-1 transition-transform" />
-            </Link>
-            <Link
               href="/api-banking"
-              className="inline-flex items-center gap-2 border border-white/20 text-white px-8 py-4 rounded-full font-semibold hover:bg-white/10 transition-all"
+              className="inline-flex items-center gap-2 bg-[#E8192C] text-white px-8 py-4 rounded-full font-semibold hover:bg-[#c4121e] transition-all group"
             >
               Explore API Banking
             </Link>
@@ -133,7 +125,7 @@ export default function BusinessBankingPage() {
             <h2 className="text-4xl font-bold text-[#0A0534]">Built for how businesses actually operate.</h2>
           </div>
           <div className="grid md:grid-cols-2 gap-8">
-            {accounts.map(({ icon: Icon, name, tagline, description, features, cta, accent, badgeBg, badgeText }) => (
+            {accounts.map(({ icon: Icon, name, tagline, description, features, accent, badgeBg, badgeText }) => (
               <div key={name} className={`bg-white rounded-3xl p-10 border-t-4 ${accent} shadow-sm`}>
                 <div className={`w-12 h-12 rounded-xl ${badgeBg} flex items-center justify-center mb-6`}>
                   <Icon className={badgeText} />
@@ -149,13 +141,7 @@ export default function BusinessBankingPage() {
                     </li>
                   ))}
                 </ul>
-                <Link
-                  href="/contact"
-                  className="inline-flex items-center gap-2 bg-[#0A0534] text-white px-6 py-3 rounded-full font-semibold hover:bg-[#E8192C] transition-colors group text-sm"
-                >
-                  {cta}
-                  <ArrowForward className="group-hover:translate-x-1 transition-transform" fontSize="small" />
-                </Link>
+             
               </div>
             ))}
           </div>
@@ -192,13 +178,6 @@ export default function BusinessBankingPage() {
             <p className="text-gray-500 leading-relaxed mb-8">
               Opening a Choice Bank business account is straightforward. Submit your documents and our team will guide you through the process.
             </p>
-            <Link
-              href="/contact"
-              className="inline-flex items-center gap-2 bg-[#0A0534] text-white px-6 py-3 rounded-full font-semibold hover:bg-[#E8192C] transition-colors group"
-            >
-              Start your application
-              <ArrowForward className="group-hover:translate-x-1 transition-transform" fontSize="small" />
-            </Link>
           </div>
           <div className="space-y-3">
             {requirements.map((req, i) => (
@@ -209,19 +188,6 @@ export default function BusinessBankingPage() {
             ))}
           </div>
         </div>
-      </div>
-
-      {/* CTA */}
-      <div className="py-16 px-6 md:px-16 bg-[#0A0534] text-center">
-        <h2 className="text-3xl font-bold text-white mb-4">Ready to open your business account?</h2>
-        <p className="text-gray-400 mb-8 max-w-md mx-auto">Our team will guide you through the process from start to finish.</p>
-        <Link
-          href="/contact"
-          className="inline-flex items-center gap-2 bg-[#E8192C] text-white px-8 py-4 rounded-full font-semibold hover:bg-[#c4121e] transition-colors group"
-        >
-          Speak to a Choice Bank Officer
-          <ArrowForward className="group-hover:translate-x-1 transition-transform" />
-        </Link>
       </div>
     </div>
   );

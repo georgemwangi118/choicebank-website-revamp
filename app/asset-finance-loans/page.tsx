@@ -1,7 +1,8 @@
 import { Metadata } from 'next';
 import Link from 'next/link';
 import Image from 'next/image';
-import { ArrowForward, CheckCircleOutlined, DirectionsCar, Build, WbSunny, Gavel } from '@mui/icons-material';
+import { ArrowForward, CheckCircleOutlined, DirectionsCar, WbSunny, Gavel } from '@mui/icons-material';
+import bg from '@/public/assets/loans/bg.png';
 
 export const metadata: Metadata = {
   title: 'Asset Finance Loans | Choice Microfinance Bank',
@@ -67,7 +68,7 @@ export default function AssetFinancePage() {
       {/* Hero */}
       <div className="relative bg-[#0A0534] pt-40 pb-24 px-6 md:px-16 overflow-hidden">
         <Image
-          src="https://images.unsplash.com/photo-1601584115197-04ecc0da31d7?w=1600&q=80&fit=crop"
+          src={bg}
           alt="Hero background"
           fill
           sizes="100vw"
@@ -91,7 +92,7 @@ export default function AssetFinancePage() {
               <ArrowForward className="group-hover:translate-x-1 transition-transform" />
             </Link>
             <Link
-              href="/contact"
+              href="/sales"
               className="inline-flex items-center gap-2 border border-white/20 text-white px-8 py-4 rounded-full font-semibold hover:bg-white/10 transition-all"
             >
               Speak to an advisor
