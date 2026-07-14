@@ -2,6 +2,7 @@ import { Metadata } from 'next';
 import Link from 'next/link';
 import Image from 'next/image';
 import { CheckCircleOutlined, Business, AccountBalance, SwapHoriz, Public, WbSunny, PhoneAndroid } from '@mui/icons-material';
+import image from '@/public/handshake.jpg'
 
 export const metadata: Metadata = {
   title: 'Business Banking | Choice Microfinance Bank',
@@ -91,7 +92,7 @@ export default function BusinessBankingPage() {
       {/* Hero */}
       <div className="relative bg-[#0A0534] pt-40 pb-24 px-6 md:px-16 overflow-hidden">
         <Image
-          src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=1600&q=80&fit=crop"
+          src={image}
           alt="Hero background"
           fill
           sizes="100vw"
