@@ -139,7 +139,7 @@ export default function ContactPage() {
                       value={form.name}
                       onChange={handleChange}
                       placeholder="Jane Wanjiru"
-                      className="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm text-gray-800 placeholder:text-gray-300 focus:outline-none focus:border-[#E8192C] transition-colors"
+                      className="w-full border border-gray-500 bg-gray-50 rounded-xl px-4 py-3 text-sm text-gray-800 placeholder:text-gray-400 focus:outline-none focus:border-[#E8192C] focus:bg-white transition-colors"
                     />
                   </div>
                   <div>
@@ -149,7 +149,7 @@ export default function ContactPage() {
                       value={form.phone}
                       onChange={handleChange}
                       placeholder="+254 7XX XXX XXX"
-                      className="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm text-gray-800 placeholder:text-gray-300 focus:outline-none focus:border-[#E8192C] transition-colors"
+                      className="w-full border border-gray-500 bg-gray-50 rounded-xl px-4 py-3 text-sm text-gray-800 placeholder:text-gray-400 focus:outline-none focus:border-[#E8192C] focus:bg-white transition-colors"
                     />
                   </div>
                 </div>
@@ -163,7 +163,7 @@ export default function ContactPage() {
                     value={form.email}
                     onChange={handleChange}
                     placeholder="jane@company.com"
-                    className="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm text-gray-800 placeholder:text-gray-300 focus:outline-none focus:border-[#E8192C] transition-colors"
+                    className="w-full border border-gray-500 bg-gray-50 rounded-xl px-4 py-3 text-sm text-gray-800 placeholder:text-gray-400 focus:outline-none focus:border-[#E8192C] focus:bg-white transition-colors"
                   />
                 </div>
 
@@ -174,7 +174,7 @@ export default function ContactPage() {
                     name="inquiry"
                     value={form.inquiry}
                     onChange={handleChange}
-                    className="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm text-gray-800 focus:outline-none focus:border-[#E8192C] transition-colors bg-white"
+                    className="w-full border border-gray-500 bg-gray-50 rounded-xl px-4 py-3 text-sm text-gray-800 focus:outline-none focus:border-[#E8192C] focus:bg-white transition-colors"
                   >
                     <option value="">Select a topic</option>
                     {inquiryTypes.map((t) => (
@@ -192,7 +192,7 @@ export default function ContactPage() {
                     onChange={handleChange}
                     rows={5}
                     placeholder="Tell us what you need..."
-                    className="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm text-gray-800 placeholder:text-gray-300 focus:outline-none focus:border-[#E8192C] transition-colors resize-none"
+                    className="w-full border border-gray-500 bg-gray-50 rounded-xl px-4 py-3 text-sm text-gray-800 placeholder:text-gray-400 focus:outline-none focus:border-[#E8192C] focus:bg-white transition-colors resize-none"
                   />
                 </div>
 
