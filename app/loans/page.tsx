@@ -17,6 +17,7 @@ import {
   TrendingUp,
   Close,
 } from '@mui/icons-material';
+import bg from '@/public/assets/loans/bg.png'
 
 const loanProducts = [
   {
@@ -232,6 +233,11 @@ function LoanModal({ loanType, onClose }: { loanType: string; onClose: () => voi
         ],
       });
       setSubmitted(true);
+      setTimeout(() => {
+        setSubmitted(false);
+        setForm({ name: '', phone: '', email: '', amount: '', message: '' });
+        onClose();
+      }, 4000);
     } catch {
       setSubmitError('Something went wrong. Please call us directly or try again.');
     } finally {
@@ -391,7 +397,7 @@ export default function LoansPage() {
       {/* Hero */}
       <div className="relative bg-[#0A0534] pt-40 pb-24 px-6 md:px-16 overflow-hidden">
         <Image
-          src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=1600&q=80&fit=crop"
+          src={bg}
           alt="Loans hero background"
           fill
           sizes="100vw"

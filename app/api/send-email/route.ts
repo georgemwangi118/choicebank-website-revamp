@@ -46,7 +46,7 @@ function buildHtml(formTitle: string, fields: EmailField[]): string {
         <table style="width:100%;border-collapse:collapse">${rows}</table>
       </div>
       <p style="color:#9ca3af;font-size:11px;text-align:center;margin-top:16px">
-        Submitted via choicebank.co.ke
+        Submitted via choice-bank.com
       </p>
     </div>`;
 }

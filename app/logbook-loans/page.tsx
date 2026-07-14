@@ -96,6 +96,10 @@ export default function LogbookLoansPage() {
         ],
       });
       setSubmitted(true);
+      setTimeout(() => {
+        setSubmitted(false);
+        setForm({ name: '', phone: '', email: '', vehicleMake: '', vehicleYear: '', amount: '', message: '' });
+      }, 5000);
     } catch {
       setSubmitError('Something went wrong. Please call us directly or try again.');
     } finally {
