@@ -50,6 +50,10 @@ export default function ContactPage() {
         ],
       });
       setSubmitted(true);
+      setTimeout(() => {
+        setSubmitted(false);
+        setForm({ name: '', email: '', phone: '', inquiry: '', message: '' });
+      }, 5000);
     } catch {
       setSubmitError('Something went wrong. Please email us directly at contactcenter@choice-bank.com.');
     } finally {

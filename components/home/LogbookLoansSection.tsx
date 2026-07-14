@@ -7,18 +7,18 @@ import bg from '@/public/assets/home/logbook.jpg'
 
 export default function LogbookLoansSection() {
   return (
-    <section className="relative py-24 overflow-hidden">
+    <section className="relative overflow-hidden">
+      {/* Image drives the section height */}
       <Image
         src={bg}
-        alt='Background Image'
-        fill
+        alt='Logbook Loans'
         sizes='100vw'
-        className='object-cover object-top'
+        className='w-full h-auto'
         priority
       />
-      {/* Overlay so text stays readable */}
-      <div className="absolute inset-0" />
-      <div className="relative z-10 max-w-7xl mx-auto px-6 md:px-16">
+      {/* Content overlaid on top */}
+      <div className="absolute inset-0 flex items-center">
+      <div className="w-full max-w-7xl mx-auto px-6 md:px-16">
         <div className="flex flex-col lg:flex-row items-center gap-16">
 
           {/* Content */}
@@ -44,8 +44,9 @@ export default function LogbookLoansSection() {
             </Link>
           </div>
 
-          
+
         </div>
+      </div>
       </div>
     </section>
   );
