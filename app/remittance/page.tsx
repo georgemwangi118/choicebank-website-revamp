@@ -11,6 +11,7 @@ import {
   Groups,
   Handshake,
 } from '@mui/icons-material';
+import bg from '@/public/remittance.jpg'
 
 export const metadata: Metadata = {
   title: 'Remittance | Choice Microfinance Bank',
@@ -113,11 +114,11 @@ export default function RemittancePage() {
       {/* Hero */}
       <div className="relative bg-[#0A0534] pt-40 pb-24 px-6 md:px-16 overflow-hidden">
         <Image
-          src="https://images.unsplash.com/photo-1526304640581-d334cdbbf45e?w=1600&q=80&fit=crop"
+          src={bg}
           alt="Hero background"
           fill
           sizes="100vw"
-          className="object-cover object-center opacity-30"
+          className="object-cover opacity-30"
           priority
         />
         <div className="relative z-10 max-w-7xl mx-auto">

@@ -13,15 +13,15 @@ const slides = [
   {
     label: 'Logbook Loans',
     heading: 'Unlock cash\nfrom your vehicle.',
-    subheading: 'Use your car as collateral and access up to Ksh 5M — while you keep driving. TAT as fast as 6 hours.',
+    subheading: 'Use your car as collateral and access up to Ksh 5M while you keep driving. TAT as fast as 6 hours.',
     cta: { text: 'Apply for a Logbook Loan', href: '/logbook-loans' },
     ctaSecondary: { text: 'Learn more', href: '/logbook-loans' },
     image: logbookImage,
   },
   {
     label: 'Remittance',
-    heading: 'Pay suppliers\nin China — directly.',
-    subheading: 'CNY Express lets Kenyan importers send money in CNY/RMB to Chinese suppliers. Fast, traceable, and professionally handled.',
+    heading: 'Pay suppliers\nin China directly.',
+    subheading: 'CNY Express lets Kenyan importers send money in CNY/KES to Chinese suppliers. Fast, traceable, and professionally handled.',
     cta: { text: 'Start a CNY Transfer', href: '/remittance' },
     ctaSecondary: { text: 'Learn more', href: '/remittance' },
     image: container,
@@ -29,7 +29,7 @@ const slides = [
   {
     label: 'Fixed Deposit',
     heading: 'Make your\nsavings work harder.',
-    subheading: 'Lock in a guaranteed return over 3, 6, or 12 months. Minimum Ksh 100,000 — and your FD can also secure a loan.',
+    subheading: 'Lock in a guaranteed return over 3, 6, or 12 months. Minimum Ksh 100,000 and your FD can also secure a loan.',
     cta: { text: 'Open a Fixed Deposit', href: '/personal-banking' },
     ctaSecondary: { text: 'Learn more', href: '/personal-banking' },
     image: 'https://images.unsplash.com/photo-1579621970563-ebec7560ff3e?w=1600&q=80&fit=crop',

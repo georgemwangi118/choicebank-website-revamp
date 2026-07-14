@@ -1,7 +1,7 @@
 import { Metadata } from 'next';
 import Link from 'next/link';
 import Image from 'next/image';
-import { ArrowForward, CheckCircleOutlined, DirectionsCar, WbSunny, Gavel } from '@mui/icons-material';
+import { ArrowForward, CheckCircleOutlined, DirectionsCar, Gavel } from '@mui/icons-material';
 import bg from '@/public/assets/loans/bg.png';
 
 export const metadata: Metadata = {
@@ -14,13 +14,13 @@ const assetTypes = [
     icon: DirectionsCar,
     title: 'Asset Finance Loan',
     description: 'Financing for customers purchasing a vehicle or asset from a yard, individual seller or company. Supports both fresh financing and hire purchase arrangements.',
-    examples: ['Vehicles from YOM 2009+', 'Interest: 2.5% p.m.', 'Up to Ksh 5M gross', 'Up to 24 months'],
+    examples: ['Vehicles from YOM 2004 and above', 'Interest: 2.5% p.m.', 'Up to Ksh 5M gross', 'Up to 24 months'],
   },
   {
     icon: DirectionsCar,
     title: 'MOTI 80% Asset Finance',
     description: 'A higher-limit asset finance option for qualifying customers and newer vehicles. Designed for stronger financial profiles that meet the stated eligibility criteria.',
-    examples: ['Up to 80% of forced value', 'Interest: 2.5% p.m.', 'YOM 2018 and above', '12 to 36 months'],
+    examples: ['Up to 80% of forced value', 'Interest: 2.5% p.m.', 'YOM 2004 and above', '12 to 36 months'],
   },
   {
     icon: Gavel,
@@ -28,21 +28,7 @@ const assetTypes = [
     description: 'Finance for customers acquiring repossessed vehicles through organizational auctions. Helps qualifying buyers meet the purchase balance after paying the required deposit.',
     examples: ['50% deposit required', 'Loan: 50% of selling price', 'Up to 18 months', 'Interest: 2.5% p.m.'],
   },
-  {
-    icon: WbSunny,
-    title: 'Solari Loan',
-    description: 'A green energy loan for complete solar solutions for homes, schools, churches, hotels, restaurants and SMEs seeking reliable solar packages.',
-    examples: ['Packages: Ksh 150K – Ksh 10M', 'Financing capped at Ksh 5M', '40% minimum deposit', 'Up to 36 months'],
-  },
-];
-
-const features = [
-  { label: 'Loan amount', value: 'Up to Ksh 5M' },
-  { label: 'Interest rate', value: '2.5% p.m.' },
-  { label: 'Loan period', value: 'Up to 24 months' },
-  { label: 'Vehicle YOM', value: '2009 and above' },
-  { label: 'MOTI financing', value: 'Up to 80%' },
-  { label: 'Decision', value: 'Within 48 hours' },
+ 
 ];
 
 const requirements = [
@@ -56,10 +42,9 @@ const requirements = [
 ];
 
 const steps = [
-  { number: '01', title: 'Submit your application', description: 'Fill in our online form or visit any branch. Our team will acknowledge within 4 business hours.' },
-  { number: '02', title: 'Document review', description: 'We assess your documents and credit profile. Most applications get a decision within 48 hours.' },
-  { number: '03', title: 'Loan offer', description: 'Receive a formal offer letter detailing the loan amount, rate, and repayment schedule. No surprises.' },
-  { number: '04', title: 'Disbursement', description: 'Accept the offer, sign the agreement, and funds are disbursed directly to the supplier or dealer.' },
+  { number: '01', title: 'Submit Your Application', description: 'Complete our online application form and provide the required documents for assessment' },
+  { number: '02', title: 'Loan offer and Agreement', description: 'Once approved, receive a clear offer outlining the financing amount, rate, repayment period and terms. Review and sign the agreement.' },
+  { number: '03', title: 'Disbursement', description: 'After final verification, funds are disbursed directly to you.' },
 ];
 
 export default function AssetFinancePage() {
@@ -101,18 +86,6 @@ export default function AssetFinancePage() {
         </div>
       </div>
 
-      {/* Loan terms */}
-      <div className="py-16 px-6 md:px-16 bg-[#E8192C]/10">
-        <div className="max-w-7xl mx-auto grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-6">
-          {features.map(({ label, value }) => (
-            <div key={label} className="text-center">
-              <p className="text-lg font-bold text-[#0A0534]">{value}</p>
-              <p className="text-xs text-gray-500 mt-1 uppercase tracking-widest">{label}</p>
-            </div>
-          ))}
-        </div>
-      </div>
-
       {/* Asset types */}
       <div className="py-24 px-6 md:px-16 bg-[#F7F8F8]">
         <div className="max-w-7xl mx-auto">
@@ -120,7 +93,7 @@ export default function AssetFinancePage() {
             <p className="text-sm font-semibold text-[#E8192C] uppercase tracking-widest mb-3">What we finance</p>
             <h2 className="text-4xl font-bold text-[#0A0534]">Choose the financing option that supports your next move.</h2>
           </div>
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {assetTypes.map(({ icon: Icon, title, description, examples }) => (
               <div key={title} className="bg-white rounded-2xl p-8 border border-gray-100">
                 <div className="w-12 h-12 rounded-xl bg-[#E8192C]/10 flex items-center justify-center mb-5">
@@ -152,11 +125,20 @@ export default function AssetFinancePage() {
               We&apos;ve removed the bureaucracy from asset finance. Most applications are decided within 48 hours, and we&apos;ll keep you updated at every step.
             </p>
           </div>
-          <div className="space-y-0 divide-y divide-gray-100">
-            {steps.map(({ number, title, description }) => (
-              <div key={number} className="flex gap-6 py-6">
-                <span className="text-3xl font-bold text-gray-100 w-12 shrink-0">{number}</span>
-                <div>
+          <div className="flex flex-col gap-0">
+            {steps.map(({ number, title, description }, i) => (
+              <div key={number} className="flex gap-5">
+                {/* Step indicator column */}
+                <div className="flex flex-col items-center">
+                  <div className="w-10 h-10 rounded-full bg-[#0A0534] flex items-center justify-center shrink-0 shadow-md">
+                    <span className="text-sm font-bold text-white">{number}</span>
+                  </div>
+                  {i < steps.length - 1 && (
+                    <div className="w-0.5 flex-1 bg-gradient-to-b from-[#0A0534] to-[#E8192C]/30 my-1 min-h-[40px]" />
+                  )}
+                </div>
+                {/* Content */}
+                <div className="pb-8">
                   <h3 className="font-semibold text-[#0A0534] mb-1">{title}</h3>
                   <p className="text-sm text-gray-500 leading-relaxed">{description}</p>
                 </div>
@@ -199,7 +181,7 @@ export default function AssetFinancePage() {
         <h2 className="text-3xl font-bold text-white mb-4">Ready to finance your next asset?</h2>
         <p className="text-gray-400 mb-8 max-w-md mx-auto">Talk to our lending team. We&apos;ll find the right structure for your situation.</p>
         <Link
-          href="/contact"
+          href="/sales/#contact-sales"
           className="inline-flex items-center gap-2 bg-[#E8192C] text-white px-8 py-4 rounded-full font-semibold hover:bg-[#c4121e] transition-colors group"
         >
           Apply for Asset Finance
