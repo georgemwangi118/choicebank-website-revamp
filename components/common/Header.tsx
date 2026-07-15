@@ -13,17 +13,10 @@ export default function Header() {
   const [getStartedOpen, setGetStartedOpen] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [loanLinkOpen, setLoanLinkOpen] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
   const navRef = useRef<HTMLElement>(null);
 
-  useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 80);
-    window.addEventListener('scroll', onScroll, { passive: true });
-    return () => window.removeEventListener('scroll', onScroll);
-  }, []);
-
   const logoSrc = '/logo.png';
-  const textColor = 'text-white';
+  const textColor = 'text-[#0A0534]';
   const linkHover = 'hover:text-[#E8192C] transition-colors';
   const buttonBg = 'bg-[#E8192C] text-white hover:bg-[#c4121e]';
 
@@ -46,12 +39,12 @@ export default function Header() {
   const isActive = (path: string) => pathname === path;
 
   return (
-    <nav ref={navRef} className={`font-gilroy fixed top-0 left-0 w-full z-50 transition-all duration-300 ${scrolled ? 'bg-[#0A0534] shadow-md' : 'bg-transparent'} ${textColor}`}>
+    <nav ref={navRef} className={`font-gilroy relative w-full z-50 bg-transparent ${textColor}`}>
       <div className="max-w-7xl mx-auto px-4 md:px-6 lg:px-8 flex items-center justify-between h-20">
         {/** Left: Logo */}
         <div className="flex items-center space-x-6">
           <Link href="/" onClick={closeAllDropdowns}>
-            <div className="bg-white rounded-lg px-3 py-1">
+            <div className="px-3 py-1">
               <Image
                 src={logoSrc}
                 alt='Choice Bank Logo'
@@ -80,7 +73,7 @@ export default function Header() {
           >
             Business Banking
           </Link>
-        
+
           <Link
             href="/api-banking"
             onClick={closeAllDropdowns}
@@ -111,9 +104,9 @@ export default function Header() {
               onClick={() => {
                 setLoanLinkOpen(!loanLinkOpen);
                 setLoginLinkOpen(false);
-                setGetStartedOpen(false)
+                setGetStartedOpen(false);
               }}
-              className={linkHover}
+              className={`${linkHover} ${textColor}`}
             >
               Loans <KeyboardArrowDown className='inline-block ml-1' />
             </button>
@@ -140,13 +133,6 @@ export default function Header() {
                 >
                   Asset Finance Loans
                 </Link>
-                <Link
-                  href="/loan-buyoff"
-                  className='block px-4 py-2 hover:bg-gray-100 transition-colors'
-                  onClick={() => setLoanLinkOpen(false)}
-                >
-                  Loan Buyoff
-                </Link>
               </div>
             )}
           </div>
@@ -160,9 +146,9 @@ export default function Header() {
               onClick={() => {
                 setLoginLinkOpen(!loginLinkOpen);
                 setLoanLinkOpen(false);
-                setGetStartedOpen(false)
+                setGetStartedOpen(false);
               }}
-              className={linkHover}
+              className={`${linkHover} ${textColor}`}
             >
               Log in <KeyboardArrowDown className='inline-block ml-1' />
             </button>
@@ -229,7 +215,7 @@ export default function Header() {
 
         {/** Mobile Hamburger */}
         <button
-          className="md:hidden text-white"
+          className={`md:hidden ${textColor}`}
           onClick={() => setMobileOpen(!mobileOpen)}
         >
           {mobileOpen ? <Close fontSize="large" /> : <Menu fontSize="large" />}
@@ -238,42 +224,42 @@ export default function Header() {
 
       {/** Mobile Menu */}
       {mobileOpen && (
-        <div className='md:hidden bg-[#0A0534] text-white px-4 py-6 space-y-4'>
+        <div className='md:hidden bg-white border-t border-gray-100 text-[#0A0534] px-4 py-6 space-y-4 shadow-lg'>
           {/** Main Nav Links */}
-          <div className='flex flex-col space-y-3 text-lg front-medium'>
+          <div className='flex flex-col space-y-3 text-lg font-medium'>
             <Link
               href="/personal-banking"
               onClick={() => setMobileOpen(false)}
-              className="block py-2 border-b border-white/10"
+              className="block py-2 border-b border-gray-100"
             >
-              Personal
+              Personal Banking
             </Link>
             <Link
               href="/business-banking"
               onClick={() => setMobileOpen(false)}
-              className="block py-2 border-b border-white/10"
+              className="block py-2 border-b border-gray-100"
             >
-              Business
+              Business Banking
             </Link>
-          
+
             <Link
               href="/api-banking"
               onClick={() => setMobileOpen(false)}
-              className="block py-2 border-b border-white/10"
+              className="block py-2 border-b border-gray-100"
             >
               API Banking
             </Link>
             <Link
               href="/remittance"
               onClick={() => setMobileOpen(false)}
-              className="block py-2 border-b border-white/10"
+              className="block py-2 border-b border-gray-100"
             >
               Remittance
             </Link>
             <Link
               href="/blog"
               onClick={() => setMobileOpen(false)}
-              className="block py-2 border-b border-white/10"
+              className="block py-2 border-b border-gray-100"
             >
               Blog
             </Link>
@@ -284,42 +270,33 @@ export default function Header() {
                 setLoginLinkOpen(false);
                 setGetStartedOpen(false);
               }}
-              className="flex justify-between items-center py-2 border-b border-white/10 w-full"
+              className="flex justify-between items-center py-2 border-b border-gray-100 w-full"
             >
               Loans <KeyboardArrowDown />
             </button>
 
             {loanLinkOpen && (
-              <div className="pl-4 flex flex-col space-y-2 text-base text-gray-300">
+              <div className="pl-4 flex flex-col space-y-2 text-base text-gray-500">
+                <Link
+                  href="/loans"
+                  onClick={() => { setLoanLinkOpen(false); setMobileOpen(false); }}
+                  className={linkHover}
+                >
+                  All Loans
+                </Link>
                 <Link
                   href="/asset-finance-loans"
-                  onClick={() => {
-                    setLoanLinkOpen(false);
-                    setMobileOpen(false);
-                  }}
+                  onClick={() => { setLoanLinkOpen(false); setMobileOpen(false); }}
                   className={linkHover}
                 >
                   Asset Finance Loans
                 </Link>
                 <Link
                   href="/logbook-loans"
-                  onClick={() => {
-                    setLoanLinkOpen(false);
-                    setMobileOpen(false);
-                  }}
+                  onClick={() => { setLoanLinkOpen(false); setMobileOpen(false); }}
                   className={linkHover}
                 >
                   Logbook Loans
-                </Link>
-                <Link
-                  href="/loan-buyoff"
-                  onClick={() => {
-                    setLoanLinkOpen(false);
-                    setMobileOpen(false);
-                  }}
-                  className={linkHover}
-                >
-                  Loan Buyoff
                 </Link>
               </div>
             )}
@@ -331,32 +308,31 @@ export default function Header() {
               setLoanLinkOpen(false);
               setGetStartedOpen(false);
             }}
-            className="flex justify-between items-center py-2 border-b border-white/10 w-full"
+            className="flex justify-between items-center py-2 border-b border-gray-100 w-full"
           >
-            Login <KeyboardArrowDown />
+            Log in <KeyboardArrowDown />
           </button>
 
-          {/** Login */}
           {loginLinkOpen && (
-            <div className="pl-4 flex flex-col space-y-2 text-base text-gray-300">
+            <div className="pl-4 flex flex-col space-y-2 text-base text-gray-500">
               <a
-                  href="https://baas-dashboard.choicedigitalbank.com/login?redirect=dashboard"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  onClick={() => setLoginLinkOpen(false)}
-                  className={linkHover}
-                >
-                  BaaS Dashboard
-                </a>
-                <a
-                  href="https://business.choicedigitalbank.com/login"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  onClick={() => setLoginLinkOpen(false)}
-                  className={linkHover}
-                >
-                  Business Internet Banking
-                </a>
+                href="https://baas-dashboard.choicedigitalbank.com/login?redirect=dashboard"
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={() => setLoginLinkOpen(false)}
+                className={linkHover}
+              >
+                BaaS Dashboard
+              </a>
+              <a
+                href="https://business.choicedigitalbank.com/login"
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={() => setLoginLinkOpen(false)}
+                className={linkHover}
+              >
+                Business Internet Banking
+              </a>
             </div>
           )}
 
@@ -365,34 +341,32 @@ export default function Header() {
               setGetStartedOpen(!getStartedOpen);
               setLoginLinkOpen(false);
               setLoanLinkOpen(false);
-              
             }}
-            className="flex justify-between items-center py-2 border-b border-white/10 w-full"
+            className="flex justify-between items-center py-2 border-b border-gray-100 w-full"
           >
             Get the App <KeyboardArrowDown />
           </button>
 
-          {/** Login */}
           {getStartedOpen && (
-            <div className="pl-4 flex flex-col space-y-2 text-base text-gray-300">
-               <a
-                  href="https://apps.apple.com/us/app/choice-bank/id6504041400?platform=ipad"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  onClick={() => setGetStartedOpen(false)}
-                  className={linkHover}
-                >
-                  App Store
-                </a>
-                <a
-                  href="https://play.google.com/store/apps/details?id=micro.finance.bank.choice.kenya&hl=en"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  onClick={() => setGetStartedOpen(false)}
-                  className={linkHover}
-                >
-                  Play Store
-                </a>
+            <div className="pl-4 flex flex-col space-y-2 text-base text-gray-500">
+              <a
+                href="https://apps.apple.com/us/app/choice-bank/id6504041400?platform=ipad"
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={() => setGetStartedOpen(false)}
+                className={linkHover}
+              >
+                App Store
+              </a>
+              <a
+                href="https://play.google.com/store/apps/details?id=micro.finance.bank.choice.kenya&hl=en"
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={() => setGetStartedOpen(false)}
+                className={linkHover}
+              >
+                Play Store
+              </a>
             </div>
           )}
         </div>

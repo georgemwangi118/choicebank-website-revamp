@@ -11,16 +11,16 @@ export default function LogbookLoansSection() {
       <div className="max-w-7xl mx-auto grid md:grid-cols-2 gap-12 items-center">
         {/* Left: text */}
         <div className="flex flex-col justify-center">
-          <span className="inline-block text-xs font-semibold tracking-widest uppercase text-[#E8192C] bg-[#E8192C]/10 px-3 py-1 rounded-full w-fit mb-4">
+          <span className="inline-block text-lg font-semibold tracking-widest uppercase text-[#E8192C] bg-[#E8192C]/10 px-3 py-1 rounded-full w-fit mb-4">
             Logbook Loans
           </span>
           <h2 className="text-4xl md:text-5xl font-bold text-[#0A0534] leading-tight mb-6">
-            Your car, your
+            Let Your Car Unlock
             <br />
-            <span className="text-[#E8192C]">financial lifeline.</span>
+            <span className="text-[#E8192C]">Your Next Financial Move.</span>
           </h2>
           <p className="text-gray-500 text-lg leading-relaxed mb-8 max-w-lg">
-            Unlock the value sitting in your vehicle without giving it up. Our logbook loans give you fast access to cash using your car as collateral — you keep driving, we keep it simple.
+            Unlock the value of your vehicle with fast, flexible and reliable logbook financing.
           </p>
           <Link
             href="/logbook-loans/#apply-form"
@@ -32,12 +32,12 @@ export default function LogbookLoansSection() {
         </div>
 
         {/* Right: image */}
-        <div className="relative w-full h-[480px] md:h-[520px] rounded-3xl overflow-hidden">
+        <div className="relative w-full h-[400px] md:h-[500px] rounded-3xl overflow-hidden">
           <Image
             src={image}
             alt="Logbook Loans"
             fill
-            sizes="(max-width: 768px) 100vw, 50vw"
+            sizes="(max-width: 700px) 100vw, 50vw"
             className="object-contain"
             priority
           />

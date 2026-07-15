@@ -33,7 +33,7 @@
   }
 
   body {
-    @apply antialiased;
+    @apply antialiased bg-white;
   }
 }
 

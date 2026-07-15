@@ -202,11 +202,7 @@ export default function Footer() {
                 Terms of service
               </a>
             </li>
-            <li>
-              <Link href="#" className="hover:text-white transition-colors">
-                Acceptable use policy
-              </Link>
-            </li>
+          
           </ul>
         </div>
 
