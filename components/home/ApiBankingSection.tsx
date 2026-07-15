@@ -3,7 +3,7 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import { ArrowForward } from '@mui/icons-material';
-import bg from '@/public/assets/home/api.png';
+import bg from '@/public/assets/loans/api.png';
 
 export default function ApiBankingSection() {
   return (

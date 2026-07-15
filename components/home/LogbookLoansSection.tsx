@@ -3,7 +3,7 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import { ArrowForward } from '@mui/icons-material';
-import image from '@/public/assets/home/man.png'
+import image from '@/public/assets/loans/man.png'
 
 export default function LogbookLoansSection() {
   return (

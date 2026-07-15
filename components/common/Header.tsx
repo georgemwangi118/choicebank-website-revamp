@@ -22,7 +22,7 @@ export default function Header() {
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
-  const logoSrc = '/logo2.png';
+  const logoSrc = '/logo.png';
   const textColor = 'text-white';
   const linkHover = 'hover:text-[#E8192C] transition-colors';
   const buttonBg = 'bg-[#E8192C] text-white hover:bg-[#c4121e]';
@@ -51,14 +51,16 @@ export default function Header() {
         {/** Left: Logo */}
         <div className="flex items-center space-x-6">
           <Link href="/" onClick={closeAllDropdowns}>
-            <Image
-              src={logoSrc}
-              alt='Choice Bank Logo'
-              width={120}
-              height={24}
-              className='w-auto h-6 object-contain'
-              priority
-            />
+            <div className="bg-white rounded-lg px-3 py-1">
+              <Image
+                src={logoSrc}
+                alt='Choice Bank Logo'
+                width={200}
+                height={30}
+                className='w-auto h-10 object-contain'
+                priority
+              />
+            </div>
           </Link>
         </div>
 
@@ -137,6 +139,13 @@ export default function Header() {
                   onClick={() => setLoanLinkOpen(false)}
                 >
                   Asset Finance Loans
+                </Link>
+                <Link
+                  href="/loan-buyoff"
+                  className='block px-4 py-2 hover:bg-gray-100 transition-colors'
+                  onClick={() => setLoanLinkOpen(false)}
+                >
+                  Loan Buyoff
                 </Link>
               </div>
             )}
@@ -301,6 +310,16 @@ export default function Header() {
                   className={linkHover}
                 >
                   Logbook Loans
+                </Link>
+                <Link
+                  href="/loan-buyoff"
+                  onClick={() => {
+                    setLoanLinkOpen(false);
+                    setMobileOpen(false);
+                  }}
+                  className={linkHover}
+                >
+                  Loan Buyoff
                 </Link>
               </div>
             )}

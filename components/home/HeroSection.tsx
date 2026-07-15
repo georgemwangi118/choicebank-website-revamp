@@ -4,10 +4,11 @@ import Link from 'next/link';
 import { ArrowForward, ArrowBack } from '@mui/icons-material';
 import Image from 'next/image';
 import { useState, useEffect, useCallback } from 'react';
-import logbookImage from '@/public/assets/loans/bg1.png';
-import assetFinanceImage from '@/public/assets/loans/bg.png';
-import apiImage from '@/public/assets/home/api.png';
+import assetFinanceImage from '@/public/assets/loans/lorry.png';
+import apiImage from '@/public/assets/loans/api.png';
 import container from '@/public/assets/home/container.jpg'
+import cars from '@/public/assets/loans/img1.png'
+import money from '@/public/assets/home/money.png';
 
 const slides = [
   {
@@ -16,7 +17,7 @@ const slides = [
     subheading: 'Use your car as collateral and access up to Ksh 5M while you keep driving. TAT as fast as 6 hours.',
     cta: { text: 'Apply for a Logbook Loan', href: '/logbook-loans' },
     ctaSecondary: { text: 'Learn more', href: '/logbook-loans' },
-    image: logbookImage,
+    image: cars,
   },
   {
     label: 'Remittance',
@@ -32,7 +33,7 @@ const slides = [
     subheading: 'Lock in a guaranteed return over 3, 6, or 12 months. Minimum Ksh 100,000 and your FD can also secure a loan.',
     cta: { text: 'Open a Fixed Deposit', href: '/personal-banking' },
     ctaSecondary: { text: 'Learn more', href: '/personal-banking' },
-    image: 'https://images.unsplash.com/photo-1579621970563-ebec7560ff3e?w=1600&q=80&fit=crop',
+    image: money,
   },
   {
     label: 'Asset Finance',
@@ -84,7 +85,7 @@ export default function HeroSection() {
           alt={slide.label}
           fill
           sizes="100vw"
-          className="object-cover object-center"
+          className="object-contain object-center"
           priority
         />
       </div>
