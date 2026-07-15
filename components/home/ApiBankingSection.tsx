@@ -20,7 +20,7 @@ export default function ApiBankingSection() {
             Endless possibilities.
           </h2>
           <p className="text-gray-500 mb-8 leading-relaxed">
-            Embed banking directly into your product. Whether you&apos;re a fintech, an enterprise, or a marketplace — our API gives you full banking infrastructure without the licence overhead.
+            Embed banking directly into your product. Whether you&apos;re a fintech, an enterprise, or a marketplace, our API gives you full banking infrastructure without the licence overhead.
           </p>
           <Link
             href="/api-banking"

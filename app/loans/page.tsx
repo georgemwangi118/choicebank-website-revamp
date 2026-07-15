@@ -7,120 +7,67 @@ import { sendEmail } from '@/lib/sendEmail';
 import {
   ArrowForward,
   CheckCircleOutlined,
-  DirectionsCar,
-  WbSunny,
-  Lock,
-  BusinessCenter,
-  Bolt,
   Close,
 } from '@mui/icons-material';
-import bg from '@/public/assets/loans/bg.png'
+import bg from '@/public/assets/loans/money.png'
 import solar from '@/public/assets/loans/solar.jpeg'
 import lorry from '@/public/assets/loans/lorry.png'
 import img5 from '@/public/assets/loans/img5.jpeg'
 import img4 from '@/public/assets/loans/img4.jpeg'
-import img1 from '@/public/assets/loans/img1.png'
+import img6 from '@/public/assets/loans/img6.jpeg'
 import img2 from '@/public/assets/loans/img2.jpeg'
 
 const loanProducts = [
   {
-    icon: BusinessCenter,
-    image: img4,
-    title: 'Choice Business Loan',
-    tagline: 'Business support without asset security.',
-    description: 'A retail financing solution for Choice Bank account holders who need funds for business expansion, education, emergencies, vehicle purchases or other financial goals.',
-    cta: 'Apply for a Business Loan',
-    accent: 'border-[#E8192C]',
-  },
-  {
-    icon: DirectionsCar,
     image: img5,
     title: 'Logbook Loan',
-    tagline: 'Unlock cash from your vehicle.',
     description: 'A motor vehicle-secured loan supported by a valid logbook registered in the borrower\'s name. Use the funds for personal, business or development needs while leveraging vehicle ownership.',
     cta: 'Apply for a Logbook Loan',
     accent: 'border-[#0A0534]',
   },
   {
-    icon: DirectionsCar,
     image: lorry,
     title: 'Asset Finance Loan',
-    tagline: 'Own the vehicle or asset your business needs.',
     description: 'Financing for customers purchasing an asset from a yard, individual seller or company. Supports both fresh financing and hire purchase arrangements from yards.',
-    highlights: [
-      'Vehicles from YOM 2009 and above considered',
-      'Interest rate: 2.5% p.m.',
-      'Loan amount of up to Ksh 5M gross',
-      'Loan period of up to 24 months',
-      'Financing depends on vehicle value, condition and client financials',
-    ],
     cta: 'Finance Your Asset',
     accent: 'border-[#E8192C]',
   },
   {
-    icon: DirectionsCar,
-    image: img1,
-    title: 'MOTI 80% Asset Finance',
-    tagline: 'Higher financing for qualifying vehicles.',
-    description: 'A higher-limit asset finance option for qualifying customers and vehicles. Designed for stronger financial profiles and newer assets that meet the stated eligibility criteria.',
-    highlights: [
-      'Financing of up to 80% of forced value',
-      'Interest rate: 2.5% p.m.',
-      'YOM: 2018 and above',
-      'Loan period of 12 to 36 months',
-      'Maximum loan amount of up to Ksh 5M gross',
-    ],
-    cta: 'Check Eligibility',
+    image: img4,
+    title: 'Choice Business Loan',
+    description: 'A retail financing solution for Choice Bank account holders who need funds for business expansion, education, emergencies, vehicle purchases or other financial goals.',
+    cta: 'Apply for a Business Loan',
+    accent: 'border-[#E8192C]',
+  },
+  {
+    image: img6,
+    title: 'Check-Off Loan',
+    description: 'Access convenient financing with repayments deducted directly from your salary. It is a simple, reliable solution designed to help you meet personal needs, manage emergencies, or achieve important goals with ease.',
+    cta: 'Apply for a Check-Off Loan',
     accent: 'border-[#0A0534]',
   },
   {
-    icon: WbSunny,
     image: solar,
     title: 'Solari Loan',
-    tagline: 'Power your home or business sustainably.',
     description: 'A green energy loan for complete solar solutions for homes, schools, churches, hotels, restaurants and SMEs. Supports customers who want a reliable solar package.',
-    highlights: [
-      'Solar packages range from Ksh 150K to Ksh 10M',
-      'Financing capped at Ksh 5M',
-      'Minimum deposit of 40% of quoted reserve price',
-      'Interest rate of 2% to 3% flat p.m.',
-      'Loan term of up to 36 months',
-    ],
     cta: 'Explore Solar Financing',
     accent: 'border-[#E8192C]',
   },
   {
-    icon: Lock,
     image: 'https://images.unsplash.com/photo-1579621970563-ebec7560ff3e?w=600&q=80&fit=crop',
     title: 'Fixed Deposit Loan',
-    tagline: 'Borrow against your savings.',
     description: 'A secured loan that allows customers to access financing using an active Choice Bank fixed deposit as collateral, while keeping the savings structure in place.',
-    highlights: [
-      'FD must be held with Choice Bank for at least 3 months',
-      'Minimum FD value: Ksh 100,000 or USD 1,000',
-      'Financing: 50% for 3M, 70% for 6M, 90% for 12M',
-      'Interest rate: 6% plus FD rate',
-      'Loan tenure must not exceed FD maturity',
-    ],
     cta: 'Use Your FD as Security',
     accent: 'border-[#0A0534]',
   },
 
 
   {
-    icon: Bolt,
     image: img2,
-    title: 'Emergency Loan',
+    title: 'Title Deed Loan',
     tagline: 'Extra support for existing clients.',
-    description: 'A top-up product for well-paying existing clients who need urgent cash support. Runs separately from the main loan the client carries two concurrent installments.',
-    highlights: [
-      'Available to existing clients with at least 3 installments paid without default',
-      'No valuation required',
-      'Loan amount of up to Ksh 200K net',
-      'Interest rate: 10% p.m.',
-      'Loan period of up to 3 months',
-    ],
-    cta: 'Request Emergency Support',
+    description: 'Unlock the financial value of your property and access funding for business growth, personal projects, or major investments. Your title deed gives you the opportunity to secure flexible financing while keeping ownership of your property.',
+    cta: 'Request for Title Deed Loan',
     accent: 'border-[#E8192C]',
   },
  
@@ -330,37 +277,44 @@ export default function LoansPage() {
       {modal.open && <LoanModal loanType={modal.loanType} onClose={closeModal} />}
 
       {/* Hero */}
-      <div className="relative bg-[#0A0534] pt-40 pb-24 px-6 md:px-16 overflow-hidden">
-        <Image
-          src={bg}
-          alt="Loans hero background"
-          fill
-          sizes="100vw"
-          className="object-cover object-center opacity-30"
-          priority
-        />
-        <div className="relative z-10 max-w-7xl mx-auto">
-          <p className="text-sm font-semibold text-[#E8192C] uppercase tracking-widest mb-4">Loans & Financing</p>
-          <h1 className="text-5xl md:text-6xl font-bold text-white leading-tight max-w-3xl mb-6">
-            Flexible financing for the goals ahead.
-          </h1>
-          <p className="text-white text-sm max-w-2xl leading-relaxed mb-10">
-            Access practical financing solutions designed around your goals, assets, cash flow and repayment ability. Whether the need is working capital, asset purchase, solar installation, insurance premium support or a top-up facility — Choice Microfinance Bank has a structured credit solution for you.
-          </p>
-          <div className="flex flex-wrap gap-4">
-            <button
-              onClick={scrollToProducts}
-              className="inline-flex items-center gap-2 bg-[#E8192C] text-white px-8 py-4 rounded-full font-semibold hover:bg-[#c4121e] transition-all group"
-            >
-              Apply for a Loan
-              <ArrowForward className="group-hover:translate-x-1 transition-transform" />
-            </button>
-            <Link
-              href="/sales"
-              className="inline-flex items-center gap-2 border border-white/20 text-white px-8 py-4 rounded-full font-semibold hover:bg-white/10 transition-all"
-            >
-              Speak to a loan officer
-            </Link>
+      <div className="bg-[#0A0534] py-20 overflow-hidden">
+        <div className="max-w-7xl mx-auto grid md:grid-cols-2 gap-12 items-center pl-6 md:pl-16">
+          {/* Left: text */}
+          <div>
+            <p className="text-sm font-semibold text-[#E8192C] uppercase tracking-widest mb-4">Loans & Financing</p>
+            <h1 className="text-5xl md:text-6xl font-bold text-white leading-tight mb-6">
+              Financing That Helps Us Grow Together
+            </h1>
+            <p className="text-white/70 text-lg leading-relaxed mb-10">
+              Explore flexible loan solutions designed to support your personal goals, business ambitions, and everyday financial needs. At Choice Microfinance Bank, we make access to financing simple, convenient, and tailored to help you move forward with confidence.
+            </p>
+            <div className="flex flex-wrap gap-4">
+              <button
+                onClick={scrollToProducts}
+                className="inline-flex items-center gap-2 bg-[#E8192C] text-white px-8 py-4 rounded-full font-semibold hover:bg-[#c4121e] transition-all group"
+              >
+                Explore your options below
+                <ArrowForward className="group-hover:translate-x-1 transition-transform" />
+              </button>
+              <Link
+                href="/sales"
+                className="inline-flex items-center gap-2 border border-white/30 text-white px-8 py-4 rounded-full font-semibold hover:bg-white/10 transition-all"
+              >
+                Speak to a loan officer
+              </Link>
+            </div>
+          </div>
+
+          {/* Right: image flush to edge */}
+          <div className="relative w-full h-[380px] md:h-[560px] rounded-l-3xl overflow-hidden shadow-2xl">
+            <Image
+              src={bg}
+              alt="Loans"
+              fill
+              sizes="(max-width: 768px) 100vw, 50vw"
+              className="object-cover object-center"
+              priority
+            />
           </div>
         </div>
       </div>
@@ -369,12 +323,12 @@ export default function LoansPage() {
       <div id="loan-products" className="py-24 px-6 md:px-16 bg-[#F7F8F8]">
         <div className="max-w-7xl mx-auto">
           <div className="max-w-xl mb-14">
-            <p className="text-sm font-semibold text-[#E8192C] uppercase tracking-widest mb-3">Loan products</p>
-            <h2 className="text-4xl font-bold text-[#0A0534]">Choose the financing option that supports your next move.</h2>
+            <p className="text-lg font-bold text-[#E8192C] uppercase tracking-widest mb-3">Loan products</p>
+            <h2 className="text-4xl font-semibold text-[#0A0534]">Choose the financing option that supports your next move.</h2>
           </div>
 
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {loanProducts.map(({ icon: Icon, image, title, tagline, description, cta, accent }) => (
+            {loanProducts.map(({ image, title, description, cta, accent }) => (
               <div
                 key={title}
                 className="bg-white rounded-2xl overflow-hidden border border-gray-100 shadow-sm flex flex-col group transition-all duration-300 hover:-translate-y-2 hover:shadow-xl hover:border-[#E8192C]/20"
@@ -389,12 +343,7 @@ export default function LoansPage() {
                     className="object-cover transition-transform duration-500 group-hover:scale-105"
                   />
                   <div className="absolute inset-0 bg-[#0A0534]/40 group-hover:bg-[#0A0534]/50 transition-colors duration-300" />
-                  <div className="absolute bottom-4 left-4 flex items-center gap-2">
-                    <div className="w-8 h-8 rounded-lg bg-white/20 backdrop-blur-sm flex items-center justify-center">
-                      <Icon className="text-white" sx={{ fontSize: 16 }} />
-                    </div>
-                    <span className="text-xs font-semibold text-white uppercase tracking-widest bg-[#E8192C]/80 backdrop-blur-sm px-2 py-1 rounded-full">{tagline}</span>
-                  </div>
+                  
                 </div>
 
                 {/* Content */}
@@ -422,12 +371,12 @@ export default function LoansPage() {
             <p className="text-sm font-semibold text-[#E8192C] uppercase tracking-widest mb-3">Loan Buyoff</p>
             <h2 className="text-4xl font-bold text-white mb-4">Already have a logbook loan elsewhere?</h2>
             <p className="text-gray-400 leading-relaxed">
-              Move your existing logbook loan from another MFI or bank to Choice Bank. Qualifying customers must have paid at least 50% of principal without default. Vehicles from YOM 2014 and above.
+              Move your existing logbook loan from another MFI or bank to Choice Bank. Qualifying customers must have paid at least 50% of principal without default. Vehicles from YOM 2004 and above.
             </p>
           </div>
           <div className="space-y-3">
             {[
-              'Loan amount of up to Ksh 5M gross',
+              'Loan amount of up to Ksh 6M gross',
               'Loan period of up to 18 months',
               'Vehicle YOM: 2004 and above',
               'Client must have paid at least 50% of principal without default',
@@ -453,9 +402,9 @@ export default function LoansPage() {
 
       {/* CTA */}
       <div className="py-16 px-6 md:px-16 bg-white text-center border-t border-gray-100">
-        <p className="text-sm text-gray-400 mb-4">Choice Microfinance Bank is licensed and regulated by the Central Bank of Kenya.</p>
+        
         <h2 className="text-3xl font-bold text-[#0A0534] mb-4">Not sure which loan is right for you?</h2>
-        <p className="text-gray-500 mb-8 max-w-md mx-auto">Speak to a Choice Bank loan officer. We&apos;ll match you to the right product for your situation.</p>
+        <p className="text-gray-500 mb-8 max-w-md mx-auto">We&apos;ll match you to the right product for your situation.</p>
         <Link
           href="/sales"
           className="inline-flex items-center gap-2 bg-[#0A0534] text-white px-8 py-4 rounded-full font-semibold hover:bg-[#E8192C] transition-colors group"

@@ -1,7 +1,7 @@
 import { Metadata } from 'next';
 import Image from 'next/image';
 import { CheckCircleOutlined, Savings, AccountBalanceWallet, Lock, SwapHoriz, CurrencyExchange, PhoneAndroid } from '@mui/icons-material';
-import bg from '@/public/assets/home/bg.jpg'
+import bg from '@/public/assets/home/bg.png'
 
 export const metadata: Metadata = {
   title: 'Personal Banking | Choice Microfinance Bank',
