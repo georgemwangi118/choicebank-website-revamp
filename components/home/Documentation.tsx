@@ -16,7 +16,7 @@ const steps = [
   {
     number: '03',
     title: 'Test in sandbox',
-    description: 'Simulate real transactions — disbursements, collections, account creation — without moving a single shilling.',
+    description: 'Simulate real transactions disbursements, collections, account creation without moving a single shilling.',
   },
   {
     number: '04',
@@ -52,13 +52,20 @@ export default function Documentation() {
           </div>
 
           {/* Right: steps */}
-          <div className="space-y-0 divide-y divide-gray-100">
-            {steps.map((step) => (
-              <div key={step.number} className="py-6 flex gap-6">
-                <span className="text-3xl font-bold text-gray-100 select-none w-12 shrink-0">{step.number}</span>
-                <div>
-                  <h3 className="font-semibold text-[#0A0534] mb-1">{step.title}</h3>
-                  <p className="text-sm text-gray-500 leading-relaxed">{step.description}</p>
+          <div className="flex flex-col gap-0">
+            {steps.map(({ number, title, description }, i) => (
+              <div key={number} className="flex gap-5">
+                <div className="flex flex-col items-center">
+                  <div className="w-10 h-10 rounded-full bg-[#0A0534] flex items-center justify-center shrink-0 shadow-md">
+                    <span className="text-sm font-bold text-white">{number}</span>
+                  </div>
+                  {i < steps.length - 1 && (
+                    <div className="w-0.5 flex-1 bg-gradient-to-b from-[#0A0534] to-[#E8192C]/30 my-1 min-h-[40px]" />
+                  )}
+                </div>
+                <div className="pb-8">
+                  <h3 className="font-semibold text-[#0A0534] mb-1">{title}</h3>
+                  <p className="text-sm text-gray-500 leading-relaxed">{description}</p>
                 </div>
               </div>
             ))}
