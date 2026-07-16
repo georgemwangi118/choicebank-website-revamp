@@ -14,19 +14,19 @@ const assetTypes = [
     icon: DirectionsCar,
     title: 'Asset Finance Loan',
     description: 'Financing for customers purchasing a vehicle or asset from a yard, individual seller or company. Supports both fresh financing and hire purchase arrangements.',
-    examples: ['Vehicles from YOM 2004 and above', 'Interest: 2.5% p.m.', 'Up to Ksh 5M gross', 'Up to 24 months'],
+    examples: ['Vehicles from YOM 2004 and above', 'Interest: from 1.5% p.m.', 'Up to Ksh 6M gross', 'Up to 24 months'],
   },
   {
     icon: DirectionsCar,
     title: 'MOTI 80% Asset Finance',
     description: 'A higher-limit asset finance option for qualifying customers and newer vehicles. Designed for stronger financial profiles that meet the stated eligibility criteria.',
-    examples: ['Up to 80% of forced value', 'Interest: 2.5% p.m.', 'YOM 2004 and above', '12 to 36 months'],
+    examples: ['Up to 80% of forced value', 'Interest: from 1.5% p.m.', 'YOM 2018 and above', 'up to 36 months'],
   },
   {
     icon: Gavel,
     title: 'Auction Refinancing',
     description: 'Finance for customers acquiring repossessed vehicles through organizational auctions. Helps qualifying buyers meet the purchase balance after paying the required deposit.',
-    examples: ['50% deposit required', 'Loan: 50% of selling price', 'Up to 18 months', 'Interest: 2.5% p.m.'],
+    examples: ['50% deposit required', 'Loan: 50% of selling price', 'Up to 18 months', 'Interest: from 1.5% p.m.'],
   },
  
 ];
@@ -80,8 +80,30 @@ export default function AssetFinancePage() {
               href="/sales"
               className="inline-flex items-center gap-2 border border-white/20 text-white px-8 py-4 rounded-full font-semibold hover:bg-white/10 transition-all"
             >
-              Speak to an advisor
+              Speak to a loan officer
             </Link>
+          </div>
+        </div>
+      </div>
+
+       {/* Why Choose Us */}
+      <div className="py-20 px-6 md:px-16 bg-white">
+        <div className="max-w-7xl mx-auto">
+  
+ 
+            <h2 className="text-4xl text-center font-bold text-[#0A0534] mb-10">More than just a loan.</h2>
+          
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            {[
+              { stat: 'Access Up to Ksh 6M',  },
+              { stat: 'Approval Under 6 Hours',  },
+              { stat: 'Flexible Repayment Plan',   },
+              { stat: 'Affordable Rates',  },
+            ].map(({ stat}) => (
+              <div key={stat} className="bg-[#F7F8F8] rounded-2xl p-6 border border-gray-100 hover:border-[#E8192C]/30 hover:shadow-md transition-all duration-300">
+                <p className="text-lg font-bold text-[#0A0534] mb-1">{stat}</p>
+              </div>
+            ))}
           </div>
         </div>
       </div>
@@ -120,10 +142,11 @@ export default function AssetFinancePage() {
         <div className="max-w-7xl mx-auto grid md:grid-cols-2 gap-16 items-start">
           <div>
             <p className="text-sm font-semibold text-[#E8192C] uppercase tracking-widest mb-3">How it works</p>
-            <h2 className="text-4xl font-bold text-[#0A0534] mb-4">Simple process. Fast decision.</h2>
+            <h2 className="text-4xl font-bold text-[#0A0534] mb-4">Simple and hassle-free process</h2>
             <p className="text-gray-500 leading-relaxed">
-              We&apos;ve removed the bureaucracy from asset finance. Most applications are decided within 48 hours, and we&apos;ll keep you updated at every step.
+              From application to approval, our streamlined process makes it easy to access the financing you need with confidence. 
             </p>
+            <h2 className='text-xl font-bold text-[#0A0534]'>Drive Now, Pay Later</h2>
           </div>
           <div className="flex flex-col gap-0">
             {steps.map(({ number, title, description }, i) => (
@@ -176,18 +199,7 @@ export default function AssetFinancePage() {
         </div>
       </div>
 
-      {/* CTA */}
-      <div className="py-16 px-6 md:px-16 bg-[#0A0534] text-center">
-        <h2 className="text-3xl font-bold text-white mb-4">Ready to finance your next asset?</h2>
-        <p className="text-gray-400 mb-8 max-w-md mx-auto">Talk to our lending team. We&apos;ll find the right structure for your situation.</p>
-        <Link
-          href="/sales/#contact-sales"
-          className="inline-flex items-center gap-2 bg-[#E8192C] text-white px-8 py-4 rounded-full font-semibold hover:bg-[#c4121e] transition-colors group"
-        >
-          Apply for Asset Finance
-          <ArrowForward className="group-hover:translate-x-1 transition-transform" />
-        </Link>
-      </div>
+     
     </div>
   );
 }
