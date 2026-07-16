@@ -199,18 +199,7 @@ export default function AssetFinancePage() {
         </div>
       </div>
 
-      {/* CTA */}
-      <div className="py-16 px-6 md:px-16 bg-[#0A0534] text-center">
-        <h2 className="text-3xl font-bold text-white mb-4">Ready to finance your next asset?</h2>
-        <p className="text-gray-400 mb-8 max-w-md mx-auto">Talk to our lending team. We&apos;ll find the right structure for your situation.</p>
-        <Link
-          href="/sales/#contact-sales"
-          className="inline-flex items-center gap-2 bg-[#E8192C] text-white px-8 py-4 rounded-full font-semibold hover:bg-[#c4121e] transition-colors group"
-        >
-          Apply for Asset Finance
-          <ArrowForward className="group-hover:translate-x-1 transition-transform" />
-        </Link>
-      </div>
+     
     </div>
   );
 }
