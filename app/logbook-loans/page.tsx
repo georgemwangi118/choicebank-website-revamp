@@ -199,7 +199,7 @@ function ApplicationModal({ onClose, loanType }: { onClose: () => void; loanType
 }
 
 export default function LogbookLoansPage() {
-  const [modalLoan, setModalLoan] = useState<string | null>(null);
+  const [modalLoan, setModalLoan] = useState<string | null>('Logbook Loan');
 
   function openModal(loanType: string) { setModalLoan(loanType); }
   function closeModal() { setModalLoan(null); }
@@ -217,7 +217,7 @@ export default function LogbookLoansPage() {
             Unlock cash from your vehicle.
           </h1>
           <p className="text-gray-400 text-xl max-w-xl leading-relaxed mb-10">
-            A motor vehicle-secured loan supported by a valid logbook registered in your name. Use the funds for personal, business or development needs while you keep driving.
+            Access financing using your vehicle&apos;s logbook as security and keep driving while meeting your personal, business, or development needs.
           </p>
           <div className="flex flex-wrap gap-4">
             <button
@@ -228,8 +228,30 @@ export default function LogbookLoansPage() {
               <ArrowForward className="group-hover:translate-x-1 transition-transform" />
             </button>
             <Link href="/sales" className="inline-flex items-center gap-2 border border-white/20 text-white px-8 py-4 rounded-full font-semibold hover:bg-white/10 transition-all">
-              Speak to an advisor
+              Speak to a loan officer
             </Link>
+          </div>
+        </div>
+      </div>
+
+      {/* Why Choose Us */}
+      <div className="py-20 px-6 md:px-16 bg-white">
+        <div className="max-w-7xl mx-auto">
+  
+ 
+            <h2 className="text-4xl text-center font-bold text-[#0A0534] mb-10">More than just a loan.</h2>
+          
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            {[
+              { stat: 'Access Up to Ksh 6M',  },
+              { stat: 'Approval Under 6 Hours',  },
+              { stat: 'Flexible Repayment Plan',   },
+              { stat: 'Affordable Rates',  },
+            ].map(({ stat}) => (
+              <div key={stat} className="bg-[#F7F8F8] rounded-2xl p-6 border border-gray-100 hover:border-[#E8192C]/30 hover:shadow-md transition-all duration-300">
+                <p className="text-lg font-bold text-[#0A0534] mb-1">{stat}</p>
+              </div>
+            ))}
           </div>
         </div>
       </div>
@@ -238,19 +260,12 @@ export default function LogbookLoansPage() {
       <div className="py-24 px-6 md:px-16 bg-[#F7F8F8]">
         <div className="max-w-7xl mx-auto">
           <div className="max-w-xl mb-14 text-center mx-auto">
-            <p className="text-sm font-semibold text-[#E8192C] uppercase tracking-widest mb-3">Explore our Logbook Loan Options</p>
-            <h2 className="text-4xl font-bold text-[#0A0534]">Fast. Secure. Reliable.</h2>
+            <p className="text-sm font-semibold text-[#E8192C] uppercase tracking-widest mb-3">Explore our Logbook Loan products</p>
           </div>
           <div className="grid md:grid-cols-3 gap-8">
-            {highlights.map(({ icon: Icon, title, description, accent }, i) => (
+            {highlights.map(({  title, description }, i) => (
               <div key={title} className="group bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-1 flex flex-col">
-                {/* Coloured top bar with icon */}
-                <div className={`${accent} px-8 pt-8 pb-6`}>
-                  <div className="w-14 h-14 rounded-2xl bg-white/20 flex items-center justify-center mb-4">
-                    <Icon className="text-white" sx={{ fontSize: 28 }} />
-                  </div>
-                  <span className="text-xs font-bold text-white/70 uppercase tracking-widest">Option {String(i + 1).padStart(2, '0')}</span>
-                </div>
+              
                 {/* Content */}
                 <div className="p-8 flex-1 flex flex-col">
                   <h3 className="text-lg font-bold text-[#0A0534] mb-3">{title}</h3>
@@ -284,8 +299,7 @@ export default function LogbookLoansPage() {
             </ul>
           </div>
           <div className="bg-[#0A0534] rounded-3xl p-10">
-            <p className="text-sm font-semibold text-[#E8192C] uppercase tracking-widest mb-4">Documents needed</p>
-            <h2 className="text-2xl font-bold text-white mb-6">What to bring.</h2>
+            <h2 className="text-2xl font-bold text-white mb-6">Requirements</h2>
             <ul className="space-y-4">
               {documents.map((item) => (
                 <li key={item} className="flex items-start gap-3 text-sm text-gray-300">
@@ -334,20 +348,6 @@ export default function LogbookLoansPage() {
             ))}
           </div>
         </div>
-      </div>
-
-      {/* Bottom CTA */}
-      <div className="py-16 px-6 md:px-16 bg-[#0A0534] text-center">
-        <p className="text-sm font-semibold text-[#E8192C] uppercase tracking-widest mb-4">Ready to apply?</p>
-        <h2 className="text-4xl font-bold text-white mb-4">Get your logbook loan today.</h2>
-        <p className="text-gray-400 mb-8 max-w-md mx-auto">Fill in your details and a Choice Bank loan officer will reach out within 6–12 hours.</p>
-        <button
-          onClick={() => openModal('Logbook Loan')}
-          className="inline-flex items-center gap-2 bg-[#E8192C] text-white px-10 py-4 rounded-full font-semibold hover:bg-[#c4121e] transition-all group"
-        >
-          Apply for a Logbook Loan
-          <ArrowForward className="group-hover:translate-x-1 transition-transform" />
-        </button>
       </div>
     </div>
   );

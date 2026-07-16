@@ -363,56 +363,6 @@ export default function LoansPage() {
           </div>
         </div>
       </div>
-
-      {/* Loan buyoff callout */}
-      <div className="py-16 px-6 md:px-16 bg-[#0A0534]">
-        <div className="max-w-7xl mx-auto grid md:grid-cols-2 gap-12 items-center">
-          <div>
-            <p className="text-sm font-semibold text-[#E8192C] uppercase tracking-widest mb-3">Loan Buyoff</p>
-            <h2 className="text-4xl font-bold text-white mb-4">Already have a logbook loan elsewhere?</h2>
-            <p className="text-gray-400 leading-relaxed">
-              Move your existing logbook loan from another MFI or bank to Choice Bank. Qualifying customers must have paid at least 50% of principal without default. Vehicles from YOM 2004 and above.
-            </p>
-          </div>
-          <div className="space-y-3">
-            {[
-              'Loan amount of up to Ksh 6M gross',
-              'Loan period of up to 18 months',
-              'Vehicle YOM: 2004 and above',
-              'Client must have paid at least 50% of principal without default',
-              'Up to 50% financing depending on YOM, make and condition',
-            ].map((item) => (
-              <div key={item} className="flex items-start gap-3 text-gray-300 text-sm">
-                <CheckCircleOutlined className="text-[#E8192C] shrink-0 mt-0.5" fontSize="small" />
-                {item}
-              </div>
-            ))}
-            <div className="pt-4">
-              <button
-                onClick={() => openModal('Loan Buyoff')}
-                className="inline-flex items-center gap-2 bg-[#E8192C] text-white px-6 py-3 rounded-full font-semibold hover:bg-[#c4121e] transition-colors group text-sm"
-              >
-                Request Loan Buyoff
-                <ArrowForward className="group-hover:translate-x-1 transition-transform" fontSize="small" />
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      {/* CTA */}
-      <div className="py-16 px-6 md:px-16 bg-white text-center border-t border-gray-100">
-        
-        <h2 className="text-3xl font-bold text-[#0A0534] mb-4">Not sure which loan is right for you?</h2>
-        <p className="text-gray-500 mb-8 max-w-md mx-auto">We&apos;ll match you to the right product for your situation.</p>
-        <Link
-          href="/sales"
-          className="inline-flex items-center gap-2 bg-[#0A0534] text-white px-8 py-4 rounded-full font-semibold hover:bg-[#E8192C] transition-colors group"
-        >
-          Speak to a Choice Bank Officer
-          <ArrowForward className="group-hover:translate-x-1 transition-transform" />
-        </Link>
-      </div>
     </div>
   );
 }

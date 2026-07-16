@@ -15,32 +15,7 @@ import {
 } from '@mui/icons-material';
 import bg from '@/public/handshake.jpg'
 
-const advisors = [
-  {
-    name: 'Loans Sales Desk',
-    role: 'Logbook Loans & Asset Finance',
-    phone: '+254 729 114 444',
-    whatsapp: '+254 729 114 444',
-    email: 'loans@choice-bank.com',
-    availability: 'Mon – Fri, 8:00 AM – 6:00 PM',
-  },
-  {
-    name: 'Business Banking Desk',
-    role: 'SME Loans & Business Accounts',
-    phone: '+254 729 114 444',
-    whatsapp: '+254 729 114 444',
-    email: 'business@choice-bank.com',
-    availability: 'Mon – Fri, 8:00 AM – 6:00 PM',
-  },
-  {
-    name: 'Remittance & FX Desk',
-    role: 'CNY Express & Cross-Border Payments',
-    phone: '+254 729 114 444',
-    whatsapp: '+254 729 114 444',
-    email: 'remittance@choice-bank.com',
-    availability: 'Mon – Fri, 8:00 AM – 5:00 PM',
-  },
-];
+
 
 const promises = [
   'A sales advisor picks up your enquiry, not a bot',
@@ -126,7 +101,7 @@ export default function SalesPage() {
           priority
         />
         <div className="relative z-10 max-w-7xl mx-auto">
-          <p className="text-sm font-semibold text-[#E8192C] uppercase tracking-widest mb-4">Sales & Advisory</p>
+          <p className="text-sm font-semibold text-[#E8192C] uppercase tracking-widest mb-4">Contact Us</p>
           <h1 className="text-5xl md:text-6xl font-bold text-white leading-tight max-w-3xl mb-6">
             Talk to someone who<br />knows your product.
           </h1>
@@ -134,7 +109,7 @@ export default function SalesPage() {
             Our sales advisors are specialists not generalists. Reach the right desk directly and get answers about loan terms, eligibility, and what you qualify for.
           </p>
           <a
-            href="https://wa.me/254729114444"
+            href="https://wa.me/254110123123"
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center gap-2 bg-[#25D366] text-white px-8 py-4 rounded-full font-semibold hover:bg-[#1ebe5d] transition-all group"
@@ -158,68 +133,7 @@ export default function SalesPage() {
         </div>
       </div>
 
-      {/* Advisor desks */}
-      <div className="py-24 px-6 md:px-16 bg-[#F7F8F8]">
-        <div className="max-w-7xl mx-auto">
-          <div className="max-w-xl mb-14">
-            <p className="text-sm font-semibold text-[#E8192C] uppercase tracking-widest mb-3">Our Sales Desks</p>
-            <h2 className="text-4xl font-bold text-[#0A0534]">Reach the right advisor.</h2>
-            <p className="text-gray-500 mt-4 leading-relaxed">Each desk handles a specific product area so you speak to someone who can actually answer your question.</p>
-          </div>
-
-          <div className="grid md:grid-cols-3 gap-6">
-            {advisors.map((advisor) => (
-              <div key={advisor.name} className="bg-white rounded-3xl p-8 border border-gray-100 flex flex-col gap-5">
-                <div>
-                  <h3 className="font-bold text-[#0A0534] text-lg">{advisor.name}</h3>
-                  <p className="text-sm font-semibold text-[#E8192C] mt-1">{advisor.role}</p>
-                </div>
-
-                <div className="space-y-3 flex-1">
-                  <a
-                    href={`tel:${advisor.phone.replace(/\s/g, '')}`}
-                    className="flex items-center gap-3 text-sm text-gray-600 hover:text-[#E8192C] transition-colors group"
-                  >
-                    <div className="w-9 h-9 rounded-xl bg-[#0A0534]/5 flex items-center justify-center shrink-0 group-hover:bg-[#E8192C]/10 transition-colors">
-                      <Phone fontSize="small" className="text-[#0A0534] group-hover:text-[#E8192C]" />
-                    </div>
-                    {advisor.phone}
-                  </a>
-
-                  <a
-                    href={`https://wa.me/${advisor.whatsapp.replace(/\D/g, '')}`}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center gap-3 text-sm text-gray-600 hover:text-[#25D366] transition-colors group"
-                  >
-                    <div className="w-9 h-9 rounded-xl bg-[#0A0534]/5 flex items-center justify-center shrink-0 group-hover:bg-[#25D366]/10 transition-colors">
-                      <WhatsApp fontSize="small" className="text-[#0A0534] group-hover:text-[#25D366]" />
-                    </div>
-                    WhatsApp
-                  </a>
-
-                  <a
-                    href={`mailto:${advisor.email}`}
-                    className="flex items-center gap-3 text-sm text-gray-600 hover:text-[#E8192C] transition-colors group"
-                  >
-                    <div className="w-9 h-9 rounded-xl bg-[#0A0534]/5 flex items-center justify-center shrink-0 group-hover:bg-[#E8192C]/10 transition-colors">
-                      <Email fontSize="small" className="text-[#0A0534] group-hover:text-[#E8192C]" />
-                    </div>
-                    {advisor.email}
-                  </a>
-
-                  <div className="flex items-center gap-3 text-sm text-gray-400">
-                    <div className="w-9 h-9 rounded-xl bg-[#0A0534]/5 flex items-center justify-center shrink-0">
-                      <AccessTime fontSize="small" className="text-gray-400" />
-                    </div>
-                    {advisor.availability}
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </div>
+     
 
       {/* Application Form */}
       <div id="contact-sales" className="py-24 px-6 md:px-16 bg-white">
@@ -248,8 +162,9 @@ export default function SalesPage() {
                 </div>
                 <div>
                   <p className="font-semibold text-[#0A0534] text-sm">Branch Hours</p>
-                  <p className="text-sm text-gray-500">Monday – Friday: 8:00 AM – 5:00 PM</p>
-                  <p className="text-sm text-gray-500">Saturday: 9:00 AM – 1:00 PM</p>
+                  <p className="text-sm text-gray-500">Monday – Friday: 8:00 AM – 4:00 PM</p>
+                  <p className="text-sm text-gray-500">Saturday: 9:00 AM – 12:00 PM</p>
+                  <p className="text-sm text-gray-500">Public Holidays and Sundays: Closed</p>
                 </div>
               </div>
             </div>

@@ -3,7 +3,7 @@
 import Link from 'next/link';
 import { ArrowForward } from '@mui/icons-material';
 import Image from 'next/image';
-import bg from '@/public/assets/home/bg.png';
+import bg from '@/public/assets/home/bg1.jpeg';
 
 export default function HeroSection() {
   return (
@@ -19,7 +19,7 @@ export default function HeroSection() {
       />
 
       {/* Content */}
-      <div className="relative z-10 max-w-7xl mx-auto px-6 md:px-16 w-full py-32">
+      <div className="relative z-10 max-w-7xl mx-auto px-6 md:px-16 w-full py-20">
         <div className="max-w-2xl">
           
           <h1 className="text-5xl md:text-7xl font-bold leading-tight text-[#0A0534] mb-6">

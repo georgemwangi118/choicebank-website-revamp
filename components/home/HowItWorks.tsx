@@ -37,7 +37,7 @@ const features = [
 
 export default function HowItWorks() {
   return (
-    <section className="bg-white py-24 px-6 md:px-16">
+    <section className="bg-[#F0F0F8] py-10 px-6 md:px-10">
       <div className="max-w-7xl mx-auto">
         <div className="text-center max-w-2xl mx-auto mb-16">
           <p className="text-sm font-semibold text-[#E8192C] uppercase tracking-widest mb-3">
