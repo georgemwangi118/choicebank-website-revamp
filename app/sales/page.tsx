@@ -77,7 +77,7 @@ export default function SalesPage() {
   return (
     <div className="min-h-screen bg-white">
       {/* Hero */}
-      <div className="relative bg-[#0A0534] pt-40 pb-24 px-6 md:px-16 overflow-hidden">
+      <div className="relative bg-[#0A0534] pt-52 pb-36 px-6 md:px-16 overflow-hidden">
         <Image
           src={bg}
           alt="Sales advisor background"

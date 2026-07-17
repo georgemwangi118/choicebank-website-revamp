@@ -1,7 +1,9 @@
 'use client';
 
 import Link from 'next/link';
-import { Instagram, LinkedIn, X } from '@mui/icons-material';
+import { Instagram, LinkedIn, X, YouTube } from '@mui/icons-material';
+import tiktok from '@/public/assets/footer/tiktok.png'
+import Image from 'next/image';
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
@@ -34,7 +36,7 @@ export default function Footer() {
               <Instagram sx={{ fontSize: 16 }} />
             </a>
             <a
-              href="https://www.linkedin.com/company/choice-microfinance-bank/mycompany/"
+              href="https://www.linkedin.com/company/choice-microfinance-bank/"
               target="_blank"
               rel="noopener noreferrer"
               className="border border-white/50 p-2 rounded-md hover:bg-white hover:text-black transition-colors"
@@ -43,13 +45,37 @@ export default function Footer() {
               <LinkedIn sx={{ fontSize: 16 }} />
             </a>
             <a
-              href="https://twitter.com/choicemfbbank"
+              href="https://x.com/choicebank_ke"
               target="_blank"
               rel="noopener noreferrer"
               className="border border-white/50 p-2 rounded-md hover:bg-white hover:text-black transition-colors"
               aria-label="X (Twitter)"
             >
               <X sx={{ fontSize: 16 }} />
+            </a>
+            <a
+              href="https://youtube.com/@choicemicrofinancebank4783?si=Cf1ZFc7JGr5d_u3A"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="border border-white/50 p-2 rounded-md hover:bg-white hover:text-black transition-colors"
+              aria-label="YouTube"
+            >
+              <YouTube sx={{ fontSize: 16 }} />
+            </a>
+             <a
+              href="https://www.tiktok.com/@choicebankke"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="border border-white/50 p-2 rounded-md hover:bg-white hover:text-black transition-colors"
+              aria-label="TikTok"
+            >
+              <Image
+                src={tiktok}
+                alt="TikTok"
+                width={16}
+                height={16}
+                className="w-4 h-4 object-contain"
+              />
             </a>
           </div>
         </div>

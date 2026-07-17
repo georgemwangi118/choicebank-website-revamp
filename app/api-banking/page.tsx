@@ -9,8 +9,6 @@ import {
   Savings,
   Hub,
   Shield,
-  Speed,
-  SupportAgent,
   AccountTree,
 } from '@mui/icons-material';
 import bg from '@/public/carbon.png'
@@ -68,18 +66,12 @@ const useCases = [
   { title: 'Microfinance & SACCOs', description: 'Digitise your lending and savings operations on top of a regulated banking layer without building core banking from scratch.' },
 ];
 
-const reasons = [
-  { icon: Shield, label: 'CBK Licensed', description: 'Operate under a real banking licence — no regulatory grey areas.' },
-  { icon: Speed, label: 'Fast Integration', description: 'Sandbox access within 48 hours. Go live in weeks, not months.' },
-  { icon: SupportAgent, label: 'Dedicated Support', description: 'A technical partnership team with you from integration to production.' },
-  { icon: AccountBalance, label: 'Real Banking Rails', description: 'Pesalink, M-Pesa, Airtel, SWIFT. The actual infrastructure.' },
-];
 
 export default function APIBankingPage() {
   return (
     <div className="min-h-screen bg-white">
       {/* Hero */}
-      <div className="bg-[#0A0534] py-20 overflow-hidden">
+      <div className="bg-[#0A0534]/90 py-20 overflow-hidden">
         <div className="max-w-7xl mx-auto grid md:grid-cols-2 gap-12 items-center pl-6 md:pl-16">
           {/* Left: text */}
           <div>
@@ -117,22 +109,6 @@ export default function APIBankingPage() {
         </div>
       </div>
 
-      {/* Why Choice BaaS */}
-      <div className="py-16 px-6 md:px-16 bg-[#E8192C]/10">
-        <div className="max-w-7xl mx-auto grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
-          {reasons.map(({ icon: Icon, label, description }) => (
-            <div key={label} className="flex items-start gap-4">
-              <div className="w-10 h-10 rounded-xl bg-[#E8192C]/20 flex items-center justify-center shrink-0">
-                <Icon className="text-[#E8192C]" fontSize="small" />
-              </div>
-              <div>
-                <p className="font-bold text-[#0A0534] text-sm mb-1">{label}</p>
-                <p className="text-xs text-gray-500 leading-relaxed">{description}</p>
-              </div>
-            </div>
-          ))}
-        </div>
-      </div>
 
       {/* BaaS Capabilities */}
       <div className="py-24 px-6 md:px-16 bg-[#F7F8F8]">

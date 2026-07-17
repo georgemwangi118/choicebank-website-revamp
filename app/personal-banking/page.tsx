@@ -1,7 +1,7 @@
 import { Metadata } from 'next';
 import Image from 'next/image';
 import { CheckCircleOutlined, Savings, AccountBalanceWallet, Lock, SwapHoriz, CurrencyExchange, PhoneAndroid } from '@mui/icons-material';
-import bg from '@/public/assets/home/bg.png'
+import bg from '@/public/assets/pages/personal.png'
 
 export const metadata: Metadata = {
   title: 'Personal Banking | Choice Microfinance Bank',
@@ -81,13 +81,13 @@ export default function PersonalBankingPage() {
   return (
     <div className="min-h-screen bg-white">
       {/* Hero */}
-      <div className="relative bg-[#0A0534] pt-40 pb-24 px-6 md:px-16 overflow-hidden">
+      <div className="relative bg-[#0A0534]/90 pt-40 pb-24 px-6 md:px-16 overflow-hidden">
         <Image
           src={bg}
           alt="Hero background"
           fill
           sizes="100vw"
-          className="object-cover object-center opacity-30"
+          className="object-contain object-center opacity-30"
           priority
         />
         <div className="relative z-10 max-w-7xl mx-auto">
