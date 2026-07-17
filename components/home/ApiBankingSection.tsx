@@ -3,7 +3,7 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import { ArrowForward } from '@mui/icons-material';
-import bg from '@/public/assets/home/api.png';
+import bg from '@/public/assets/home/carbon.png';
 
 export default function ApiBankingSection() {
   return (
@@ -38,7 +38,7 @@ export default function ApiBankingSection() {
             alt="API Banking"
             fill
             sizes="(max-width: 768px) 100vw, 50vw"
-            className="object-cover object-center"
+            className="object-contain object-center"
           />
         </div>
       </div>

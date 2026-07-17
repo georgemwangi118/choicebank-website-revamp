@@ -5,7 +5,7 @@ import Image from 'next/image';
 import { useState } from 'react';
 import { sendEmail } from '@/lib/sendEmail';
 import { ArrowForward, CheckCircleOutlined, Close, DirectionsCar, FlashOn, SwapHoriz } from '@mui/icons-material';
-import bg from '@/public/assets/loans/bg1.png';
+import bg from '@/public/assets/loans/logbook.png';
 
 const highlights = [
   {
@@ -188,7 +188,7 @@ function ApplicationModal({ onClose, loanType }: { onClose: () => void; loanType
               {submitError && <p className="text-sm text-red-500 text-center">{submitError}</p>}
 
               <p className="text-xs text-gray-400 text-center">
-                A Choice Bank loan officer will contact you within 6–12 hours. Your data is handled in accordance with CBK regulations.
+                A Choice Bank loan officer will contact you.
               </p>
             </form>
           )}
@@ -209,27 +209,33 @@ export default function LogbookLoansPage() {
       {modalLoan && <ApplicationModal onClose={closeModal} loanType={modalLoan} />}
 
       {/* Hero */}
-      <div className="relative bg-[#0A0534] pt-40 pb-24 px-6 md:px-16 overflow-hidden">
-        <Image src={bg} alt="Hero background" fill sizes="100vw" className="object-cover object-center opacity-30" priority />
-        <div className="relative z-10 max-w-7xl mx-auto">
-          <p className="text-sm font-semibold text-[#E8192C] uppercase tracking-widest mb-4">Logbook Loans</p>
-          <h1 className="text-5xl md:text-6xl font-bold text-white leading-tight max-w-3xl mb-6">
-            Unlock cash from your vehicle.
-          </h1>
-          <p className="text-gray-400 text-xl max-w-xl leading-relaxed mb-10">
-            Access financing using your vehicle&apos;s logbook as security and keep driving while meeting your personal, business, or development needs.
-          </p>
-          <div className="flex flex-wrap gap-4">
-            <button
-              onClick={() => openModal('Logbook Loan')}
-              className="inline-flex items-center gap-2 bg-[#E8192C] text-white px-8 py-4 rounded-full font-semibold hover:bg-[#c4121e] transition-all group"
-            >
-              Apply for a Logbook Loan
-              <ArrowForward className="group-hover:translate-x-1 transition-transform" />
-            </button>
-            <Link href="/sales" className="inline-flex items-center gap-2 border border-white/20 text-white px-8 py-4 rounded-full font-semibold hover:bg-white/10 transition-all">
-              Speak to a loan officer
-            </Link>
+      <div className="bg-[#0A0534] py-20 overflow-hidden">
+        <div className="max-w-7xl mx-auto grid md:grid-cols-2 gap-12 items-center pl-6 md:pl-16">
+          {/* Left: text */}
+          <div>
+            <p className="text-sm font-semibold text-[#E8192C] uppercase tracking-widest mb-4">Logbook Loans</p>
+            <h1 className="text-5xl md:text-6xl font-bold text-white leading-tight mb-6">
+              Unlock cash from your vehicle.
+            </h1>
+            <p className="text-white/70 text-xl max-w-xl leading-relaxed mb-10">
+              Access financing using your vehicle&apos;s logbook as security and keep driving while meeting your personal, business, or development needs.
+            </p>
+            <div className="flex flex-wrap gap-4">
+              <button
+                onClick={() => openModal('Logbook Loan')}
+                className="inline-flex items-center gap-2 bg-[#E8192C] text-white px-8 py-4 rounded-full font-semibold hover:bg-[#c4121e] transition-all group"
+              >
+                Apply for a Logbook Loan
+                <ArrowForward className="group-hover:translate-x-1 transition-transform" />
+              </button>
+              <Link href="/sales" className="inline-flex items-center gap-2 border border-white/20 text-white px-8 py-4 rounded-full font-semibold hover:bg-white/10 transition-all">
+                Speak to a loan officer
+              </Link>
+            </div>
+          </div>
+          {/* Right: image flush to edge */}
+          <div className="relative w-full h-[380px] md:h-[560px] rounded-l-3xl overflow-hidden">
+            <Image src={bg} alt="Logbook Loans" fill sizes="(max-width: 768px) 100vw, 50vw" className="object-contain object-center" priority />
           </div>
         </div>
       </div>
