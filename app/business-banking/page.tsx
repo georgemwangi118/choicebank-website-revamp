@@ -1,8 +1,8 @@
 import { Metadata } from 'next';
-import Link from 'next/link';
 import Image from 'next/image';
-import { CheckCircleOutlined, Business, AccountBalance, SwapHoriz, Public, WbSunny, PhoneAndroid } from '@mui/icons-material';
-import image from '@/public/handshake.jpg'
+import { CheckCircleOutlined, Business, AccountBalance, SwapHoriz, Public, WbSunny, PhoneAndroid, ArrowForward } from '@mui/icons-material';
+import image from '@/public/assets/pages/business.png'
+import Link from 'next/link';
 
 export const metadata: Metadata = {
   title: 'Business Banking | Choice Microfinance Bank',
@@ -47,12 +47,12 @@ const solutions = [
   {
     icon: AccountBalance,
     title: 'SME Financing',
-    description: 'Choice Business Loan up to Ksh 1M net. Tenure of up to 12 months. Assessment based on account transactions and customer profile.',
+    description: 'Choice Business Loan up to Ksh 1M. Tenure of up to 12 months. Assessment based on account transactions and customer profile.',
   },
   {
     icon: Public,
     title: 'Asset Financing',
-    description: 'Finance vehicles and income-generating assets up to Ksh 5M gross. Interest from 2.5% p.m. Loan period up to 24 months.',
+    description: 'Finance vehicles and income-generating assets up to Ksh 6M. Interest from 1.5% p.m. Loan period up to 48 months.',
   },
   {
     icon: SwapHoriz,
@@ -67,7 +67,7 @@ const solutions = [
   {
     icon: WbSunny,
     title: 'Solari Loan',
-    description: 'Green energy financing for solar installations. Packages from Ksh 150K to Ksh 10M, capped at Ksh 5M. Loan period up to 36 months.',
+    description: 'Green energy financing for solar installations. Packages from Ksh 150K to Ksh 10M, capped at Ksh 6M. Loan period up to 36 months.',
   },
   {
     icon: PhoneAndroid,
@@ -83,20 +83,19 @@ const requirements = [
   'Board resolution authorising account opening',
   'ID and KRA PIN for all directors/signatories',
   'Proof of business address (utility bill or lease agreement)',
-  'Latest 6 months bank statements',
 ];
 
 export default function BusinessBankingPage() {
   return (
     <div className="min-h-screen bg-white">
       {/* Hero */}
-      <div className="relative bg-[#0A0534] pt-40 pb-24 px-6 md:px-16 overflow-hidden">
+      <div className="relative bg-[#0A0534]/90 pt-40 pb-24 px-6 md:px-16 overflow-hidden">
         <Image
           src={image}
           alt="Hero background"
           fill
           sizes="100vw"
-          className="object-cover object-center opacity-30"
+          className="object-contain object-center opacity-30"
           priority
         />
         <div className="relative z-10 max-w-7xl mx-auto">
@@ -105,16 +104,19 @@ export default function BusinessBankingPage() {
             Banking built around your business goals.
           </h1>
           <p className="text-white text-sm max-w-xl leading-relaxed mb-10">
-            Practical financial solutions for SMEs, startups and growing enterprises across the world. Manage cash flow, transact with confidence, grow deposits and access financing designed around real business needs.
+            Practical financial solutions for SMEs, start-ups and growing enterprises across the world. Manage cash flow, transact with confidence, grow deposits and access financing designed around real business needs.
           </p>
+
           <div className="flex flex-wrap gap-4">
             <Link
-              href="/api-banking"
+              href='/contact'
               className="inline-flex items-center gap-2 bg-[#E8192C] text-white px-8 py-4 rounded-full font-semibold hover:bg-[#c4121e] transition-all group"
             >
-              Explore API Banking
+              Contact Us to Get Started
+              <ArrowForward className="group-hover:translate-x-1 transition-transform" />
             </Link>
           </div>
+         
         </div>
       </div>
 
@@ -123,7 +125,7 @@ export default function BusinessBankingPage() {
         <div className="max-w-7xl mx-auto">
           <div className="max-w-xl mb-14">
             <p className="text-sm font-semibold text-[#E8192C] uppercase tracking-widest mb-3">Account types</p>
-            <h2 className="text-4xl font-bold text-[#0A0534]">Built for how businesses actually operate.</h2>
+            <h2 className="text-4xl font-bold text-[#0A0534]">The Right Account for Every Business.</h2>
           </div>
           <div className="grid md:grid-cols-2 gap-8">
             {accounts.map(({ icon: Icon, name, tagline, description, features, accent, badgeBg, badgeText }) => (

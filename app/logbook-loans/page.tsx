@@ -209,7 +209,7 @@ export default function LogbookLoansPage() {
       {modalLoan && <ApplicationModal onClose={closeModal} loanType={modalLoan} />}
 
       {/* Hero */}
-      <div className="bg-[#0A0534] py-20 overflow-hidden">
+      <div className="bg-[#0A0534]/90 py-20 overflow-hidden">
         <div className="max-w-7xl mx-auto grid md:grid-cols-2 gap-12 items-center pl-6 md:pl-16">
           {/* Left: text */}
           <div>

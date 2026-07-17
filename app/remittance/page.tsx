@@ -1,8 +1,6 @@
 import { Metadata } from 'next';
-import Link from 'next/link';
 import Image from 'next/image';
 import {
-  ArrowForward,
   CheckCircleOutlined,
   FlightTakeoff,
   CurrencyExchange,
@@ -11,7 +9,7 @@ import {
   Groups,
   Handshake,
 } from '@mui/icons-material';
-import bg from '@/public/remittance.jpg'
+import bg from '@/public/assets/pages/remittance.png'
 
 export const metadata: Metadata = {
   title: 'Remittance | Choice Microfinance Bank',
@@ -112,13 +110,13 @@ export default function RemittancePage() {
   return (
     <div className="min-h-screen bg-white">
       {/* Hero */}
-      <div className="relative bg-[#0A0534] pt-40 pb-24 px-6 md:px-16 overflow-hidden">
+      <div className="relative bg-[#0A0534]/90 pt-40 pb-24 px-6 md:px-16 overflow-hidden">
         <Image
           src={bg}
           alt="Hero background"
           fill
           sizes="100vw"
-          className="object-cover opacity-30"
+          className="object-contain opacity-30"
           priority
         />
         <div className="relative z-10 max-w-7xl mx-auto">
@@ -148,7 +146,7 @@ export default function RemittancePage() {
       <div className="py-24 px-6 md:px-16 bg-[#0A0534]">
         <div className="max-w-7xl mx-auto grid md:grid-cols-2 gap-16 items-center">
           <div>
-            <span className="inline-block text-xs font-semibold tracking-widest uppercase text-[#E8192C] mb-4 bg-[#E8192C]/10 px-3 py-1 rounded-full">
+            <span className="inline-block text-xs font-semibold tracking-widest uppercase text-[#E8192C] mb-4  px-3 py-1 rounded-full">
               Featured Service
             </span>
             <h2 className="text-4xl md:text-5xl font-bold text-white leading-tight mb-6">
@@ -156,7 +154,7 @@ export default function RemittancePage() {
               <span className="text-[#E8192C]">direct in CNY.</span>
             </h2>
             <p className="text-white text-lg leading-relaxed mb-8">
-              CNY Express is our dedicated China payment corridor — built for importers, traders and businesses that need to pay suppliers in CNY/KES directly from Kenya. Fast, traceable, and professionally handled.
+              CNY Express is our dedicated China payment corridor built for importers, traders and businesses that need to pay suppliers in CNY/KES directly from Kenya. Fast, traceable, and professionally handled.
             </p>
             <ul className="space-y-3 mb-10">
               {[
@@ -220,21 +218,7 @@ export default function RemittancePage() {
         </div>
       </div>
 
-      {/* Compliance note */}
-      <div className="py-12 px-6 md:px-16 bg-white border-t border-gray-100">
-        <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6">
-          <p className="text-sm text-gray-500 max-w-xl">
-            Choice Microfinance Bank is licensed and regulated by the Central Bank of Kenya. All remittance transactions are handled through secure, compliant and traceable banking processes.
-          </p>
-          <Link
-            href="/contact"
-            className="shrink-0 inline-flex items-center gap-2 bg-[#0A0534] text-white px-6 py-3 rounded-full font-semibold hover:bg-[#E8192C] transition-colors group text-sm"
-          >
-            Speak to a Choice Bank Officer
-            <ArrowForward className="group-hover:translate-x-1 transition-transform" fontSize="small" />
-          </Link>
-        </div>
-      </div>
+   
     </div>
   );
 }
