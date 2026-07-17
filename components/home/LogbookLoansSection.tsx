@@ -12,18 +12,18 @@ export default function LogbookLoansSection() {
         {/* Left: text */}
         <div className="flex flex-col justify-center">
           <span className="inline-block text-lg font-semibold tracking-widest uppercase text-[#E8192C] bg-[#E8192C]/10 px-3 py-1 rounded-full w-fit mb-4">
-            Logbook Loans & Assets Financing
+            Logbook Loans & Asset Financing
           </span>
           <h2 className="text-4xl md:text-5xl font-bold text-[#0A0534] leading-tight mb-6">
-            Let Your Car Unlock
+            Let&apos;s Finance
             <br />
-            <span className="text-[#E8192C]">Your Next Financial Move.</span>
+            <span className="text-[#E8192C]">Your Next Move.</span>
           </h2>
-          <p className="text-gray-500 text-lg leading-relaxed mb-8 max-w-lg">
-            Unlock the value of your vehicle with our fast, flexible and affordable logbook financing.
+          <p className="text-gray-500 text-lg leading-relaxed mb-8 max-w-7xl">
+            From logbook loans to asset financing, we provide flexible and affordable financing solutions tailored to your needs. Whether you&apos;re looking to grow your business, invest in essential assets, or access funds using your vehicle, we&apos;re here to help you move forward with confidence.
           </p>
           <Link
-            href="/logbook-loans/#apply-form"
+            href="/logbook-loans"
             className="group inline-flex items-center gap-2 bg-[#0A0534] text-white px-8 py-4 rounded-full font-semibold hover:bg-[#E8192C] transition-all duration-300 w-fit"
           >
             Apply now

@@ -20,7 +20,7 @@ export default function RemittanceSection() {
             <span className="text-[#E8192C]">instantly.</span>
           </h2>
           <p className="text-white/70 text-lg leading-relaxed mb-8 max-w-lg">
-            Whether you&apos;re paying international suppliers, our remittance service makes cross-border transfers fast, affordable, and stress-free every single time.
+            Whether you&apos;re paying international suppliers or sending money to family abroad, our remittance service gets your funds where they need to go, quickly and affordably.
           </p>
        
           <Link

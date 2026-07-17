@@ -5,6 +5,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { Menu, Close, KeyboardArrowDown } from '@mui/icons-material';
 import { usePathname } from 'next/navigation';
+import logo from '@/public/logo2.png';
 
 export default function Header() {
   const pathname = usePathname();
@@ -15,8 +16,7 @@ export default function Header() {
   const [loanLinkOpen, setLoanLinkOpen] = useState(false);
   const navRef = useRef<HTMLElement>(null);
 
-  const logoSrc = '/logo.png';
-  const textColor = 'text-[#0A0534]';
+  const textColor = 'text-white';
   const linkHover = 'hover:text-[#E8192C] transition-colors';
   const buttonBg = 'bg-[#E8192C] text-white hover:bg-[#c4121e]';
 
@@ -39,20 +39,23 @@ export default function Header() {
   const isActive = (path: string) => pathname === path;
 
   return (
-    <nav ref={navRef} className={`font-gilroy relative w-full z-50 bg-transparent ${textColor}`}>
+    <nav ref={navRef} className={`sticky top-0 font-gilroy relative w-full z-50 bg-[#0A0534] ${textColor}`}>
       <div className="max-w-7xl mx-auto px-4 md:px-6 lg:px-8 flex items-center justify-between h-20">
         {/** Left: Logo */}
         <div className="flex items-center space-x-6">
           <Link href="/" onClick={closeAllDropdowns}>
-            <div className="px-3 py-1">
-              <Image
-                src={logoSrc}
-                alt='Choice Bank Logo'
-                width={200}
-                height={30}
-                className='w-auto h-10 object-contain'
-                priority
-              />
+            <div className="flex flex-col items-center">
+             
+                <Image
+                  src={logo}
+                  alt='Choice Bank Logo'
+                  width={200}
+                  height={30}
+                  className='w-auto h-10 object-contain'
+                  priority
+                />
+            
+              <span className="text-[10px] font-semibold tracking-widest uppercase text-white mt-0.5">Grow Together</span>
             </div>
           </Link>
         </div>
@@ -224,20 +227,20 @@ export default function Header() {
 
       {/** Mobile Menu */}
       {mobileOpen && (
-        <div className='md:hidden bg-white border-t border-gray-100 text-[#0A0534] px-4 py-6 space-y-4 shadow-lg'>
+        <div className='md:hidden bg-[#0A0534] border-t border-white/10 text-white px-4 py-6 space-y-4 shadow-lg'>
           {/** Main Nav Links */}
           <div className='flex flex-col space-y-3 text-lg font-medium'>
             <Link
               href="/personal-banking"
               onClick={() => setMobileOpen(false)}
-              className="block py-2 border-b border-gray-100"
+              className="block py-2 border-b border-white/10"
             >
               Personal Banking
             </Link>
             <Link
               href="/business-banking"
               onClick={() => setMobileOpen(false)}
-              className="block py-2 border-b border-gray-100"
+              className="block py-2 border-b border-white/10"
             >
               Business Banking
             </Link>
@@ -245,21 +248,21 @@ export default function Header() {
             <Link
               href="/api-banking"
               onClick={() => setMobileOpen(false)}
-              className="block py-2 border-b border-gray-100"
+              className="block py-2 border-b border-white/10"
             >
               API Banking
             </Link>
             <Link
               href="/remittance"
               onClick={() => setMobileOpen(false)}
-              className="block py-2 border-b border-gray-100"
+              className="block py-2 border-b border-white/10"
             >
               Remittance
             </Link>
             <Link
               href="/blog"
               onClick={() => setMobileOpen(false)}
-              className="block py-2 border-b border-gray-100"
+              className="block py-2 border-b border-white/10"
             >
               Blog
             </Link>
@@ -270,13 +273,13 @@ export default function Header() {
                 setLoginLinkOpen(false);
                 setGetStartedOpen(false);
               }}
-              className="flex justify-between items-center py-2 border-b border-gray-100 w-full"
+              className="flex justify-between items-center py-2 border-b border-white/10 w-full"
             >
               Loans <KeyboardArrowDown />
             </button>
 
             {loanLinkOpen && (
-              <div className="pl-4 flex flex-col space-y-2 text-base text-gray-500">
+              <div className="pl-4 flex flex-col space-y-2 text-base text-white/70">
                 <Link
                   href="/loans"
                   onClick={() => { setLoanLinkOpen(false); setMobileOpen(false); }}
@@ -308,13 +311,13 @@ export default function Header() {
               setLoanLinkOpen(false);
               setGetStartedOpen(false);
             }}
-            className="flex justify-between items-center py-2 border-b border-gray-100 w-full"
+            className="flex justify-between items-center py-2 border-b border-white/10 w-full"
           >
             Log in <KeyboardArrowDown />
           </button>
 
           {loginLinkOpen && (
-            <div className="pl-4 flex flex-col space-y-2 text-base text-gray-500">
+            <div className="pl-4 flex flex-col space-y-2 text-base text-white/70">
               <a
                 href="https://baas-dashboard.choicedigitalbank.com/login?redirect=dashboard"
                 target="_blank"
@@ -342,13 +345,13 @@ export default function Header() {
               setLoginLinkOpen(false);
               setLoanLinkOpen(false);
             }}
-            className="flex justify-between items-center py-2 border-b border-gray-100 w-full"
+            className="flex justify-between items-center py-2 border-b border-white/10 w-full"
           >
             Get the App <KeyboardArrowDown />
           </button>
 
           {getStartedOpen && (
-            <div className="pl-4 flex flex-col space-y-2 text-base text-gray-500">
+            <div className="pl-4 flex flex-col space-y-2 text-base text-white/70">
               <a
                 href="https://apps.apple.com/us/app/choice-bank/id6504041400?platform=ipad"
                 target="_blank"

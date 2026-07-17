@@ -1,28 +1,14 @@
 'use client';
 
 import Image from 'next/image';
-import Link from 'next/link';
 import { useState } from 'react';
 import { sendEmail } from '@/lib/sendEmail';
 import {
-  Phone,
-  Email,
   WhatsApp,
-  LocationOn,
   ArrowForward,
   CheckCircleOutlined,
-  AccessTime,
 } from '@mui/icons-material';
-import bg from '@/public/handshake.jpg'
-
-
-
-const promises = [
-  'A sales advisor picks up your enquiry, not a bot',
-  'Response within 20 minutes during business hours',
-  'No obligation, just an honest conversation about your options',
-  'Confidential. Your details are never shared outside Choice Bank',
-];
+import bg from '@/public/contact.jpeg'
 
 const productOptions = [
   'Logbook Loan',
@@ -101,15 +87,12 @@ export default function SalesPage() {
           priority
         />
         <div className="relative z-10 max-w-7xl mx-auto">
-          <p className="text-sm font-semibold text-[#E8192C] uppercase tracking-widest mb-4">Contact Us</p>
-          <h1 className="text-5xl md:text-6xl font-bold text-white leading-tight max-w-3xl mb-6">
-            Talk to someone who<br />knows your product.
-          </h1>
+          <p className="text-5xl font-bold text-white uppercase tracking-widest mb-4">Talk to Us</p>
           <p className="text-gray-400 text-xl max-w-xl leading-relaxed mb-10">
-            Our sales advisors are specialists not generalists. Reach the right desk directly and get answers about loan terms, eligibility, and what you qualify for.
+            Our experienced team is ready to answer your questions, explain our financing solutions, and guide you through every step of the application process.
           </p>
           <a
-            href="https://wa.me/254110123123"
+            href="https://wa.me/254729114444"
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center gap-2 bg-[#25D366] text-white px-8 py-4 rounded-full font-semibold hover:bg-[#1ebe5d] transition-all group"
@@ -121,20 +104,6 @@ export default function SalesPage() {
         </div>
       </div>
 
-      {/* What to expect */}
-      <div className="py-16 px-6 md:px-16 bg-[#E8192C]/10">
-        <div className="max-w-7xl mx-auto grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          {promises.map((p) => (
-            <div key={p} className="flex items-start gap-3">
-              <CheckCircleOutlined className="text-[#E8192C] shrink-0 mt-0.5" fontSize="small" />
-              <p className="text-sm text-[#0A0534] font-medium leading-snug">{p}</p>
-            </div>
-          ))}
-        </div>
-      </div>
-
-     
-
       {/* Application Form */}
       <div id="contact-sales" className="py-24 px-6 md:px-16 bg-white">
         <div className="max-w-7xl mx-auto grid md:grid-cols-2 gap-16 items-start">
@@ -143,31 +112,9 @@ export default function SalesPage() {
             <p className="text-sm font-semibold text-[#E8192C] uppercase tracking-widest mb-4">Get in Touch</p>
             <h2 className="text-4xl font-bold text-[#0A0534] mb-6">Leave your details.<br />We&apos;ll call you back.</h2>
             <p className="text-gray-500 leading-relaxed mb-8">
-              Not ready to call? Fill in the form and a sales advisor will reach out within 2 hours during business hours. Tell us what product you&apos;re interested in and we&apos;ll come prepared.
+              Not ready to call? Fill in the form and a team member will contact you soon.
             </p>
-            <div className="space-y-4">
-              <div className="flex items-start gap-4">
-                <div className="w-10 h-10 rounded-xl bg-[#E8192C]/10 flex items-center justify-center shrink-0">
-                  <LocationOn className="text-[#E8192C]" fontSize="small" />
-                </div>
-                <div>
-                  <p className="font-semibold text-[#0A0534] text-sm">Head Office</p>
-                  <p className="text-sm text-gray-500">Riverside Square, Riverside Drive, Nairobi</p>
-                  <p className="text-sm text-gray-400">PO BOX 29796-00100</p>
-                </div>
-              </div>
-              <div className="flex items-start gap-4">
-                <div className="w-10 h-10 rounded-xl bg-[#E8192C]/10 flex items-center justify-center shrink-0">
-                  <AccessTime className="text-[#E8192C]" fontSize="small" />
-                </div>
-                <div>
-                  <p className="font-semibold text-[#0A0534] text-sm">Branch Hours</p>
-                  <p className="text-sm text-gray-500">Monday – Friday: 8:00 AM – 4:00 PM</p>
-                  <p className="text-sm text-gray-500">Saturday: 9:00 AM – 12:00 PM</p>
-                  <p className="text-sm text-gray-500">Public Holidays and Sundays: Closed</p>
-                </div>
-              </div>
-            </div>
+         
           </div>
 
           {/* Right: form */}
@@ -277,57 +224,9 @@ export default function SalesPage() {
                   <p className="text-sm text-red-500 text-center">{submitError}</p>
                 )}
 
-                <p className="text-xs text-gray-400 text-center">
-                  A Choice Bank sales advisor will contact you within 2 hours. Your information is handled in accordance with CBK regulations.
-                </p>
+              
               </form>
             )}
-          </div>
-        </div>
-      </div>
-
-      {/* General inquiries */}
-      <div className="py-16 px-6 md:px-16 bg-[#0A0534]">
-        <div className="max-w-7xl mx-auto grid md:grid-cols-2 gap-12 items-center">
-          <div>
-            <p className="text-sm font-semibold text-[#E8192C] uppercase tracking-widest mb-4">General Inquiries</p>
-            <h3 className="text-2xl font-bold text-white mb-4">Not sure which desk to call?</h3>
-            <p className="text-gray-400 text-sm leading-relaxed">Our main contact centre handles all incoming queries and routes you to the right specialist.</p>
-          </div>
-          <div className="space-y-4">
-            <a
-              href="tel:+254729114444"
-              className="flex items-center gap-4 text-gray-300 hover:text-white transition-colors group"
-            >
-              <div className="w-10 h-10 rounded-xl bg-white/10 flex items-center justify-center shrink-0 group-hover:bg-[#E8192C]/20 transition-colors">
-                <Phone fontSize="small" />
-              </div>
-              <div>
-                <p className="text-xs text-gray-500 uppercase tracking-widest">Call Centre</p>
-                <p className="font-semibold">+254 729 114 444</p>
-              </div>
-            </a>
-            <a
-              href="mailto:contactcentre@choice-bank.com"
-              className="flex items-center gap-4 text-gray-300 hover:text-white transition-colors group"
-            >
-              <div className="w-10 h-10 rounded-xl bg-white/10 flex items-center justify-center shrink-0 group-hover:bg-[#E8192C]/20 transition-colors">
-                <Email fontSize="small" />
-              </div>
-              <div>
-                <p className="text-xs text-gray-500 uppercase tracking-widest">Email</p>
-                <p className="font-semibold">contactcentre@choice-bank.com</p>
-              </div>
-            </a>
-            <div className="pt-4 border-t border-white/10">
-              <Link
-                href="/contact"
-                className="inline-flex items-center gap-2 text-sm text-gray-400 hover:text-white transition-colors group"
-              >
-                View full contact page
-                <ArrowForward fontSize="small" className="group-hover:translate-x-1 transition-transform" />
-              </Link>
-            </div>
           </div>
         </div>
       </div>

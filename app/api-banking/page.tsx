@@ -13,7 +13,7 @@ import {
   SupportAgent,
   AccountTree,
 } from '@mui/icons-material';
-import bg from '@/public/assets/home/api.png'
+import bg from '@/public/carbon.png'
 
 export const metadata: Metadata = {
   title: 'Banking as a Service | Choice Microfinance Bank',
@@ -79,35 +79,40 @@ export default function APIBankingPage() {
   return (
     <div className="min-h-screen bg-white">
       {/* Hero */}
-      <div className="relative bg-[#0A0534] pt-40 pb-24 px-6 md:px-16 overflow-hidden">
-        <Image
-          src={bg}
-          alt="BaaS background"
-          fill
-          sizes="100vw"
-          className="object-cover object-center opacity-30"
-          priority
-        />
-
-        <div className="relative z-10 max-w-7xl mx-auto">
-          <p className="text-sm font-semibold text-[#E8192C] uppercase tracking-widest mb-4">Banking as a Service</p>
-          <h1 className="text-5xl md:text-6xl font-bold text-white leading-tight max-w-3xl mb-6">
-            The bank behind<br />your fintech.
-          </h1>
-          <p className="text-white text-sm max-w-xl leading-relaxed mb-10">
-            Choice Microfinance Bank provides regulated banking infrastructure to fintechs, digital lenders, and platforms across the World. Embed real accounts, payments, and collections into your product without building a bank.
-          </p>
-          <div className="flex flex-wrap gap-4">
-            <a
-              href="https://choice-bank.gitbook.io/choice-bank"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 bg-[#E8192C] text-white px-8 py-4 rounded-full font-semibold hover:bg-[#c4121e] transition-all group"
-            >
-              Read the Docs
-              <ArrowForward className="group-hover:translate-x-1 transition-transform" />
-            </a>
+      <div className="bg-[#0A0534] py-20 overflow-hidden">
+        <div className="max-w-7xl mx-auto grid md:grid-cols-2 gap-12 items-center pl-6 md:pl-16">
+          {/* Left: text */}
+          <div>
+            <p className="text-sm font-semibold text-[#E8192C] uppercase tracking-widest mb-4">Banking as a Service</p>
+            <h1 className="text-5xl md:text-6xl font-bold text-white leading-tight mb-6">
+              The bank behind<br />your fintech.
+            </h1>
+            <p className="text-white/70 text-lg max-w-xl leading-relaxed mb-10">
+              Build, launch, and scale financial services with secure banking infrastructure designed for fintechs, lenders, SACCOs, and businesses. Connect seamlessly to payments, accounts, lending, FX, savings through our secure digital banking solutions, while offering your customers a fully branded financial experience powered by Choice Bank’s regulated infrastructure.
+            </p>
           
+            <div className="flex flex-wrap gap-4">
+              <a
+                href="https://choice-bank.gitbook.io/choice-bank"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 bg-[#E8192C] text-white px-8 py-4 rounded-full font-semibold hover:bg-[#c4121e] transition-all group"
+              >
+                Read the Docs
+                <ArrowForward className="group-hover:translate-x-1 transition-transform" />
+              </a>
+            </div>
+          </div>
+          {/* Right: image flush to edge */}
+          <div className="relative w-full h-[480px] md:h-[650px] rounded-l-3xl overflow-hidden">
+            <Image
+              src={bg}
+              alt="API Banking"
+              fill
+              sizes="(max-width: 768px) 100vw, 50vw"
+              className="object-contain object-center"
+              priority
+            />
           </div>
         </div>
       </div>
