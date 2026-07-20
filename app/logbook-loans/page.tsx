@@ -96,19 +96,19 @@ function ApplicationModal({ onClose, loanType }: { onClose: () => void; loanType
   }
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4" onClick={onClose}>
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 " onClick={onClose}>
       <div className="absolute inset-0 bg-black/60 backdrop-blur-sm" />
       <div
-        className="relative bg-white rounded-3xl w-full max-w-lg max-h-[90vh] overflow-y-auto shadow-2xl"
+        className="relative bg-white rounded-3xl w-full max-w-3xl min-h-[80vh] max-h-[95vh] overflow-y-auto shadow-2xl"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Modal header */}
-        <div className="bg-[#0A0534] rounded-t-3xl px-8 py-6 flex items-start justify-between">
+        <div className="bg-white rounded-t-3xl px-8 py-6 flex items-start justify-between">
           <div>
             <p className="text-xs font-semibold text-[#E8192C] uppercase tracking-widest mb-1">Logbook Loan Application</p>
-            <h3 className="text-xl font-bold text-white leading-snug">{loanType}</h3>
+            <h3 className="text-xl font-bold text-[#0A0534] leading-snug">{loanType}</h3>
           </div>
-          <button onClick={onClose} className="text-white/60 hover:text-white transition-colors mt-0.5 shrink-0">
+          <button onClick={onClose} className="text-[#0A0534] hover:text-[#E8192C] transition-colors mt-0.5 shrink-0">
             <Close />
           </button>
         </div>

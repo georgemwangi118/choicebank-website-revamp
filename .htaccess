@@ -1,0 +1,7 @@
+RewriteEngine On
+
+# Allow direct access to scripts folder
+RewriteRule ^scripts/ - [L]
+
+# Proxy everything else to Node.js
+RewriteRule ^(.*)$ http://127.0.0.1:3000/$1 [P,L]

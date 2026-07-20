@@ -14,8 +14,30 @@ import {
 import bg from '@/public/carbon.png'
 
 export const metadata: Metadata = {
-  title: 'Banking as a Service | Choice Microfinance Bank',
-  description: 'Choice Bank offers BaaS infrastructure to fintechs and digital businesses — embed accounts, payments, collections and cross-border rails into your product via API.',
+  title: 'API Banking & BaaS Kenya | Banking as a Service for Fintechs',
+  description: 'Choice Microfinance Bank offers Banking as a Service (BaaS) and API banking in Kenya. Embed CBK-regulated accounts, payments, collections and cross-border rails into your fintech or digital product.',
+  keywords: [
+    'API banking Kenya',
+    'banking as a service Kenya',
+    'BaaS Kenya',
+    'fintech banking API Kenya',
+    'embedded banking Kenya',
+    'open banking Kenya',
+    'bank API integration Kenya',
+    'CBK licensed API banking',
+    'payments API Kenya',
+    'digital banking infrastructure Kenya',
+    'fintech partnership Kenya',
+    'banking infrastructure Kenya',
+    'embedded finance Kenya',
+    'account opening API Kenya',
+    'collections API Kenya',
+    'cross-border payments API Kenya',
+    'Choice Bank API',
+    'microfinance bank API Kenya',
+    'developer banking API Kenya',
+    'BaaS provider Kenya',
+  ],
 };
 
 const capabilities = [

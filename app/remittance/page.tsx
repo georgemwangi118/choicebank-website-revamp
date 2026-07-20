@@ -9,11 +9,33 @@ import {
   Groups,
   Handshake,
 } from '@mui/icons-material';
-import bg from '@/public/assets/pages/remittance.png'
+import bg from '@/public/assets/home/globe.png'
 
 export const metadata: Metadata = {
-  title: 'Remittance | Choice Microfinance Bank',
-  description: 'Send money beyond borders with secure, guided and business-ready remittance solutions. CNY Express, supplier payments, diaspora support and more.',
+  title: 'Remittance Kenya | CNY Express & International Money Transfer',
+  description: 'Send money internationally with Choice Microfinance Bank. CNY Express for Kenya–China supplier payments, cross-border transfers, diaspora remittance and competitive FX support. CBK licensed.',
+  keywords: [
+    'remittance Kenya',
+    'international money transfer Kenya',
+    'send money from Kenya to China',
+    'CNY Express Kenya',
+    'Kenya China money transfer',
+    'supplier payments China Kenya',
+    'pay Chinese suppliers from Kenya',
+    'CNY KES transfer Kenya',
+    'cross-border payments Kenya',
+    'diaspora remittance Kenya',
+    'foreign exchange Kenya',
+    'money transfer Nairobi',
+    'international wire transfer Kenya',
+    'CBK licensed remittance Kenya',
+    'secure money transfer Kenya',
+    'Kenya China corridor payments',
+    'import financing payments Kenya',
+    'FX support Kenya',
+    'Choice Bank remittance',
+    'online money transfer Kenya',
+  ],
 };
 
 const stats = [
@@ -110,23 +132,29 @@ export default function RemittancePage() {
   return (
     <div className="min-h-screen bg-white">
       {/* Hero */}
-      <div className="relative bg-[#0A0534]/90 pt-40 pb-24 px-6 md:px-16 overflow-hidden">
-        <Image
-          src={bg}
-          alt="Hero background"
-          fill
-          sizes="100vw"
-          className="object-contain opacity-30"
-          priority
-        />
-        <div className="relative z-10 max-w-7xl mx-auto">
-          <p className="text-sm font-semibold text-[#E8192C] uppercase tracking-widest mb-4">Remittance</p>
-          <h1 className="text-5xl md:text-6xl font-bold text-white leading-tight max-w-3xl mb-6">
-            Cross-border payments built for modern trade.
-          </h1>
-          <p className="text-white text-sm max-w-2xl leading-relaxed mb-10">
-            Send money beyond borders with secure, guided and business-ready remittance solutions. From CNY Express payments between Kenya and China to supplier settlements and diaspora-linked transactions, Choice Microfinance Bank helps customers move funds with clarity and confidence.
-          </p>
+      <div className="bg-[#0A0534]/90 overflow-hidden">
+        <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center">
+          {/* Text left */}
+          <div className="flex-1 pt-40 pb-24 pl-6 md:pl-16 pr-6 md:pr-12">
+            <p className="text-sm font-semibold text-[#E8192C] uppercase tracking-widest mb-4">Remittance</p>
+            <h1 className="text-5xl md:text-6xl font-bold text-white leading-tight mb-6">
+              Cross-border payments built for modern trade.
+            </h1>
+            <p className="text-white/80 text-sm max-w-xl leading-relaxed">
+              Send money beyond borders with secure, guided and business-ready remittance solutions. From CNY Express payments between Kenya and China to supplier settlements and diaspora-linked transactions, Choice Microfinance Bank helps customers move funds with clarity and confidence.
+            </p>
+          </div>
+          {/* Image right */}
+          <div className="flex-1 self-stretch relative min-h-[340px] md:min-h-[500px]">
+            <Image
+              src={bg}
+              alt="Remittance globe"
+              fill
+              sizes="(max-width: 768px) 100vw, 50vw"
+              className="object-contain object-center"
+              priority
+            />
+          </div>
         </div>
       </div>
 

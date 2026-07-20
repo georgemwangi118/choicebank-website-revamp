@@ -92,7 +92,7 @@ export default function SalesPage() {
             Our experienced team is ready to answer your questions, explain our financing solutions, and guide you through every step of the application process.
           </p>
           <a
-            href="https://wa.me/254729114444"
+            href="https://wa.me/254110123123"
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center gap-2 bg-[#25D366] text-white px-8 py-4 rounded-full font-semibold hover:bg-[#1ebe5d] transition-all group"
