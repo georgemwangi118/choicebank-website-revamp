@@ -12,7 +12,7 @@ export const metadata: Metadata = {
 const accounts = [
   {
     icon: Business,
-    name: 'Business Account',
+    name: 'Business Current Account',
     tagline: 'Run your business with better control.',
     description: 'A reliable account for SMEs, startups and growing enterprises that need a secure place to manage collections, payments and daily operations. Keeps business finances separate from personal funds.',
     features: [
@@ -31,12 +31,11 @@ const accounts = [
     tagline: 'Put idle business funds to work.',
     description: 'A secure way for businesses to earn predictable returns on funds not immediately required for operations. Suitable for SMEs and corporate clients focused on capital preservation.',
     features: [
-      'Tenures available for 3, 6 or 12 months',
+      'Tenures available for 3, 6, 9 or 12 months',
       'Competitive fixed returns agreed at placement',
       'Supports better treasury planning for businesses',
       'Can be used as collateral for credit facilities',
     ],
-
     accent: 'border-[#0A0534]',
     badgeBg: 'bg-[#0A0534]/10',
     badgeText: 'text-[#0A0534]',
@@ -76,13 +75,68 @@ const solutions = [
   },
 ];
 
-const requirements = [
-  'Certificate of Incorporation or Business Registration',
-  'KRA PIN Certificate (company)',
-  'Memorandum & Articles of Association (for limited companies)',
-  'Board resolution authorising account opening',
-  'ID and KRA PIN for all directors/signatories',
-  'Proof of business address (utility bill or lease agreement)',
+const businessTypes = [
+  {
+    type: 'Sole Proprietorship',
+    requirements: [
+      'National ID or Passport of the owner',
+      'KRA PIN Certificate (individual)',
+      'Business Registration Certificate',
+      'Proof of business address (utility bill or lease)',
+    ],
+  },
+  {
+    type: 'Limited Company (Ltd)',
+    requirements: [
+      'Certificate of Incorporation',
+      'Memorandum & Articles of Association',
+      'CR12 (list of directors from the Registrar)',
+      'Board resolution authorising account opening',
+      'National ID / Passport & KRA PIN for all directors and signatories',
+      'Proof of business address',
+      'KRA PIN Certificate (company)',
+    ],
+  },
+  {
+    type: 'Partnership',
+    requirements: [
+      'Partnership Deed / Agreement',
+      'National ID / Passport & KRA PIN for all partners',
+      'KRA PIN Certificate (partnership)',
+      'Business Registration Certificate',
+      'Proof of business address',
+      'Resolution/letter authorising signatories',
+    ],
+  },
+  {
+    type: 'Trust',
+    requirements: [
+      'Trust Deed',
+      'National ID / Passport & KRA PIN for all trustees',
+      'KRA PIN Certificate (trust)',
+      'Resolution authorising account opening and signatories',
+      'Proof of registered address',
+    ],
+  },
+  {
+    type: 'NGO / Association / Society',
+    requirements: [
+      'Certificate of Registration (NGO Board / Registrar of Societies)',
+      'Constitution or by-laws',
+      'Minutes / resolution authorising account opening',
+      'National ID / Passport & KRA PIN for officials and signatories',
+      'Proof of registered address',
+    ],
+  },
+  {
+    type: 'Chama / Investment Group',
+    requirements: [
+      'Group constitution or by-laws',
+      'Minutes of the meeting authorising account opening',
+      'National ID & KRA PIN for all officials and signatories',
+      'Proof of meeting venue or registered address',
+    ],
+  },
 ];
 
 export default function BusinessBankingPage() {
@@ -104,9 +158,8 @@ export default function BusinessBankingPage() {
             Banking built around your business goals.
           </h1>
           <p className="text-white text-sm max-w-xl leading-relaxed mb-10">
-            Practical financial solutions for SMEs, start-ups and growing enterprises across the world. Manage cash flow, transact with confidence, grow deposits and access financing designed around real business needs.
+            Practical financial solutions for sole traders, SMEs, partnerships, trusts and enterprises across Kenya. Manage cash flow, transact with confidence, grow deposits and access financing designed around real business needs.
           </p>
-
           <div className="flex flex-wrap gap-4">
             <Link
               href='/contact'
@@ -116,7 +169,6 @@ export default function BusinessBankingPage() {
               <ArrowForward className="group-hover:translate-x-1 transition-transform" />
             </Link>
           </div>
-         
         </div>
       </div>
 
@@ -144,7 +196,6 @@ export default function BusinessBankingPage() {
                     </li>
                   ))}
                 </ul>
-             
               </div>
             ))}
           </div>
@@ -172,24 +223,34 @@ export default function BusinessBankingPage() {
         </div>
       </div>
 
-      {/* Requirements */}
+      {/* KYB Requirements by business type */}
       <div className="py-24 px-6 md:px-16 bg-[#F7F8F8]">
-        <div className="max-w-7xl mx-auto grid md:grid-cols-2 gap-16 items-start">
-          <div>
-            <p className="text-sm font-semibold text-[#E8192C] uppercase tracking-widest mb-3">Account opening</p>
+        <div className="max-w-7xl mx-auto">
+          <div className="max-w-2xl mb-14">
+            <p className="text-sm font-semibold text-[#E8192C] uppercase tracking-widest mb-3">Account opening requirements</p>
             <h2 className="text-4xl font-bold text-[#0A0534] mb-4">What you need to get started.</h2>
-            <p className="text-gray-500 leading-relaxed mb-8">
-              Opening a Choice Bank business account is straightforward. Submit your documents and our team will guide you through the process.
+            <p className="text-gray-500 leading-relaxed">
+              Requirements vary by business type. Find your structure below. Our team is happy to guide you through the process.
             </p>
           </div>
-          <div className="space-y-3">
-            {requirements.map((req, i) => (
-              <div key={req} className="flex items-start gap-4 bg-white p-4 rounded-xl border border-gray-100">
-                <span className="text-sm font-bold text-[#E8192C] w-6 shrink-0">{String(i + 1).padStart(2, '0')}</span>
-                <p className="text-sm text-gray-600 leading-relaxed">{req}</p>
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {businessTypes.map(({ type, requirements }) => (
+              <div key={type} className="bg-white rounded-2xl p-8 border border-gray-100 flex flex-col">
+                <h3 className="font-bold text-[#0A0534] text-lg mb-5 pb-4 border-b border-gray-100">{type}</h3>
+                <ul className="space-y-3 flex-1">
+                  {requirements.map((req) => (
+                    <li key={req} className="flex items-start gap-3 text-sm text-gray-600">
+                      <CheckCircleOutlined className="text-[#E8192C] shrink-0 mt-0.5" sx={{ fontSize: 16 }} />
+                      {req}
+                    </li>
+                  ))}
+                </ul>
               </div>
             ))}
           </div>
+          <p className="text-xs text-gray-400 mt-8">
+            Requirements are subject to the bank&apos;s KYB/AML policy and may vary. Additional documents may be requested during onboarding.
+          </p>
         </div>
       </div>
     </div>
