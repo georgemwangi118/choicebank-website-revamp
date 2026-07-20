@@ -1,6 +1,6 @@
 import { Metadata } from 'next';
 import Image from 'next/image';
-import { CheckCircleOutlined, Savings, AccountBalanceWallet, Lock, SwapHoriz, CurrencyExchange, PhoneAndroid } from '@mui/icons-material';
+import { CheckCircleOutlined, Savings, AccountBalanceWallet, Lock, SwapHoriz, CurrencyExchange, PhoneAndroid, Apple, Shop } from '@mui/icons-material';
 import bg from '@/public/assets/pages/personal.png'
 
 export const metadata: Metadata = {
@@ -98,7 +98,32 @@ export default function PersonalBankingPage() {
           <p className="text-white text-sm max-w-xl leading-relaxed mb-10">
             Secure, accessible and flexible banking solutions designed to help you save, transact and plan with confidence. From daily money movement to fixed deposits and digital access, Choice Microfinance Bank gives you tools to manage your financial life with clarity.
           </p>
-        
+          <div className="flex flex-wrap gap-4">
+            <a
+              href="https://apps.apple.com/us/app/choice-bank/id6504041400?platform=ipad"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-3 bg-white text-[#0A0534] px-6 py-3 rounded-full font-semibold hover:bg-gray-100 transition-colors"
+            >
+              <Apple fontSize="small" />
+              <span className="text-sm leading-tight">
+                <span className="block text-[10px] font-normal uppercase tracking-widest opacity-60">Download on the</span>
+                App Store
+              </span>
+            </a>
+            <a
+              href="https://play.google.com/store/apps/details?id=micro.finance.bank.choice.kenya&hl=en"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-3 bg-white text-[#0A0534] px-6 py-3 rounded-full font-semibold hover:bg-gray-100 transition-colors"
+            >
+              <Shop fontSize="small" />
+              <span className="text-sm leading-tight">
+                <span className="block text-[10px] font-normal uppercase tracking-widest opacity-60">Get it on</span>
+                Google Play
+              </span>
+            </a>
+          </div>
         </div>
       </div>
 
@@ -128,6 +153,45 @@ export default function PersonalBankingPage() {
                 </ul>
               </div>
             ))}
+          </div>
+        </div>
+      </div>
+
+      {/* App Download Banner */}
+      <div className="py-20 px-6 md:px-16 bg-[#0A0534]">
+        <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-10">
+          <div>
+            <p className="text-sm font-semibold text-[#E8192C] uppercase tracking-widest mb-3">Mobile App</p>
+            <h2 className="text-4xl font-bold text-white mb-4">Bank on the go.<br />Download the app.</h2>
+            <p className="text-gray-400 text-sm max-w-md leading-relaxed">
+              Manage your accounts, make transfers, check balances and access Choice Bank services from anywhere — available on iOS and Android.
+            </p>
+          </div>
+          <div className="flex flex-col sm:flex-row gap-4 shrink-0">
+            <a
+              href="https://apps.apple.com/us/app/choice-bank/id6504041400?platform=ipad"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-3 bg-white text-[#0A0534] px-7 py-4 rounded-2xl font-semibold hover:bg-gray-100 transition-colors min-w-[180px]"
+            >
+              <Apple />
+              <span className="leading-tight">
+                <span className="block text-[10px] font-normal uppercase tracking-widest opacity-60">Download on the</span>
+                <span className="text-base font-bold">App Store</span>
+              </span>
+            </a>
+            <a
+              href="https://play.google.com/store/apps/details?id=micro.finance.bank.choice.kenya&hl=en"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-3 bg-white text-[#0A0534] px-7 py-4 rounded-2xl font-semibold hover:bg-gray-100 transition-colors min-w-[180px]"
+            >
+              <Shop />
+              <span className="leading-tight">
+                <span className="block text-[10px] font-normal uppercase tracking-widest opacity-60">Get it on</span>
+                <span className="text-base font-bold">Google Play</span>
+              </span>
+            </a>
           </div>
         </div>
       </div>

@@ -1,4 +1,3 @@
-'use client';
 
 import { SwapHoriz, CreditCard, AccountBalance, Public } from '@mui/icons-material';
 

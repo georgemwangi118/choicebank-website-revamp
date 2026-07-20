@@ -1,4 +1,3 @@
-'use client';
 
 import { Send, Bolt, Lock } from '@mui/icons-material';
 

@@ -189,7 +189,7 @@ export default function Header() {
               }}
               className={`px-4 py-2 rounded-full font-semibold ${buttonBg} transition-colors duration-300`}
             >
-              Get the App
+              Download the App
             </button>
             {getStartedOpen && (
               <div className="absolute top-full mt-2 bg-white text-black rounded-md shadow-md w-48 py-2 right-0">
@@ -347,7 +347,7 @@ export default function Header() {
             }}
             className="flex justify-between items-center py-2 border-b border-white/10 w-full"
           >
-            Get the App <KeyboardArrowDown />
+            Download the App <KeyboardArrowDown />
           </button>
 
           {getStartedOpen && (
