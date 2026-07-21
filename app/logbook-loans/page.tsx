@@ -2,8 +2,7 @@
 
 import Link from 'next/link';
 import Image from 'next/image';
-import { useState } from 'react';
-import { sendEmail } from '@/lib/sendEmail';
+import { useState, useEffect, useCallback } from 'react';
 import { ArrowForward, CheckCircleOutlined, Close, DirectionsCar, FlashOn, SwapHoriz } from '@mui/icons-material';
 import bg from '@/public/assets/loans/logbook.png';
 
@@ -50,133 +49,221 @@ const steps = [
   { number: '03', title: 'Disbursement', description: 'After final verification, funds are disbursed directly to you.' },
 ];
 
-const emptyForm = { name: '', phone: '', email: '', vehicleMake: '', vehicleYear: '', amount: '', message: '' };
+// ── Types ─────
 
-function ApplicationModal({ onClose, loanType }: { onClose: () => void; loanType: string }) {
-  const [submitted, setSubmitted] = useState(false);
-  const [submitting, setSubmitting] = useState(false);
-  const [submitError, setSubmitError] = useState('');
+interface Product { id: string; name: string; }
+
+interface PreApprovalResult {
+  status: string;
+  minSuggestedAmount: number | null;
+  maxSuggestedAmount: number | null;
+  message: string;
+  nextAction: string;
+}
+
+interface DocCheckItem { code: string; name: string; collected: boolean; blocksCalculation: boolean; }
+
+interface PreApprovalResponse {
+  id: string;
+  preApprovalNo: string;
+  docCheckResult: { complete: boolean; items: DocCheckItem[] };
+  preApprovalResult: PreApprovalResult;
+}
+
+//Helpers
+
+const emptyForm = { name: '', phone: '', email: '', vehicleMake: '', vehicleModel: '', vehicleYear: '', productId: '', amount: '' };
+
+function formatPhone(raw: string): string {
+  const digits = raw.replace(/\D/g, '');
+  if (digits.startsWith('0') && digits.length >= 9) return '+254' + digits.slice(1);
+  if (digits.startsWith('254') && digits.length >= 12) return '+' + digits;
+  if (digits.startsWith('7') && digits.length >= 9) return '+254' + digits;
+  return raw;
+}
+
+//Modal
+
+function ApplicationModal({ onClose }: { onClose: () => void }) {
   const [form, setForm] = useState(emptyForm);
 
-  function handleChange(e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) {
-    setForm({ ...form, [e.target.name]: e.target.value });
+  // API-loaded data
+  const [products, setProducts] = useState<Product[]>([]);
+  const [brands, setBrands] = useState<string[]>([]);
+  const [models, setModels] = useState<string[]>([]);
+  const [loadingBrands, setLoadingBrands] = useState(true);
+  const [loadingModels, setLoadingModels] = useState(false);
+
+  // Submission state
+  const [submitting, setSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState('');
+
+  // Post-submit state
+  const [preApproval, setPreApproval] = useState<PreApprovalResponse | null>(null);
+
+  // Load products + brands on mount
+  useEffect(() => {
+    fetch('/api/loan/products')
+      .then((r) => r.json())
+      .then((d) => setProducts(d.data ?? []))
+      .catch(() => {});
+
+    fetch('/api/loan/brands')
+      .then((r) => r.json())
+      .then((brands: string[]) => setBrands(brands))
+      .catch(() => setBrands([]))
+      .finally(() => setLoadingBrands(false));
+  }, []);
+
+  // Load models whenever make changes
+  const loadModels = useCallback(async (make: string) => {
+    if (!make) { setModels([]); return; }
+    setLoadingModels(true);
+    try {
+      const r = await fetch(`/api/loan/models?make=${encodeURIComponent(make)}`);
+      const data: string[] = await r.json();
+      setModels(data);
+    } catch {
+      setModels([]);
+    } finally {
+      setLoadingModels(false);
+    }
+  }, []);
+
+  function handleChange(e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) {
+    const { name, value } = e.target;
+    if (name === 'vehicleMake') {
+      setForm((f) => ({ ...f, vehicleMake: value, vehicleModel: '' }));
+      loadModels(value);
+    } else {
+      setForm((f) => ({ ...f, [name]: value }));
+    }
   }
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     setSubmitting(true);
     setSubmitError('');
+    const phone = formatPhone(form.phone);
     try {
-      await sendEmail({
-        to: 'sales@choice-bank.com',
-        subject: `Logbook Loan Application — ${form.name}`,
-        formTitle: 'Logbook Loan Application',
-        replyTo: form.email || undefined,
-        fields: [
-          { label: 'Full Name', value: form.name },
-          { label: 'Phone Number', value: form.phone },
-          { label: 'Email Address', value: form.email },
-          { label: 'Vehicle Make & Model', value: form.vehicleMake },
-          { label: 'Year of Manufacture', value: form.vehicleYear },
-          { label: 'Loan Amount Needed', value: form.amount },
-          { label: 'Additional Information', value: form.message },
-        ],
+      const res = await fetch('/api/loan/apply', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          channel: 'CHOICE_BANK_WEBSITE',
+          agreed_to_user_agreement: true,
+          phone_number: phone,
+          device_id: crypto.randomUUID(),
+          product_id: form.productId,
+          make: form.vehicleMake,
+          model: form.vehicleModel,
+          year: Number(form.vehicleYear),
+          application_amount: Number(form.amount),
+          mpesa_statement_password: null,
+        }),
       });
-      setSubmitted(true);
-      setTimeout(() => {
-        setSubmitted(false);
-        setForm(emptyForm);
-        onClose();
-      }, 4000);
-    } catch {
-      setSubmitError('Something went wrong. Please call us directly or try again.');
+      const data = await res.json();
+      if (!res.ok || data.code !== 200) throw new Error(data.message ?? 'Submission failed');
+      setPreApproval(data.data as PreApprovalResponse);
+    } catch (err) {
+      setSubmitError(err instanceof Error ? err.message : 'Something went wrong. Please call us directly or try again.');
     } finally {
       setSubmitting(false);
     }
   }
 
+  const inputCls = 'w-full border border-gray-200 rounded-xl px-4 py-3 text-sm text-[#0A0534] placeholder-gray-300 focus:outline-none focus:border-[#E8192C] transition-colors';
+  const selectCls = `${inputCls} appearance-none bg-white`;
+  const labelCls = 'block text-xs font-semibold text-gray-500 uppercase tracking-widest mb-1.5';
+
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 " onClick={onClose}>
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4" onClick={onClose}>
       <div className="absolute inset-0 bg-black/60 backdrop-blur-sm" />
       <div
         className="relative bg-white rounded-3xl w-full max-w-3xl min-h-[80vh] max-h-[95vh] overflow-y-auto shadow-2xl"
         onClick={(e) => e.stopPropagation()}
       >
-        {/* Modal header */}
-        <div className="bg-white rounded-t-3xl px-8 py-6 flex items-start justify-between">
+        {/* Header */}
+        <div className="px-8 py-6 flex items-start justify-between border-b border-gray-100">
           <div>
             <p className="text-xs font-semibold text-[#E8192C] uppercase tracking-widest mb-1">Logbook Loan Application</p>
-            <h3 className="text-xl font-bold text-[#0A0534] leading-snug">{loanType}</h3>
+            <h3 className="text-xl font-bold text-[#0A0534]">Apply for a Logbook Loan</h3>
           </div>
-          <button onClick={onClose} className="text-[#0A0534] hover:text-[#E8192C] transition-colors mt-0.5 shrink-0">
-            <Close />
-          </button>
+          <button onClick={onClose} className="text-[#0A0534] hover:text-[#E8192C] transition-colors mt-0.5 shrink-0"><Close /></button>
         </div>
 
         <div className="px-8 py-6">
-          {submitted ? (
-            <div className="text-center py-8">
-              <CheckCircleOutlined className="text-[#E8192C] mb-4" sx={{ fontSize: 48 }} />
-              <h4 className="text-xl font-bold text-[#0A0534] mb-2">Application received.</h4>
-              <p className="text-gray-500 text-sm">Thank you, {form.name}. A Choice Bank loan officer will contact you on {form.phone} within 6–12 hours.</p>
-              <button
-                onClick={onClose}
-                className="mt-6 inline-flex items-center gap-2 bg-[#0A0534] text-white px-6 py-3 rounded-full font-semibold hover:bg-[#E8192C] transition-colors text-sm"
-              >
-                Close
-              </button>
+
+          {/* ── Success screen ── */}
+          {preApproval && (
+            <div className="text-center py-10">
+              <CheckCircleOutlined className="text-[#E8192C] mb-4" sx={{ fontSize: 52 }} />
+              <p className="text-xs font-semibold text-[#E8192C] uppercase tracking-widest mb-2">{preApproval.preApprovalNo}</p>
+              <h4 className="text-xl font-bold text-[#0A0534] mb-2">Application received!</h4>
+              
+              <button onClick={onClose} className="bg-[#0A0534] text-white px-8 py-3 rounded-full text-sm font-semibold hover:bg-[#E8192C] transition-colors">Close</button>
             </div>
-          ) : (
+          )}
+
+          {/* ── Form ── */}
+          {!preApproval && (
             <form onSubmit={handleSubmit} className="space-y-4">
+              {/* Name & Phone */}
               <div className="grid grid-cols-2 gap-4">
                 <div className="col-span-2 sm:col-span-1">
-                  <label className="block text-xs font-semibold text-gray-500 uppercase tracking-widest mb-1.5">Full Name *</label>
-                  <input type="text" name="name" required value={form.name} onChange={handleChange} placeholder="John Kamau"
-                    className="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm text-[#0A0534] placeholder-gray-300 focus:outline-none focus:border-[#E8192C] transition-colors" />
+                  <label className={labelCls}>Full Name *</label>
+                  <input type="text" name="name" required value={form.name} onChange={handleChange} placeholder="John Kamau" className={inputCls} />
                 </div>
                 <div className="col-span-2 sm:col-span-1">
-                  <label className="block text-xs font-semibold text-gray-500 uppercase tracking-widest mb-1.5">Phone Number *</label>
-                  <input type="tel" name="phone" required value={form.phone} onChange={handleChange} placeholder="07XX XXX XXX"
-                    className="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm text-[#0A0534] placeholder-gray-300 focus:outline-none focus:border-[#E8192C] transition-colors" />
+                  <label className={labelCls}>Phone Number *</label>
+                  <input type="tel" name="phone" required value={form.phone} onChange={handleChange} placeholder="07XX XXX XXX" className={inputCls} />
+                  <p className="text-[10px] text-gray-400 mt-1">We&apos;ll format to +254 automatically</p>
                 </div>
               </div>
 
+              {/* Email */}
               <div>
-                <label className="block text-xs font-semibold text-gray-500 uppercase tracking-widest mb-1.5">Email Address</label>
-                <input type="email" name="email" value={form.email} onChange={handleChange} placeholder="john@email.com"
-                  className="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm text-[#0A0534] placeholder-gray-300 focus:outline-none focus:border-[#E8192C] transition-colors" />
+                <label className={labelCls}>Email Address</label>
+                <input type="email" name="email" value={form.email} onChange={handleChange} placeholder="john@email.com" className={inputCls} />
               </div>
 
-              <div className="grid grid-cols-2 gap-4">
-                <div>
-                  <label className="block text-xs font-semibold text-gray-500 uppercase tracking-widest mb-1.5">Vehicle Make & Model *</label>
-                  <input type="text" name="vehicleMake" required value={form.vehicleMake} onChange={handleChange} placeholder="e.g. Toyota Fielder"
-                    className="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm text-[#0A0534] placeholder-gray-300 focus:outline-none focus:border-[#E8192C] transition-colors" />
-                </div>
-                <div>
-                  <label className="block text-xs font-semibold text-gray-500 uppercase tracking-widest mb-1.5">Year of Manufacture *</label>
-                  <input type="number" name="vehicleYear" required value={form.vehicleYear} onChange={handleChange} placeholder="e.g. 2015" min="2004" max="2025"
-                    className="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm text-[#0A0534] placeholder-gray-300 focus:outline-none focus:border-[#E8192C] transition-colors" />
-                </div>
-              </div>
-
+              {/* Loan Product */}
               <div>
-                <label className="block text-xs font-semibold text-gray-500 uppercase tracking-widest mb-1.5">Loan Amount Needed (Ksh) *</label>
-                <select name="amount" required value={form.amount} onChange={handleChange}
-                  className="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm text-[#0A0534] focus:outline-none focus:border-[#E8192C] transition-colors appearance-none bg-white">
-                  <option value="">Select a range</option>
-                  <option value="Under 500K">Under Ksh 500,000</option>
-                  <option value="500K - 1M">Ksh 500,000 – 1,000,000</option>
-                  <option value="1M - 2M">Ksh 1,000,000 – 2,000,000</option>
-                  <option value="2M - 4M">Ksh 2,000,000 – 4,000,000</option>
-                  <option value="Above 4M">Above Ksh 4,000,000</option>
+                <label className={labelCls}>Loan Product *</label>
+                <select name="productId" required value={form.productId} onChange={handleChange} className={selectCls}>
+                  <option value="">{products.length === 0 ? 'Loading products…' : 'Select a product'}</option>
+                  {products.map((p) => <option key={p.id} value={p.id}>{p.name}</option>)}
                 </select>
               </div>
 
-              <div>
-                <label className="block text-xs font-semibold text-gray-500 uppercase tracking-widest mb-1.5">Additional Information</label>
-                <textarea name="message" value={form.message} onChange={handleChange} rows={3} placeholder="Any other details about your vehicle or loan purpose..."
-                  className="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm text-[#0A0534] placeholder-gray-300 focus:outline-none focus:border-[#E8192C] transition-colors resize-none" />
+              {/* Vehicle Make & Model (cascading — API driven) */}
+              <div className="grid grid-cols-2 gap-4">
+                <div>
+                  <label className={labelCls}>Vehicle Make *</label>
+                  <select name="vehicleMake" required value={form.vehicleMake} onChange={handleChange} disabled={loadingBrands} className={`${selectCls} disabled:opacity-50`}>
+                    <option value="">{loadingBrands ? 'Loading…' : 'Select make'}</option>
+                    {brands.map((b) => <option key={b} value={b}>{b}</option>)}
+                  </select>
+                </div>
+                <div>
+                  <label className={labelCls}>Vehicle Model *</label>
+                  <select name="vehicleModel" required value={form.vehicleModel} onChange={handleChange} disabled={!form.vehicleMake || loadingModels} className={`${selectCls} disabled:opacity-50`}>
+                    <option value="">{loadingModels ? 'Loading…' : 'Select model'}</option>
+                    {models.map((m) => <option key={m} value={m}>{m}</option>)}
+                  </select>
+                </div>
+              </div>
+
+              {/* Year & Amount */}
+              <div className="grid grid-cols-2 gap-4">
+                <div>
+                  <label className={labelCls}>Year of Manufacture *</label>
+                  <input type="number" name="vehicleYear" required value={form.vehicleYear} onChange={handleChange} placeholder="e.g. 2015" min="2004" max="2025" className={inputCls} />
+                </div>
+                <div>
+                  <label className={labelCls}>Loan Amount (Ksh) *</label>
+                  <input type="number" name="amount" required value={form.amount} onChange={handleChange} placeholder="e.g. 500000" min="50000" max="6000000" step="1000" className={inputCls} />
+                </div>
               </div>
 
               <button type="submit" disabled={submitting}
@@ -186,10 +273,7 @@ function ApplicationModal({ onClose, loanType }: { onClose: () => void; loanType
               </button>
 
               {submitError && <p className="text-sm text-red-500 text-center">{submitError}</p>}
-
-              <p className="text-xs text-gray-400 text-center">
-                A Choice Bank loan officer will contact you.
-              </p>
+              <p className="text-xs text-gray-400 text-center">A Choice Bank loan officer will contact you.</p>
             </form>
           )}
         </div>
@@ -206,7 +290,7 @@ export default function LogbookLoansPage() {
 
   return (
     <div className="min-h-screen bg-white">
-      {modalLoan && <ApplicationModal onClose={closeModal} loanType={modalLoan} />}
+      {modalLoan && <ApplicationModal onClose={closeModal} />}
 
       {/* Hero */}
       <div className="bg-[#0A0534]/90 py-20 overflow-hidden">
