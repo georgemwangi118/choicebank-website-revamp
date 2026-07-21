@@ -217,7 +217,7 @@ function ApplicationModal({ onClose }: { onClose: () => void }) {
                 <div className="col-span-2 sm:col-span-1">
                   <label className={labelCls}>Phone Number *</label>
                   <input type="tel" name="phone" required value={form.phone} onChange={handleChange} placeholder="07XX XXX XXX" className={inputCls} />
-                  <p className="text-[10px] text-gray-400 mt-1">We&apos;ll format to +254 automatically</p>
+                 
                 </div>
               </div>
 
