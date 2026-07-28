@@ -26,6 +26,7 @@ export interface SendEmailPayload {
   to: string;
   subject: string;
   formTitle: string;
+  fromName?: string;
   replyTo?: string;
   fields: EmailField[];
 }
@@ -59,7 +60,7 @@ function buildHtml(formTitle: string, fields: EmailField[]): string {
 
 export async function POST(req: NextRequest) {
   const body: SendEmailPayload = await req.json();
-  const { to, subject, formTitle, replyTo, fields } = body;
+  const { to, subject, formTitle, fromName, replyTo, fields } = body;
 
   if (!to || !subject || !fields?.length) {
     return NextResponse.json({ error: 'Missing required fields' }, { status: 400 });
@@ -67,7 +68,7 @@ export async function POST(req: NextRequest) {
 
   try {
     await transporter.sendMail({
-      from: `"Choice Microfinance Bank" <${process.env.SMTP_USER}>`,
+      from: `"${fromName ?? 'Choice Microfinance Bank'}" <${process.env.SMTP_USER}>`,
       to,
       ...(replyTo ? { replyTo } : {}),
       subject,

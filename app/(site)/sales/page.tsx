@@ -51,6 +51,7 @@ export default function SalesPage() {
       await sendEmail({
         to: 'sales@choice-bank.com',
         subject: `Sales Enquiry — ${form.product} — ${form.name}`,
+        fromName: form.name,
         formTitle: 'Sales Advisor Enquiry',
         replyTo: form.email || undefined,
         fields: [
@@ -92,7 +93,7 @@ export default function SalesPage() {
             Our experienced team is ready to answer your questions, explain our financing solutions, and guide you through every step of the application process.
           </p>
           <a
-            href="https://wa.me/254110123123"
+            href="https://wa.me/254700807568"
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center gap-2 bg-[#25D366] text-white px-8 py-4 rounded-full font-semibold hover:bg-[#1ebe5d] transition-all group"

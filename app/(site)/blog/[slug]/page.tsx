@@ -2,24 +2,20 @@ import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
 import Image from 'next/image';
-import { ArrowBack, AccessTime, ArrowForward } from '@mui/icons-material';
-import { blogPosts, getPostBySlug, getAllSlugs } from '@/lib/blog';
+import { ArrowBack, AccessTime,} from '@mui/icons-material';
+import { createClient } from '@/lib/supabase/server';
+import { Post } from '@/lib/supabase/types';
 
-interface Props {
-  params: Promise<{ slug: string }>;
-}
-
-export async function generateStaticParams() {
-  return getAllSlugs().map((slug) => ({ slug }));
-}
+interface Props { params: Promise<{ slug: string }>; }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
-  const post = getPostBySlug(slug);
-  if (!post) return {};
+  const supabase = await createClient();
+  const { data } = await supabase.from('posts').select('title,excerpt').eq('slug', slug).single();
+  if (!data) return {};
   return {
-    title: `${post.title} | Choice Microfinance Bank`,
-    description: post.excerpt,
+    title: `${data.title} | Choice Microfinance Bank`,
+    description: data.excerpt,
   };
 }
 
@@ -65,13 +61,9 @@ function renderContent(content: string) {
         </ol>
       );
       continue;
-    } else if (line.trim() === '') {
-      // skip blank lines
-    } else {
+    } else if (line.trim() !== '') {
       elements.push(
-        <p
-          key={i}
-          className="text-gray-600 leading-relaxed mb-4"
+        <p key={i} className="text-gray-600 leading-relaxed mb-4"
           dangerouslySetInnerHTML={{ __html: line.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>') }}
         />
       );
@@ -85,31 +77,30 @@ function renderContent(content: string) {
 
 export default async function BlogPostPage({ params }: Props) {
   const { slug } = await params;
-  const post = getPostBySlug(slug);
+  const supabase = await createClient();
+
+  const { data: post } = await supabase.from('posts').select('*').eq('slug', slug).eq('published', true).single();
   if (!post) notFound();
 
-  const related = blogPosts.filter((p) => p.slug !== slug && p.category === post.category).slice(0, 2);
-  const fallbackRelated = blogPosts.filter((p) => p.slug !== slug).slice(0, 2);
-  const relatedPosts = related.length >= 2 ? related : fallbackRelated;
+  const { data: related } = await supabase
+    .from('posts')
+    .select('*')
+    .eq('published', true)
+    .eq('category', post.category)
+    .neq('slug', slug)
+    .limit(2);
+
+  const relatedPosts: Post[] = related?.length ? related : [];
 
   return (
     <div className="min-h-screen bg-white">
-      {/* Hero image */}
       <div className="relative h-[480px] bg-[#0A0534]">
-        <Image
-          src={post.coverImage}
-          alt={post.title}
-          fill
-          sizes="100vw"
-          className="object-cover object-center opacity-50"
-          priority
-        />
+        {post.cover_image && (
+          <Image src={post.cover_image} alt={post.title} fill sizes="100vw" className="object-cover object-center opacity-50" priority />
+        )}
         <div className="absolute inset-0 bg-gradient-to-t from-[#0A0534] via-[#0A0534]/30 to-transparent" />
         <div className="absolute bottom-0 left-0 right-0 px-6 md:px-16 pb-12 max-w-4xl mx-auto w-full">
-          <Link
-            href="/blog"
-            className="inline-flex items-center gap-2 text-white/70 hover:text-white text-sm mb-6 transition-colors"
-          >
+          <Link href="/blog" className="inline-flex items-center gap-2 text-white/70 hover:text-white text-sm mb-6 transition-colors">
             <ArrowBack sx={{ fontSize: 16 }} /> Back to Blog
           </Link>
           <span className="inline-block text-xs font-semibold uppercase tracking-widest text-white bg-[#E8192C] px-3 py-1 rounded-full mb-4">
@@ -119,49 +110,27 @@ export default async function BlogPostPage({ params }: Props) {
         </div>
       </div>
 
-      {/* Meta bar */}
       <div className="border-b border-gray-100 px-6 md:px-16 py-4">
         <div className="max-w-4xl mx-auto flex flex-wrap items-center gap-4 text-sm text-gray-500">
-          <span className="font-semibold text-[#0A0534]">{post.author.name}</span>
+          <span className="font-semibold text-[#0A0534]">{post.author_name}</span>
           <span className="text-gray-300">·</span>
-          <span>{post.author.role}</span>
+          <span>{post.author_role}</span>
           <span className="text-gray-300">·</span>
-          <span className="flex items-center gap-1">
-            <AccessTime sx={{ fontSize: 14 }} /> {post.readTime}
-          </span>
+          <span className="flex items-center gap-1"><AccessTime sx={{ fontSize: 14 }} /> {post.read_time}</span>
           <span className="text-gray-300">·</span>
           <span>{post.date}</span>
         </div>
       </div>
 
-      {/* Article body */}
       <article className="px-6 md:px-16 py-12">
         <div className="max-w-4xl mx-auto">
-          <p className="text-lg text-gray-500 leading-relaxed mb-8 border-l-4 border-[#E8192C] pl-6 italic">
-            {post.excerpt}
-          </p>
+          <p className="text-lg text-gray-500 leading-relaxed mb-8 border-l-4 border-[#E8192C] pl-6 italic">{post.excerpt}</p>
           <div className="prose-like">{renderContent(post.content)}</div>
         </div>
       </article>
 
-      {/* CTA */}
-      <div className="px-6 md:px-16 py-12 bg-[#F7F8F8]">
-        <div className="max-w-4xl mx-auto bg-[#0A0534] rounded-3xl p-10 flex flex-col md:flex-row items-center justify-between gap-6">
-          <div>
-            <h3 className="text-xl font-bold text-white mb-2">Ready to apply?</h3>
-            <p className="text-gray-400 text-sm">Speak to a Choice Bank officer to get started today.</p>
-          </div>
-          <Link
-            href="/contact"
-            className="shrink-0 inline-flex items-center gap-2 bg-[#E8192C] text-white px-8 py-4 rounded-full font-semibold hover:bg-[#c4121e] transition-colors group"
-          >
-            Contact Us
-            <ArrowForward className="group-hover:translate-x-1 transition-transform" fontSize="small" />
-          </Link>
-        </div>
-      </div>
+      
 
-      {/* Related posts */}
       {relatedPosts.length > 0 && (
         <div className="px-6 md:px-16 py-16 bg-white">
           <div className="max-w-4xl mx-auto">
@@ -171,21 +140,13 @@ export default async function BlogPostPage({ params }: Props) {
                 <Link key={p.slug} href={`/blog/${p.slug}`} className="group block">
                   <div className="rounded-2xl overflow-hidden border border-gray-100 hover:shadow-md transition-shadow flex flex-col">
                     <div className="relative h-44">
-                      <Image
-                        src={p.coverImage}
-                        alt={p.title}
-                        fill
-                        sizes="(max-width: 768px) 100vw, 50vw"
-                        className="object-cover"
-                      />
+                      {p.cover_image && <Image src={p.cover_image} alt={p.title} fill sizes="(max-width: 768px) 100vw, 50vw" className="object-cover" />}
                       <div className="absolute inset-0 bg-[#0A0534]/20" />
                     </div>
                     <div className="p-6">
                       <span className="text-xs font-semibold text-[#E8192C] uppercase tracking-widest">{p.category}</span>
-                      <h3 className="font-bold text-[#0A0534] mt-2 mb-1 group-hover:text-[#E8192C] transition-colors">
-                        {p.title}
-                      </h3>
-                      <p className="text-xs text-gray-400">{p.readTime} · {p.date}</p>
+                      <h3 className="font-bold text-[#0A0534] mt-2 mb-1 group-hover:text-[#E8192C] transition-colors">{p.title}</h3>
+                      <p className="text-xs text-gray-400">{p.read_time} · {p.date}</p>
                     </div>
                   </div>
                 </Link>

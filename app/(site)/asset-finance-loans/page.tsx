@@ -63,6 +63,7 @@ function ApplicationModal({ onClose, loanType }: { onClose: () => void; loanType
       await sendEmail({
         to: 'sales@choice-bank.com',
         subject: `Asset Finance Application — ${loanType} — ${form.name}`,
+        fromName: form.name,
         formTitle: `${loanType} Application`,
         replyTo: form.email,
         fields: [
