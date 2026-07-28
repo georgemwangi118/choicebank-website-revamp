@@ -40,6 +40,7 @@ export default function ContactPage() {
       await sendEmail({
         to: 'contactcentre@choice-bank.com',
         subject: `Contact Us — ${form.inquiry} — ${form.name}`,
+        fromName: form.name,
         formTitle: 'Contact Us',
         replyTo: form.email,
         fields: [

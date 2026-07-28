@@ -70,6 +70,7 @@ export default function LoanBuyoffPage() {
       await sendEmail({
         to: 'sales@choice-bank.com',
         subject: `Loan Buyoff Application — ${form.name}`,
+        fromName: form.name,
         formTitle: 'Loan Buyoff Application',
         replyTo: form.email || undefined,
         fields: [

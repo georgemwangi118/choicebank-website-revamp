@@ -1,8 +1,7 @@
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
+import { AppRouterCacheProvider } from '@mui/material-nextjs/v15-appRouter';
 import './globals.css';
-import Header from '@/components/common/Header';
-import Footer from '@/components/common/Footer';
 
 const inter = Inter({ 
   subsets: ['latin'],
@@ -88,9 +87,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${inter.variable} font-sans antialiased`} suppressHydrationWarning>
-        <Header />
-        <main>{children}</main>
-        <Footer />
+        <AppRouterCacheProvider>
+          {children}
+        </AppRouterCacheProvider>
       </body>
     </html>
   );

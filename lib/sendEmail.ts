@@ -7,6 +7,7 @@ export interface SendEmailOptions {
   to: string;
   subject: string;
   formTitle: string;
+  fromName?: string;
   replyTo?: string;
   fields: EmailField[];
 }
