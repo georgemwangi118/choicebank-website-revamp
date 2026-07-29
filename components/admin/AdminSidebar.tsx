@@ -53,7 +53,7 @@ export default function AdminSidebar() {
     <aside className="w-56 bg-[#0A0534] min-h-screen flex flex-col shrink-0">
       <div className="p-6 border-b border-white/10">
         <Image src={logo} alt="Choice Bank" height={32} className="brightness-0 invert" />
-        <p className="text-white/40 text-xs mt-1">Admin Portal</p>
+        <p className="text-white text-xs mt-1">Admin Portal</p>
       </div>
       <nav className="flex-1 p-4 space-y-1">
         {links.map(({ href, label, icon: Icon, exact }) => {
