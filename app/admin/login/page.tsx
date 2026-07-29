@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { createClient } from '@/lib/supabase/client';
 import Image from 'next/image';
-import logo from '@/public/logo.png';
+import logo from '@/public/logo2.png';
 
 export default function AdminLoginPage() {
   const router = useRouter();

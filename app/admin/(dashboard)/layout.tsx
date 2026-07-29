@@ -1,6 +1,7 @@
 import { redirect } from 'next/navigation';
 import { createClient } from '@/lib/supabase/server';
 import AdminSidebar from '@/components/admin/AdminSidebar';
+import SessionGuard from '@/components/admin/SessionGuard';
 
 export const metadata = { title: 'Admin | Choice Bank', robots: { index: false } };
 
@@ -11,9 +12,10 @@ export default async function AdminDashboardLayout({ children }: { children: Rea
   if (!user) redirect('/admin/login');
 
   return (
-    <div className="min-h-screen bg-gray-50 flex">
+    <div className="min-h-screen bg-gray-50 flex" suppressHydrationWarning>
       <AdminSidebar />
-      <main className="flex-1 p-8 overflow-auto">{children}</main>
+      <main className="flex-1 p-8 overflow-auto" suppressHydrationWarning>{children}</main>
+      <SessionGuard />
     </div>
   );
 }
