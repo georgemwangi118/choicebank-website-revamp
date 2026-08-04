@@ -4,7 +4,7 @@ export async function POST(req: NextRequest) {
   const body = await req.json();
   const base = process.env.LOAN_API_BASE_URL;
 
-  body.channel = 'Official Website';
+  body.channel = 'CHOICE_BANK_WEBSITE';
   const res = await fetch(`${base}/api/loan/app/pre-approval/apply`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
