@@ -142,7 +142,7 @@ export default function Footer() {
           <ul className="space-y-1 text-white/70">
             <li>
               <a
-                href="https://app.choicedigitalbank.com/#/privacypolicy"
+                href="https://choice-bank.com/legal/Choice_Bank_Privacy_Policy.pdf"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="hover:text-white transition-colors"
@@ -152,7 +152,7 @@ export default function Footer() {
             </li>
             <li>
               <a
-                href="https://app.choicedigitalbank.com/#/conditions"
+                href="https://choice-bank.com/legal/Choice_Bank_Terms_and_Conditions.pdf"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="hover:text-white transition-colors"
