@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import { AppRouterCacheProvider } from '@mui/material-nextjs/v15-appRouter';
+import WebChat from '@/components/WebChat';
 import './globals.css';
 
 const inter = Inter({ 
@@ -86,9 +87,14 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
+      <head>
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+        <link href="https://app.telvoip.io/web-chat.css" rel="stylesheet" />
+      </head>
       <body className={`${inter.variable} font-sans antialiased`} suppressHydrationWarning>
         <AppRouterCacheProvider>
           {children}
+          <WebChat />
         </AppRouterCacheProvider>
       </body>
     </html>
