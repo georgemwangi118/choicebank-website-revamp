@@ -160,13 +160,22 @@ export default function BusinessBankingPage() {
           <p className="text-white text-sm max-w-xl leading-relaxed mb-10">
             Practical financial solutions for sole traders, SMEs, partnerships, trusts and enterprises across Kenya. Manage cash flow, transact with confidence, grow deposits and access financing designed around real business needs.
           </p>
+          <p className="text-white text-xs mb-2">&#9432;&nbsp; For Kenya-registered businesses only.</p>
           <div className="flex flex-wrap gap-4">
-            <Link
-              href='/contact'
+            <a
+              href="https://www.choicebank.co.ke/business/register"
+              target="_blank"
+              rel="noopener noreferrer"
               className="inline-flex items-center gap-2 bg-[#E8192C] text-white px-8 py-4 rounded-full font-semibold hover:bg-[#c4121e] transition-all group"
             >
-              Contact Us to Get Started
+              Open a Business Account
               <ArrowForward className="group-hover:translate-x-1 transition-transform" />
+            </a>
+            <Link
+              href='/contact'
+              className="inline-flex items-center gap-2 border border-white/20 text-white px-8 py-4 rounded-full font-semibold hover:bg-white/10 transition-all"
+            >
+              Contact Us
             </Link>
           </div>
         </div>
@@ -196,6 +205,14 @@ export default function BusinessBankingPage() {
                     </li>
                   ))}
                 </ul>
+                <a
+                  href="https://www.choicebank.co.ke/business/register"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1.5 text-sm font-semibold text-[#E8192C] hover:gap-3 transition-all"
+                >
+                  Open this account <ArrowForward fontSize="small" />
+                </a>
               </div>
             ))}
           </div>
