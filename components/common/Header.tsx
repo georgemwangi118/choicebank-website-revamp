@@ -40,28 +40,26 @@ export default function Header() {
 
   return (
     <nav ref={navRef} className={`sticky top-0 font-gilroy relative w-full z-50 bg-[#0A0534] ${textColor}`}>
-      <div className="max-w-7xl mx-auto px-4 md:px-6 lg:px-8 flex items-center justify-between h-20">
+      <div className="max-w-7xl mx-auto px-4 md:px-6 lg:px-8 flex items-center h-20 gap-4">
         {/** Left: Logo */}
-        <div className="flex items-center space-x-6">
+        <div className="flex-shrink-0">
           <Link href="/" onClick={closeAllDropdowns}>
             <div className="flex flex-col items-center">
-             
-                <Image
-                  src={logo}
-                  alt='Choice Bank Logo'
-                  width={200}
-                  height={30}
-                  className='w-auto h-10 object-contain'
-                  priority
-                />
-            
+              <Image
+                src={logo}
+                alt='Choice Bank Logo'
+                width={200}
+                height={30}
+                className='w-auto h-10 object-contain'
+                priority
+              />
               <span className="text-[10px] font-semibold tracking-widest uppercase text-white mt-0.5">Grow Together</span>
             </div>
           </Link>
         </div>
 
-        {/** Desktop Navs */}
-        <div className='hidden md:flex items-center space-x-6 text-sm font-medium'>
+        {/** Centre: Nav links */}
+        <div className='hidden lg:flex flex-1 items-center justify-center space-x-5 text-sm font-medium'>
           <Link
             href="/personal-banking"
             onClick={closeAllDropdowns}
@@ -179,7 +177,20 @@ export default function Header() {
             )}
           </div>
 
-          {/** Get Started Dropdown */}
+        </div>
+
+        {/** Right: Buttons */}
+        <div className='hidden lg:flex flex-shrink-0 items-center space-x-3'>
+          <a
+            href="https://www.choicebank.co.ke/business/register"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="px-4 py-2 rounded-full font-semibold bg-[#E8192C] text-white hover:bg-[#c4121e] transition-colors duration-300 text-sm whitespace-nowrap"
+          >
+            Business Account
+          </a>
+
+          {/** Download the App Dropdown */}
           <div className='relative'>
             <button
               onClick={() => {
@@ -187,7 +198,7 @@ export default function Header() {
                 setLoanLinkOpen(false);
                 setLoginLinkOpen(false);
               }}
-              className={`px-4 py-2 rounded-full font-semibold ${buttonBg} transition-colors duration-300`}
+              className={`px-4 py-2 rounded-full font-semibold ${buttonBg} transition-colors duration-300 text-sm whitespace-nowrap`}
             >
               Download the App
             </button>
@@ -218,7 +229,7 @@ export default function Header() {
 
         {/** Mobile Hamburger */}
         <button
-          className={`md:hidden ${textColor}`}
+          className={`lg:hidden ml-auto ${textColor}`}
           onClick={() => setMobileOpen(!mobileOpen)}
         >
           {mobileOpen ? <Close fontSize="large" /> : <Menu fontSize="large" />}
@@ -227,7 +238,7 @@ export default function Header() {
 
       {/** Mobile Menu */}
       {mobileOpen && (
-        <div className='md:hidden bg-[#0A0534] border-t border-white/10 text-white px-4 py-6 space-y-4 shadow-lg'>
+        <div className='lg:hidden bg-[#0A0534] border-t border-white/10 text-white px-4 py-6 space-y-4 shadow-lg'>
           {/** Main Nav Links */}
           <div className='flex flex-col space-y-3 text-lg font-medium'>
             <Link
