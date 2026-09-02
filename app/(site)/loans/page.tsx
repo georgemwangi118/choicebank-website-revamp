@@ -351,6 +351,17 @@ export default function LoansPage() {
                 <div className={`p-6 border-t-4 ${accent} flex flex-col flex-1`}>
                   <h3 className="font-bold text-[#0A0534] text-base mb-2 group-hover:text-[#E8192C] transition-colors duration-300">{title}</h3>
                   <p className="text-sm text-gray-500 leading-relaxed mb-5 flex-1">{description}</p>
+                  {title === 'Logbook Loan' ? (
+                    <a
+                      href="https://choicebank.co.ke/m/loan/calculator?channel=CHOICE_BANK_WEBSITE"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-2 text-sm font-semibold text-[#0A0534] hover:text-[#E8192C] transition-colors group/btn"
+                    >
+                      {cta}
+                      <ArrowForward className="group-hover/btn:translate-x-1 transition-transform" fontSize="small" />
+                    </a>
+                  ) : (
                   <button
                     onClick={() => openModal(title)}
                     className="inline-flex items-center gap-2 text-sm font-semibold text-[#0A0534] hover:text-[#E8192C] transition-colors group/btn"
@@ -358,6 +369,7 @@ export default function LoansPage() {
                     {cta}
                     <ArrowForward className="group-hover/btn:translate-x-1 transition-transform" fontSize="small" />
                   </button>
+                  )}
                 </div>
               </div>
             ))}
