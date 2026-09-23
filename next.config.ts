@@ -1,6 +1,36 @@
 import type { NextConfig } from "next";
 
+const securityHeaders = [
+  // Force HTTPS for 2 years; include subdomains
+  {
+    key: 'Strict-Transport-Security',
+    value: 'max-age=63072000; includeSubDomains',
+  },
+  // Prevent clickjacking — disallow embedding this site in iframes
+  {
+    key: 'X-Frame-Options',
+    value: 'SAMEORIGIN',
+  },
+  // Stop browsers guessing file types (MIME sniffing)
+  {
+    key: 'X-Content-Type-Options',
+    value: 'nosniff',
+  },
+  // Only send the origin (no path) when navigating to external sites
+  {
+    key: 'Referrer-Policy',
+    value: 'strict-origin-when-cross-origin',
+  },
+  // Restrict access to browser features (camera, mic, location etc.)
+  {
+    key: 'Permissions-Policy',
+    value: 'camera=(), microphone=(), geolocation=(), payment=(), usb=(), bluetooth=()',
+  },
+];
+
 const nextConfig: NextConfig = {
+  // Remove the X-Powered-By: Next.js header that reveals the tech stack
+  poweredByHeader: false,
   images: {
     remotePatterns: [
       {
@@ -12,6 +42,14 @@ const nextConfig: NextConfig = {
         hostname: '*.supabase.co',
       },
     ],
+  },
+  async headers() {
+    return [
+      {
+        source: '/(.*)',
+        headers: securityHeaders,
+      },
+    ];
   },
   async redirects() {
     return [
