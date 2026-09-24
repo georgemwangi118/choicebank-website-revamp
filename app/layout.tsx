@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import { AppRouterCacheProvider } from '@mui/material-nextjs/v15-appRouter';
+import { headers } from 'next/headers';
 import WebChat from '@/components/WebChat';
 import './globals.css';
 
@@ -80,11 +81,13 @@ export const metadata: Metadata = {
   },
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
+  const nonce = (await headers()).get('x-nonce') ?? '';
+
   return (
     <html lang="en">
       <head>
@@ -94,7 +97,7 @@ export default function RootLayout({
       <body className={`${inter.variable} font-sans antialiased`} suppressHydrationWarning>
         <AppRouterCacheProvider>
           {children}
-          <WebChat />
+          <WebChat nonce={nonce} />
         </AppRouterCacheProvider>
       </body>
     </html>

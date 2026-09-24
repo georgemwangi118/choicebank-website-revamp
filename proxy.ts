@@ -1,38 +1,40 @@
-import { NextResponse, type NextRequest } from 'next/server';
-import { createServerClient } from '@supabase/ssr';
+import { NextResponse } from 'next/server';
+import type { NextRequest } from 'next/server';
 
-export async function proxy(request: NextRequest) {
-  const { pathname } = request.nextUrl;
+export function proxy(request: NextRequest) {
+  const nonce = Buffer.from(crypto.randomUUID()).toString('base64');
+  const isDev = process.env.NODE_ENV === 'development';
 
-  if (!pathname.startsWith('/admin')) return NextResponse.next();
-  if (pathname === '/admin/login') return NextResponse.next();
+  const csp = `
+    default-src 'self';
+    script-src 'self' 'nonce-${nonce}' 'strict-dynamic'${isDev ? " 'unsafe-eval'" : ''};
+    style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://app.telvoip.io;
+    font-src 'self' https://fonts.gstatic.com;
+    img-src 'self' data: https://images.unsplash.com https://*.supabase.co;
+    frame-src https://app.telvoip.io;
+    connect-src 'self' https://api.telvoip.io https://knyhzwfcbyurvapvbivf.supabase.co wss://knyhzwfcbyurvapvbivf.supabase.co;
+    object-src 'none';
+    base-uri 'self';
+    form-action 'self';
+  `.replace(/\s{2,}/g, ' ').trim();
 
-  let response = NextResponse.next({ request });
+  const requestHeaders = new Headers(request.headers);
+  requestHeaders.set('x-nonce', nonce);
 
-  const supabase = createServerClient(
-    process.env.NEXT_PUBLIC_SUPABASE_URL!,
-    process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY!,
-    {
-      cookies: {
-        getAll() { return request.cookies.getAll(); },
-        setAll(toSet) {
-          toSet.forEach(({ name, value }) => request.cookies.set(name, value));
-          response = NextResponse.next({ request });
-          toSet.forEach(({ name, value, options }) => response.cookies.set(name, value, options));
-        },
-      },
-    }
-  );
-
-  const { data: { user } } = await supabase.auth.getUser();
-
-  if (!user) {
-    return NextResponse.redirect(new URL('/admin/login', request.url));
-  }
+  const response = NextResponse.next({ request: { headers: requestHeaders } });
+  response.headers.set('Content-Security-Policy', csp);
 
   return response;
 }
 
 export const config = {
-  matcher: ['/admin/:path*'],
+  matcher: [
+    {
+      source: '/((?!api|_next/static|_next/image|favicon.ico).*)',
+      missing: [
+        { type: 'header', key: 'next-router-prefetch' },
+        { type: 'header', key: 'purpose', value: 'prefetch' },
+      ],
+    },
+  ],
 };
