@@ -1,6 +1,32 @@
 import type { NextConfig } from "next";
 
+const csp = [
+  "default-src 'self'",
+  // Next.js inline scripts + Telvoip inline init script
+  "script-src 'self' 'unsafe-inline'",
+  // MUI injects inline styles at runtime; Google Fonts and Telvoip CSS are external
+  "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://app.telvoip.io",
+  // Self-hosted Gilroy fonts + Google Fonts static files (Material Icons)
+  "font-src 'self' https://fonts.gstatic.com",
+  // Local images, data URIs (MUI icons), Unsplash and Supabase storage
+  "img-src 'self' data: https://images.unsplash.com https://*.supabase.co",
+  // Telvoip chat iframe
+  "frame-src https://app.telvoip.io",
+  // Client-side API calls: Telvoip settings fetch + Supabase (HTTP and WebSocket)
+  "connect-src 'self' https://api.telvoip.io https://knyhzwfcbyurvapvbivf.supabase.co wss://knyhzwfcbyurvapvbivf.supabase.co",
+  // Block plugins (Flash etc.)
+  "object-src 'none'",
+  // Prevent base tag hijacking
+  "base-uri 'self'",
+  // Only allow forms to submit to same origin
+  "form-action 'self'",
+].join('; ');
+
 const securityHeaders = [
+  {
+    key: 'Content-Security-Policy',
+    value: csp,
+  },
   // Force HTTPS for 2 years; include subdomains
   {
     key: 'Strict-Transport-Security',
