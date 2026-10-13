@@ -70,23 +70,17 @@ export default function AboutPage() {
       {/* Mission + Vision */}
       <div className="py-24 px-6 md:px-16 bg-[#F7F8F8]">
         <div className="max-w-7xl mx-auto grid md:grid-cols-2 gap-12">
-          <div className="bg-white rounded-3xl p-10 border border-gray-100">
-            <span className="text-xs font-semibold text-[#E8192C] uppercase tracking-widest">Mission</span>
-            <h2 className="text-2xl font-bold text-[#0A0534] mt-3 mb-4">
-              Make banking a tool for growth, not a barrier to it.
+          <div className="bg-[#0A0534] rounded-3xl p-10 text-center">
+            <span className="text-lg font-bold text-white uppercase tracking-widest">Mission</span>
+            <h2 className="text-lg font-bold text-white mt-3 mb-4">
+              To accelerate the growth of SMEs across Africa through innovative digital banking solutions and trusted services.
             </h2>
-            <p className="text-gray-500 leading-relaxed">
-              We believe access to great banking shouldn&apos;t be a privilege. Every business, every individual — regardless of size or sector — deserves a bank that moves at the speed of their ambitions. We provide the financial rails for Kenya&apos;s next generation of entrepreneurs.
-            </p>
           </div>
-          <div className="bg-[#0A0534] rounded-3xl p-10">
-            <span className="text-xs font-semibold text-[#E8192C] uppercase tracking-widest">Vision</span>
-            <h2 className="text-2xl font-bold text-white mt-3 mb-4">
-              The most trusted digital bank for SMEs across Africa.
+          <div className="bg-[#0A0534] rounded-3xl p-10 text-center">
+            <span className="text-lg font-bold text-white uppercase tracking-widest">Vision</span>
+            <h2 className="text-lg font-bold text-white mt-3 mb-4">
+              The best digital bank for SMEs in Africa.
             </h2>
-            <p className="text-gray-400 leading-relaxed">
-              We are building toward a future where every business in Africa can access the same quality of banking infrastructure that powers global enterprises — with the local knowledge and regulatory trust that only a homegrown bank can provide.
-            </p>
           </div>
         </div>
       </div>
@@ -127,15 +121,6 @@ export default function AboutPage() {
               </div>
             ))}
           </div>
-        </div>
-      </div>
-
-      {/* Regulatory note */}
-      <div className="py-16 px-6 md:px-16 bg-[#0A0534]">
-        <div className="max-w-7xl mx-auto text-center">
-          <p className="text-gray-400 text-sm max-w-2xl mx-auto leading-relaxed">
-            ChoiceBank is licensed and regulated by the <strong className="text-white">Central Bank of Kenya (CBK)</strong> as a Microfinance Bank. Your deposits are protected and all operations comply with Kenya&apos;s Banking Act and CBK Prudential Guidelines.
-          </p>
         </div>
       </div>
     </div>
