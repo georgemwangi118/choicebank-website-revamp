@@ -27,31 +27,24 @@ jobs:
           NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY: ${{ secrets.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY }}
         run: npm run build
 
-      - name: Deploy via FTP
-        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+      - name: Deploy via SFTP
+        uses: wlixcc/SFTP-Deploy-Action@v1.2.4
         with:
-          server: ${{ secrets.FTP_HOST }}
-          username: ${{ secrets.FTP_USERNAME }}
-          password: ${{ secrets.FTP_PASSWORD }}
-          protocol: ftps
-          port: 21
-          local-dir: ./
-          server-dir: /choicebank/
-          exclude: |
-            **/.git*
-            **/.git*/**
-            **/node_modules/**
-            .next/dev/**
-            .next/cache/**
-            deploy.zip
+          server: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USERNAME }}
+          password: ${{ secrets.SSH_PASSWORD }}
+          port: 22
+          local_path: './*'
+          remote_path: '/choicebank'
+          sftp_only: true
+          args: '-o StrictHostKeyChecking=no'
+          delete_remote_files: false
 
       - name: Restart Node.js app (Passenger)
-        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        uses: appleboy/ssh-action@v1.0.3
         with:
-          server: ${{ secrets.FTP_HOST }}
-          username: ${{ secrets.FTP_USERNAME }}
-          password: ${{ secrets.FTP_PASSWORD }}
-          protocol: ftps
-          port: 21
-          local-dir: ./.github/restart/
-          server-dir: /choicebank/tmp/
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USERNAME }}
+          password: ${{ secrets.SSH_PASSWORD }}
+          port: 22
+          script: touch /home/${{ secrets.SSH_USERNAME }}/choicebank/tmp/restart.txt
