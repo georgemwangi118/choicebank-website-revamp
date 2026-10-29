@@ -12,7 +12,9 @@ export function proxy(request: NextRequest) {
     font-src 'self' https://fonts.gstatic.com;
     img-src 'self' data: https://images.unsplash.com https://*.supabase.co;
     frame-src https://app.telvoip.io;
+    frame-ancestors 'self';
     connect-src 'self' https://api.telvoip.io https://knyhzwfcbyurvapvbivf.supabase.co wss://knyhzwfcbyurvapvbivf.supabase.co;
+    upgrade-insecure-requests;
     object-src 'none';
     base-uri 'self';
     form-action 'self';

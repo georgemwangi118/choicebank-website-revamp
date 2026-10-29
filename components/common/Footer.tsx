@@ -19,7 +19,12 @@ export default function Footer() {
         <div>
           <h3 className="font-semibold mb-2">Contact us</h3>
           <p className="text-white/70 mb-1">+254 729 114 444</p>
-          <p className="text-white/70 mb-1">contactcentre@choice-bank.com</p>
+          {/* Email split across spans so scrapers cannot harvest it as plain text */}
+          <p className="text-white/70 mb-1">
+            <span>contactcentre</span>
+            <span>&#64;</span>
+            <span>choice-bank.com</span>
+          </p>
           <p className="text-white/70 mb-1">
             Riverside Square, <br />
             Riverside drive

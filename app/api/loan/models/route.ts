@@ -3,9 +3,13 @@ import { NextRequest, NextResponse } from 'next/server';
 interface VehicleModel { model: string; }
 interface Pagination { total_pages: number; }
 
+const MAKE_PATTERN = /^[\w\s\-.'&]+$/;
+
 export async function GET(req: NextRequest) {
   const make = req.nextUrl.searchParams.get('make');
-  if (!make) return NextResponse.json([], { status: 400 });
+  if (!make || !MAKE_PATTERN.test(make) || make.length > 64) {
+    return NextResponse.json([], { status: 400 });
+  }
 
   const base = process.env.LOAN_API_BASE_URL;
   let page = 1;
