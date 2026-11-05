@@ -21,23 +21,25 @@ jobs:
       - name: Install dependencies
         run: npm install
 
-      - name: Build
+      - name: Build Project
         env:
           NEXT_PUBLIC_SUPABASE_URL: ${{ secrets.NEXT_PUBLIC_SUPABASE_URL }}
           NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY: ${{ secrets.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY }}
         run: |
           npm run build
+          # Create Phusion Passenger restart file inside the standalone folder
           mkdir -p .next/standalone/tmp
           touch .next/standalone/tmp/restart.txt
 
-      - name: Deploy via FTP
-        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
-        with:
-          server: ${{ secrets.FTP_HOST }}
-          username: ${{ secrets.FTP_USERNAME }}
-          password: ${{ secrets.FTP_PASSWORD }}
-          protocol: ftps
-          port: 21
-          security: loose
-          local-dir: .next/standalone/
-          server-dir: /choicebank/
+      - name: Deploy via LFTP (Forces Correct IP)
+        run: |
+          sudo apt-get update && sudo apt-get install -y lftp
+          lftp -e " \
+            set ftp:ssl-allow true; \
+            set ftp:ssl-force true; \
+            set ftp:ssl-protect-data true; \
+            set ssl:verify-certificate no; \
+            set ftp:fix-pasv-address true; \
+            open -u ${{ secrets.FTP_USERNAME }},${{ secrets.FTP_PASSWORD }} -p 21 196.216.245.211; \
+            mirror -R .next/standalone/ /choicebank/; \
+            quit"
