@@ -25,7 +25,10 @@ jobs:
         env:
           NEXT_PUBLIC_SUPABASE_URL: ${{ secrets.NEXT_PUBLIC_SUPABASE_URL }}
           NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY: ${{ secrets.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY }}
-        run: npm run build
+        run: |
+          npm run build
+          mkdir -p .next/standalone/tmp
+          touch .next/standalone/tmp/restart.txt
 
       - name: Deploy via FTP
         uses: SamKirkland/FTP-Deploy-Action@v4.3.5
@@ -35,23 +38,6 @@ jobs:
           password: ${{ secrets.FTP_PASSWORD }}
           protocol: ftps
           port: 21
-          local-dir: ./
+          # Upload only the minimal standalone production build files
+          local-dir: .next/standalone/
           server-dir: /choicebank/
-          exclude: |
-            **/.git*
-            **/.git*/**
-            **/node_modules/**
-            .next/dev/**
-            .next/cache/**
-            deploy.zip
-
-      - name: Restart Node.js app (Passenger)
-        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
-        with:
-          server: ${{ secrets.FTP_HOST }}
-          username: ${{ secrets.FTP_USERNAME }}
-          password: ${{ secrets.FTP_PASSWORD }}
-          protocol: ftps
-          port: 21
-          local-dir: ./.github/restart/
-          server-dir: /choicebank/tmp/
