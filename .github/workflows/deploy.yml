@@ -27,30 +27,30 @@ jobs:
           NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY: ${{ secrets.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY }}
         run: npm run build
 
-      - name: Prepare deploy folder
-        run: |
-          mkdir -p /tmp/deploy
-          cp -r .next /tmp/deploy/
-          cp package.json package-lock.json server.js /tmp/deploy/ 2>/dev/null || true
-          cp -r public /tmp/deploy/ 2>/dev/null || true
+      - name: Deploy via FTP
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+          server: ${{ secrets.FTP_HOST }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          protocol: ftps
+          port: 21
+          local-dir: ./
+          server-dir: /choicebank/
+          exclude: |
+            **/.git*
+            **/.git*/**
+            **/node_modules/**
+            .next/dev/**
+            .next/cache/**
 
-      - name: Install production dependencies
-        run: |
-          cd /tmp/deploy
-          npm install --omit=dev
-
-      - name: Deploy via LFTP
-        run: |
-          sudo apt-get update -qq && sudo apt-get install -y -qq lftp
-          lftp -e "
-            set ftp:ssl-allow true;
-            set ftp:ssl-force true;
-            set ftp:ssl-protect-data true;
-            set ssl:verify-certificate no;
-            set ftp:fix-pasv-address true;
-            set net:timeout 60;
-            set net:max-retries 3;
-            open -u '${{ secrets.FTP_USERNAME }}','${{ secrets.FTP_PASSWORD }}' -p 21 ${{ secrets.FTP_HOST }};
-            mirror --reverse --delete --verbose /tmp/deploy/ /choicebank/;
-            put /dev/null -o /choicebank/tmp/restart.txt;
-            quit"
+      - name: Restart Node.js app (Passenger)
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+          server: ${{ secrets.FTP_HOST }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          protocol: ftps
+          port: 21
+          local-dir: ./.github/restart/
+          server-dir: /choicebank/tmp/
