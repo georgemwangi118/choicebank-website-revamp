@@ -38,6 +38,6 @@ jobs:
           password: ${{ secrets.FTP_PASSWORD }}
           protocol: ftps
           port: 21
-          # Upload only the minimal standalone production build files
+          security: loose
           local-dir: .next/standalone/
           server-dir: /choicebank/
