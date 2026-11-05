@@ -42,14 +42,15 @@ jobs:
       - name: Deploy via LFTP
         run: |
           sudo apt-get update -qq && sudo apt-get install -y -qq lftp
-          lftp -d -e "
+          lftp -e "
             set ftp:ssl-allow true;
             set ftp:ssl-force true;
             set ftp:ssl-protect-data true;
             set ssl:verify-certificate no;
             set ftp:fix-pasv-address true;
-            set net:timeout 30;
-            set net:max-retries 1;
+            set net:timeout 60;
+            set net:max-retries 3;
             open -u '${{ secrets.FTP_USERNAME }}','${{ secrets.FTP_PASSWORD }}' -p 21 ${{ secrets.FTP_HOST }};
-            ls;
-            quit" 2>&1 | head -60
+            mirror --reverse --delete --verbose /tmp/deploy/ /choicebank/;
+            put /dev/null -o /choicebank/tmp/restart.txt;
+            quit"
