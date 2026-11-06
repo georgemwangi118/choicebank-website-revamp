@@ -31,6 +31,7 @@ const securityHeaders = [
 ];
 
 const nextConfig: NextConfig = {
+  turbopack: { root: __dirname },
   // Remove the X-Powered-By: Next.js header that reveals the tech stack
   poweredByHeader: false,
   images: {
