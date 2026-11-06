@@ -40,9 +40,9 @@ jobs:
           lftp -u "$FTP_USER","$FTP_PASS" "$FTP_HOST" <<'EOF'
 
           set ftp:ssl-allow true
-          set ftp:ssl-force true
-          set ftp:ssl-protect-data true
-          set ssl:verify-certificate true
+          set ftp:ssl-force false
+          set ftp:ssl-protect-data false
+          set ssl:verify-certificate no
           set ftp:fix-pasv-address true
 
           set net:timeout 60
