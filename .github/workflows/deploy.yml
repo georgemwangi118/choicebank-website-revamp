@@ -32,21 +32,25 @@ jobs:
           rm -rf .next/cache
           zip -r deploy.zip .next/ public/ server.js package.json package-lock.json
 
-      - name: Install lftp
-        run: sudo apt-get update && sudo apt-get install -y lftp
-
-      - name: Upload to cPanel via FTP
+      - name: Upload to cPanel via HTTPS API
         env:
-          FTP_USER: ${{ secrets.FTP_USERNAME }}
-          FTP_PASS: ${{ secrets.FTP_PASSWORD }}
-          FTP_HOST: ${{ secrets.FTP_HOST }}
+          CPANEL_USER: ${{ secrets.CPANEL_USERNAME }}
+          CPANEL_TOKEN: ${{ secrets.CPANEL_API_TOKEN }}
+          CPANEL_HOST: ${{ secrets.CPANEL_HOST }}
         run: |
-          lftp -e "
-            set ftp:ssl-allow false;
-            set ssl:verify-certificate no;
-            set ftp:fix-pasv-address true;
-            set net:timeout 300;
-            set net:max-retries 3;
-            open -u '$FTP_USER','$FTP_PASS' $FTP_HOST;
-            put deploy.zip -o /choicebank/deploy.zip;
-            quit"
+          curl -s -X POST \
+            "https://$CPANEL_HOST:2083/execute/Fileman/upload_files" \
+            -H "Authorization: cpanel $CPANEL_USER:$CPANEL_TOKEN" \
+            -F "dir=/choicebank" \
+            -F "file-1=@deploy.zip"
+
+      - name: Restart app
+        env:
+          CPANEL_USER: ${{ secrets.CPANEL_USERNAME }}
+          CPANEL_TOKEN: ${{ secrets.CPANEL_API_TOKEN }}
+          CPANEL_HOST: ${{ secrets.CPANEL_HOST }}
+        run: |
+          curl -s -X POST \
+            "https://$CPANEL_HOST:2083/execute/Fileman/save_file_content" \
+            -H "Authorization: cpanel $CPANEL_USER:$CPANEL_TOKEN" \
+            -d "dir=/choicebank/tmp&filename=restart.txt&content="
