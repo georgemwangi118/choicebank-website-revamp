@@ -1,4 +1,3 @@
-
 name: Deploy to cPanel
 
 on:
@@ -28,39 +27,26 @@ jobs:
           NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY: ${{ secrets.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY }}
         run: npm run build
 
+      - name: Package build
+        run: |
+          rm -rf .next/cache
+          zip -r deploy.zip .next/ public/ server.js package.json package-lock.json
+
       - name: Install lftp
         run: sudo apt-get update && sudo apt-get install -y lftp
 
-      - name: Deploy to cPanel
+      - name: Upload to cPanel via FTP
         env:
           FTP_USER: ${{ secrets.FTP_USERNAME }}
           FTP_PASS: ${{ secrets.FTP_PASSWORD }}
           FTP_HOST: ${{ secrets.FTP_HOST }}
         run: |
-          lftp -u "$FTP_USER","$FTP_PASS" "$FTP_HOST" <<'EOF'
-
-          set ftp:ssl-allow true
-          set ftp:ssl-force false
-          set ftp:ssl-protect-data false
-          set ssl:verify-certificate no
-          set ftp:fix-pasv-address true
-
-          set net:timeout 60
-          set net:max-retries 5
-          set mirror:parallel-transfer-count 1
-
-          mirror --reverse --delete --verbose \
-            --exclude-glob 'cache/**' \
-            .next/ /choicebank/.next/
-
-          mirror --reverse --verbose \
-            public/ /choicebank/public/
-
-          put package.json -o /choicebank/package.json
-          put package-lock.json -o /choicebank/package-lock.json
-          put server.js -o /choicebank/server.js
-
-          put /dev/null -o /choicebank/tmp/restart.txt
-
-          quit
-          EOF
+          lftp -e "
+            set ftp:ssl-allow false;
+            set ssl:verify-certificate no;
+            set ftp:fix-pasv-address true;
+            set net:timeout 300;
+            set net:max-retries 3;
+            open -u '$FTP_USER','$FTP_PASS' $FTP_HOST;
+            put deploy.zip -o /choicebank/deploy.zip;
+            quit"
